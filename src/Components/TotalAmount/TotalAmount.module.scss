@@ -1,0 +1,64 @@
+.totalAmount {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(240, 239, 239);
+  gap: 10px;
+  height: 100%;
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    background: rgb(240, 239, 239);
+    padding: 15px 20px 10px;
+  }
+  &__title {
+    font-size: 20px;
+  }
+  &__price {
+    text-align: right;
+  }
+  &__amount {
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px 10px;
+    gap: 10px;
+  }
+  &__button {
+    background: rgb(42, 122, 42);
+    padding: 20px;
+  }
+  &__buttonQuick {
+    margin: 0 auto;
+    border-bottom: 1px dotted #000;
+    width: fit-content;
+  }
+}
+.promocode {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  &__title {
+  }
+  &__input {
+    grid-row: 2/2;
+    border: 1px solid gray;
+  }
+  &__button {
+    grid-row: 2/2;
+  }
+}
+.promocodeList {
+}
+.promocodeItem {
+  display: flex;
+  justify-content: space-between;
+  &_name {
+  }
+  &__close {
+  }
+}
