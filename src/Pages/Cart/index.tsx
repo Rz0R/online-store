@@ -10,7 +10,7 @@ function Cart() {
         <div className={styles.control}>
           <div className={styles.control__limit}>
             Items:
-            <input type="text" value={4} />
+            <input type="text" placeholder="4" />
           </div>
           <div className={styles.control__pageControl}>
             <button className={styles.control__left} type="button">
