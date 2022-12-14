@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 //Percent
 @function percent($px, $from) {
   $result: math.div($px, $from) * 100%;
@@ -30,7 +32,14 @@
 }
 
 // Адаптивное свойство (clamp)
-@mixin adaptiveValue($property, $startSize, $minSize, $widthFrom: $containerWidth, $widthTo: $minWidth, $keepSize: 0) {
+@mixin adaptiveValue(
+  $property,
+  $startSize,
+  $minSize,
+  $widthFrom: $containerWidth,
+  $widthTo: $minWidth,
+  $keepSize: 0
+) {
   @if ($startSize==0) {
     $startSize: 0.0001;
   }
@@ -69,12 +78,21 @@
   // Если не поддерживается clamp();
   @supports not (#{$property}: $propertyValue) {
     #{$property}: calc(
-      #{rem($minSize)} + #{$addSize} * (100vw - #{rem($widthTo)}) / #{math.div($widthFrom, 16) - math.div($widthTo, 16)}
+      #{rem($minSize)} + #{$addSize} * (100vw - #{rem($widthTo)}) / #{math.div($widthFrom, 16) -
+        math.div($widthTo, 16)}
     );
   }
 
   // Устанавливаем значения по умолчанию
-  @if $widthFrom != $containerWidth and $widthFrom != $maxWidth and $keepSize != 1 and $keepSize != 2 {
+  @if $widthFrom !=
+    $containerWidth and
+    $widthFrom !=
+    $maxWidth and
+    $keepSize !=
+    1 and
+    $keepSize !=
+    2
+  {
     @media (min-width: $widthFromMedia) {
       #{$property}: inherit;
     }

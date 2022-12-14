@@ -13,8 +13,7 @@ $fontFamily: 'Roboto', sans-serif;
 $fontSize: rem(16);
 
 // Основные цвета
-
-$mainColor: #000;
+@import 'colors.scss';
 
 // Минимальная ширина страницы
 $minWidth: 320;
@@ -29,9 +28,7 @@ $containerPadding: 30;
 $containerWidth: $maxWidthContainer + $containerPadding;
 
 // Брейк-поинты
-$pc: em(
-  $containerWidth
-); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$pc: em($containerWidth); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
 $tablet: em(991.98); // Планшеты, некоторые телефоны в горизонтальном положении
 $mobile: em(767.98); // Телефоны L
 $mobileSmall: em(479.98); // Телефоны S
