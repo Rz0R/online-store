@@ -1,0 +1,23 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.header {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: rem(20);
+    padding-bottom: rem(20);
+  }
+
+  &__logo img {
+    display: block;
+    max-width: rem(200);
+    max-height: rem(100);
+    width: auto;
+    height: auto;
+  }
+
+  &__cart {
+  }
+}
