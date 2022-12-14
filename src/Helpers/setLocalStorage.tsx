@@ -1,7 +1,7 @@
-import TempData from '../Interfaces/data';
+import { TempCartData } from '../Interfaces/data';
 
-interface SetLocalStorageProps {
-  cartItems: Array<TempData>;
+export interface SetLocalStorageProps {
+  cartItems: Array<TempCartData>;
 }
 
 export default function setLocalStorage(data: SetLocalStorageProps) {

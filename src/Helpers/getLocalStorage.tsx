@@ -1,16 +1,15 @@
-import TempData from '../Interfaces/data';
+import { TempCartData } from '../Interfaces/data';
 
-export default function getLocalStorage(): TempData | null {
-  try {
-    const data: TempData | string = JSON.parse(
-      localStorage.getItem('online-store-metalknock-rz0r') || '""',
-    );
-    if (typeof data === 'string') {
-      throw new Error('LocalStorage is empty');
-    }
-    return data;
-  } catch (e) {
-    console.error(e);
+export interface TempGetLocalStorage {
+  cartItems: Array<TempCartData>;
+}
+
+export function getLocalStorage(): TempGetLocalStorage {
+  const data: TempGetLocalStorage | string = JSON.parse(
+    localStorage.getItem('online-store-metalknock-rz0r') || '""',
+  );
+  if (typeof data === 'string') {
+    throw new Error('LocalStorage is empty');
   }
-  return null;
+  return data;
 }

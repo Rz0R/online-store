@@ -1,4 +1,4 @@
-export default interface TempData {
+export interface TempData {
   id: number;
   title: string;
   description: string;
@@ -11,3 +11,7 @@ export default interface TempData {
   thumbnail: string;
   images: Array<string>;
 }
+
+export type TempCartData = TempData & {
+  amount: number;
+};

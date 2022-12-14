@@ -1,17 +1,32 @@
 import React from 'react';
+import { TempGetLocalStorage } from '../../Helpers/getLocalStorage';
 import styles from './TotalAmount.module.scss';
 
 interface TotalAmountProps {
   className: string | undefined;
+  data: TempGetLocalStorage;
 }
 
-export default function TotalAmount({ className }: TotalAmountProps) {
+export default function TotalAmount({ className, data }: TotalAmountProps) {
+  function calcTotalAmount() {
+    return data.cartItems.reduce((acc, item) => {
+      const { price, amount } = item;
+      return acc + price * amount;
+    }, 0);
+  }
+  function calcAmount() {
+    return data.cartItems.reduce((acc, item) => {
+      const { amount } = item;
+      return acc + amount;
+    }, 0);
+  }
+
   return (
     <div className={`${styles.totalAmount} ${className}`}>
       <div className={styles.totalAmount__inner}>
         <h4 className={styles.totalAmount__title}>ИТОГО:</h4>
-        <div className={styles.totalAmount__price}>€1860.00</div>
-        <div className={styles.totalAmount__amount}>Товаров: 2</div>
+        <div className={styles.totalAmount__price}>€{calcTotalAmount()}</div>
+        <div className={styles.totalAmount__amount}>Товаров: {calcAmount()}</div>
       </div>
       <div className={styles.totalAmount__wrap}>
         <div className={styles.promocode}>
