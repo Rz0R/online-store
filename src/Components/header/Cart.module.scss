@@ -1,0 +1,59 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.cart {
+  background-color: $bgColor;
+  padding: rem(8) rem(30);
+  border-radius: rem(20);
+  cursor: pointer;
+
+  display: flex;
+  gap: rem(10);
+
+  font-size: rem(14);
+
+  &__icon {
+    position: relative;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: $secondColor;
+    }
+  }
+
+  svg {
+    transition: all 0.3s ease 0s;
+    width: rem(25);
+    height: rem(25);
+  }
+
+  &__count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -30%);
+    border-radius: 50%;
+    color: #fff;
+    font-size: rem(11);
+    font-weight: 700;
+    background-color: $secondColor;
+    width: rem(16);
+    height: rem(16);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__desription {
+    font-size: rem(14);
+  }
+
+  &__title {
+    color: $grayColor;
+  }
+
+  &__total {
+    color: $secondColor;
+  }
+}
