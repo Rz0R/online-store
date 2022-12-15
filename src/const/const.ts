@@ -4,3 +4,5 @@ export enum NameSpace {
 
 // Нужно потом убрать. Default чтобы eslint ошибку не показывал
 export default NameSpace;
+
+export const keyLocalStorage = 'online-store-metalknock-rz0r';

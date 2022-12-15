@@ -1,3 +1,4 @@
+import { keyLocalStorage } from '../const/const';
 import { TempCartData } from '../types/data';
 
 export interface SetLocalStorageProps {
@@ -5,5 +6,5 @@ export interface SetLocalStorageProps {
 }
 
 export default function setLocalStorage(data: SetLocalStorageProps) {
-  localStorage.setItem('online-store-metalknock-rz0r', JSON.stringify(data));
+  localStorage.setItem(keyLocalStorage, JSON.stringify(data));
 }

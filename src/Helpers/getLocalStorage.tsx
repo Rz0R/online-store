@@ -1,3 +1,4 @@
+import { keyLocalStorage } from '../const/const';
 import { TempCartData } from '../types/data';
 
 export interface TempGetLocalStorage {
@@ -6,7 +7,7 @@ export interface TempGetLocalStorage {
 
 export function getLocalStorage(): TempGetLocalStorage {
   const data: TempGetLocalStorage | string = JSON.parse(
-    localStorage.getItem('online-store-metalknock-rz0r') || '""',
+    localStorage.getItem(keyLocalStorage) || '""',
   );
   if (typeof data === 'string') {
     throw new Error('LocalStorage is empty');
