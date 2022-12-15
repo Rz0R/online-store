@@ -1,5 +1,5 @@
 import { keyLocalStorage } from '../const/const';
-import { TempCartData } from '../types/data';
+import { TempCartData } from '../types/dataTemp';
 
 export interface SetLocalStorageProps {
   cartItems: Array<TempCartData>;
