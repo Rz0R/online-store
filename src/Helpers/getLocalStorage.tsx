@@ -1,4 +1,4 @@
-import { TempCartData } from '../Interfaces/data';
+import { TempCartData } from '../types/data';
 
 export interface TempGetLocalStorage {
   cartItems: Array<TempCartData>;
