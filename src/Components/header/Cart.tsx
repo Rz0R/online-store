@@ -1,9 +1,11 @@
+import { useAppSelector } from '../../hooks/redux';
 import styles from './Cart.module.scss';
 
-const count = 1;
 const totalPrice = 5;
 
 function Cart() {
+  const { itemQuantity } = useAppSelector((state) => state.CART);
+
   return (
     <div className={styles.cart}>
       <div className={styles.cart__icon}>
@@ -20,7 +22,7 @@ function Cart() {
             <path d="M19.306 23.417a3.001 3.001 0 01-2.925-2.347l-1.375-6.155a5.356 5.356 0 00-5.258-4.212H3a3 3 0 110-6h6.749c5.372 0 9.942 3.662 11.113 8.904l1.375 6.155a3 3 0 01-2.931 3.655z" />
           </g>
         </svg>
-        {count > 0 && <span className={styles.cart__count}>{count}</span>}
+        {itemQuantity > 0 && <span className={styles.cart__count}>{itemQuantity}</span>}
       </div>
 
       <div>
