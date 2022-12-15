@@ -1,0 +1,43 @@
+.cart {
+  &__title {
+    font-size: 34px;
+    font-weight: 500;
+    text-align: center;
+    padding: 40px 0;
+  }
+  &__wrapper {
+    display: flex;
+    gap: 20px;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 0 1 70%;
+  }
+  &__item {
+  }
+  &__total {
+  }
+}
+.control {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  &__limit {
+  }
+  &__pageControl {
+    display: flex;
+    align-items: center;
+    background: rgb(214, 213, 213);
+  }
+  &__left {
+    padding: 10px;
+  }
+  &__number {
+    padding: 10px;
+  }
+  &__right {
+    padding: 10px;
+  }
+}
