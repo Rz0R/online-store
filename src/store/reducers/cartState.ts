@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { NameSpace } from '../../const/const';
+import { NameSpace, keyLocalStorage } from '../../const/const';
 import { Item } from '../../types/data';
 import { CartState } from '../../types/state';
 
+const cartState1: CartState = JSON.parse(localStorage.getItem(keyLocalStorage) || 'null');
+
 export const initialState: CartState = {
-  cartItemQuantaty: 0,
-  totalPrice: 0,
-  cartItems: [],
+  cartItemQuantaty: cartState1 ? cartState1.cartItemQuantaty : 0,
+  totalPrice: cartState1 ? cartState1.totalPrice : 0,
+  cartItems: cartState1 ? cartState1.cartItems : [],
 };
 
 export const cartStateSlice = createSlice({
@@ -26,6 +28,8 @@ export const cartStateSlice = createSlice({
       }
       state.cartItemQuantaty = state.cartItems.reduce((sum, item) => sum + item.quantaty, 0);
       state.totalPrice = state.cartItems.reduce((sum, item) => sum + item.price * item.quantaty, 0);
+
+      localStorage.setItem(keyLocalStorage, JSON.stringify(state.cartItems.map((item) => item)));
     },
     removeItemCart(state, action: PayloadAction<number>) {
       const id = action.payload;
