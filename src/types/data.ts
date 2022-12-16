@@ -21,3 +21,10 @@ export interface CartItem {
 export type Items = Item[];
 
 export type CartItems = CartItem[];
+
+export interface ResponseData {
+  limit: number;
+  products: Items;
+  skip: number;
+  total: number;
+}

@@ -1,22 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { NameSpace } from '../../const/const';
+import { Item } from '../../types/data';
 import { CartState } from '../../types/state';
 
 export const initialState: CartState = {
-  cartItemQuantaty: 10,
-  totalPrice: 2300,
-  cartItems: [
-    { id: 1, quantaty: 10, price: 200 },
-    { id: 2, quantaty: 1, price: 300 },
-  ],
+  cartItemQuantaty: 0,
+  totalPrice: 0,
+  cartItems: [],
 };
 
 export const cartStateSlice = createSlice({
   name: NameSpace.cart,
   initialState,
   reducers: {
-    addCartItem(state, action: PayloadAction<{ id: number; price: number }>) {
+    addCartItem(state, action: PayloadAction<Item>) {
       const newItem = action.payload;
       const cartItem = state.cartItems.find((item) => item.id === newItem.id);
       if (cartItem) {

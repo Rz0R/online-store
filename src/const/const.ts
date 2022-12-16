@@ -10,6 +10,6 @@ export enum LoadingStatus {
   FAILED = 'failed',
 }
 
-export const URL = 'https://dummyjson.com/products';
+export const URL = 'https://dummyjson.com/products?limit=100';
 
 export const keyLocalStorage = 'online-store-metalknock-rz0r';

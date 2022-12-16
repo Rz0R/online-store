@@ -1,17 +1,14 @@
-import { useAppSelector, useAppDispatch } from '../../hooks/redux';
-import { addCartItem } from '../../store/reducers/cartState';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/redux';
+
 import styles from './Cart.module.scss';
 
 function Cart() {
   const { cartItemQuantaty, totalPrice } = useAppSelector((state) => state.CART);
 
-  const dispatch = useAppDispatch();
-
-  const onCartClick = () => dispatch(addCartItem({ id: 1, price: 200 }));
-
   return (
-    <div className={styles.cart}>
-      <button type="button" className={styles.cart__icon} onClick={onCartClick}>
+    <Link to="/cart" className={styles.cart}>
+      <div className={styles.cart__icon}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
           <g
             fill="currentColor"
@@ -26,13 +23,13 @@ function Cart() {
           </g>
         </svg>
         {cartItemQuantaty > 0 && <span className={styles.cart__count}>{cartItemQuantaty}</span>}
-      </button>
+      </div>
 
       <div>
-        <div className={styles.cart__title}>Корзина</div>
-        <div className={styles.cart__total}>{`$${totalPrice}`}</div>
+        <div className={styles.cart__title}>Cart</div>
+        <div className={styles.cart__total}>{`€${totalPrice}`}</div>
       </div>
-    </div>
+    </Link>
   );
 }
 

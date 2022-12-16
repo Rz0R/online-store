@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import loadItemsAction from '../../store/serviceActions';
 
@@ -7,7 +8,7 @@ function Main() {
   const { items, isLoading } = useAppSelector((state) => state.ITEMS);
 
   useEffect(() => {
-    dispatch(loadItemsAction());
+    if (isLoading) dispatch(loadItemsAction());
   }, []);
 
   return (
