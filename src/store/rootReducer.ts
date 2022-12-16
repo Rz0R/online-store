@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
+import { itemState } from './reducers/itemState';
 import { cartState } from './reducers/cartState';
 import { NameSpace } from '../const/const';
 
 export const rootReducer = combineReducers({
+  [NameSpace.items]: itemState,
   [NameSpace.cart]: cartState,
 });
 
