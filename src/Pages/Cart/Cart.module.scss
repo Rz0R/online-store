@@ -1,3 +1,5 @@
+@import '../../scss/colors.scss';
+
 .cart {
   &__title {
     font-size: 34px;
@@ -29,7 +31,7 @@
   &__pageControl {
     display: flex;
     align-items: center;
-    background: rgb(214, 213, 213);
+    background: $bgColor;
   }
   &__left {
     padding: 10px;

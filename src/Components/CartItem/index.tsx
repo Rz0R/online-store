@@ -27,7 +27,7 @@ export default function CartItemComp({ className, item }: CartItemProps) {
 
   return (
     <div className={`${styles.item} ${className}`}>
-      <img className={styles.item__image} src={item.images[0]} alt="change-text" />
+      <img className={styles.item__image} src={item.images[0]} alt={item.title} />
       <h3 className={styles.item__title}>{item.title}</h3>
       <div className={styles.price}>
         <div className={styles.price__inner}>

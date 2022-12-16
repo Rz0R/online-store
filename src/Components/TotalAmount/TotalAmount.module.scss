@@ -1,7 +1,9 @@
+@import '../../scss/colors.scss';
+
 .totalAmount {
   display: flex;
   flex-direction: column;
-  border: 1px solid rgb(240, 239, 239);
+  border: 1px solid $bgColor;
   gap: 10px;
   height: 100%;
   &__inner {
@@ -9,7 +11,7 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     align-items: center;
-    background: rgb(240, 239, 239);
+    background: $bgColor;
     padding: 15px 20px 10px;
   }
   &__title {
@@ -28,12 +30,12 @@
     gap: 10px;
   }
   &__button {
-    background: rgb(42, 122, 42);
+    background: $secondColor;
     padding: 20px;
   }
   &__buttonQuick {
     margin: 0 auto;
-    border-bottom: 1px dotted #000;
+    border-bottom: 1px dotted $mainColor;
     width: fit-content;
   }
 }
@@ -46,7 +48,7 @@
   }
   &__input {
     grid-row: 2/2;
-    border: 1px solid gray;
+    border: 1px solid $grayColor;
   }
   &__button {
     grid-row: 2/2;
