@@ -12,11 +12,9 @@ export interface Item {
   images: Array<string>;
 }
 
-export interface CartItem {
-  id: number;
-  price: number;
-  quantaty: number;
-}
+export type CartItem = Item & {
+  quantity: number;
+};
 
 export type Items = Item[];
 
