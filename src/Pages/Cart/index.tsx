@@ -48,7 +48,7 @@ function Cart() {
         <div className={styles.cart__wrapper}>
           <div className={styles.cart__list}>
             {cartItems.map((item) => (
-              <CartItem className="styles.cart__list" item={item} />
+              <CartItem className="styles.cart__list" key={item.id} item={item} />
             ))}
           </div>
           <TotalAmount />
