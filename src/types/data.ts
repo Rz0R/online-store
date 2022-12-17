@@ -13,7 +13,7 @@ export interface Item {
 }
 
 export type CartItem = Item & {
-  quantaty: number;
+  quantity: number;
 };
 
 export type Items = Item[];

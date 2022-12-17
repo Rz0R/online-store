@@ -1,7 +1,7 @@
 import { Items, CartItems } from './data';
 
 export type CartState = {
-  cartItemQuantaty: number;
+  cartItemQuantity: number;
   totalPrice: number;
   cartItems: CartItems;
 };

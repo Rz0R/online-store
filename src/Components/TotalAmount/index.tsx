@@ -3,14 +3,14 @@ import { useAppSelector } from '../../hooks/redux';
 import styles from './TotalAmount.module.scss';
 
 export default function TotalAmount() {
-  const { cartItemQuantaty, totalPrice } = useAppSelector((state) => state.CART);
+  const { cartItemQuantity, totalPrice } = useAppSelector((state) => state.CART);
 
   return (
     <div className={`${styles.totalAmount}`}>
       <div className={styles.totalAmount__inner}>
         <h4 className={styles.totalAmount__title}>ИТОГО:</h4>
         <div className={styles.totalAmount__price}>€{totalPrice}</div>
-        <div className={styles.totalAmount__amount}>Товаров: {cartItemQuantaty}</div>
+        <div className={styles.totalAmount__amount}>Товаров: {cartItemQuantity}</div>
       </div>
       <div className={styles.totalAmount__wrap}>
         <div className={styles.promocode}>
