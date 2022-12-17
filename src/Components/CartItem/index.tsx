@@ -11,15 +11,15 @@ interface CartItemProps {
 export default function CartItemComp({ className, item }: CartItemProps) {
   const dispatch = useAppDispatch();
 
-  function handleIncQuantity() {
+  const handleIncQuantity = () => {
     if (item.quantity < item.stock) {
       dispatch(addCartItem(item));
     }
-  }
+  };
 
-  function handleDecQuantity() {
+  const handleDecQuantity = () => {
     dispatch(removeCartItem(item.id));
-  }
+  };
 
   return (
     <div className={`${styles.item} ${className}`}>

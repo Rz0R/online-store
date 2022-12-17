@@ -17,10 +17,10 @@ function Cart() {
     if (isLoading) dispatch(loadItemsAction());
   }, []);
 
-  function handleButton() {
+  const handleButton = () => {
     const randomNum = Math.floor(Math.random() * 100);
     dispatch(addCartItem(items[randomNum]));
-  }
+  };
   // //////////////////////////////////////////////
 
   return (
