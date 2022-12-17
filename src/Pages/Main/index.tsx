@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import loadItemsAction from '../../store/serviceActions';
+import Filters from '../../Components/Filters';
+import ProductList from '../../Components/ProductList';
+import styles from './Main.module.scss';
 
 function Main() {
   const dispatch = useAppDispatch();
@@ -13,7 +16,10 @@ function Main() {
 
   return (
     <main className="main">
-      <div className="main__container">{!isLoading && JSON.stringify(items, null, 2)}</div>
+      <div className={`${styles.main__container} main__container`}>
+        <Filters />
+        {!isLoading && <ProductList items={items} />}
+      </div>
     </main>
   );
 }
