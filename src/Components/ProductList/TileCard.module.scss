@@ -2,13 +2,12 @@
 @import '../../scss/colors.scss';
 
 .card {
+  grid-gap: rem(15);
   display: grid;
-  grid-gap: rem(12);
-  grid-template-columns: auto minmax(0, 1fr) rem(140);
-  padding: rem(16) rem(16);
+  grid-template-columns: 1fr;
+  padding: rem(16);
 
   transition: all 0.3s ease 0s;
-  border-top: rem(1) solid $borderColor;
   cursor: pointer;
 
   @media (any-hover: hover) {
@@ -18,8 +17,8 @@
   }
 
   &__image {
-    width: rem(120);
-    height: rem(120);
+    width: 100%;
+    aspect-ratio: 1.2/1;
     position: relative;
 
     border-radius: rem(10);
@@ -63,7 +62,6 @@
 
   &__priceBlock {
     display: flex;
-    flex-direction: column;
     gap: rem(10);
     font-weight: 500;
   }
@@ -92,7 +90,6 @@
     font-weight: 500;
     margin-left: auto;
     transition: all 0.3s ease 0s;
-    margin-top: auto;
 
     @media (any-hover: hover) {
       &:hover {
@@ -110,7 +107,6 @@
     font-weight: 500;
     margin-left: auto;
     transition: all 0.3s ease 0s;
-    margin-top: auto;
 
     @media (any-hover: hover) {
       &:hover {

@@ -2,13 +2,13 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addCartItem, dropCartItem } from '../../store/reducers/cartState';
 import { getPriceWithoutDiscount } from '../../utils/common';
 import { Item } from '../../types/data';
-import styles from './SimpleCard.module.scss';
+import styles from './TileCard.module.scss';
 
-type BlockCardProps = {
+type TileCardProps = {
   item: Item;
 };
 
-function SimpleCard({ item }: BlockCardProps) {
+function TileCard({ item }: TileCardProps) {
   const dispatch = useAppDispatch();
   const { cartItems } = useAppSelector((state) => state.CART);
   const isItemInCart = cartItems.some((cartItem) => item.id === cartItem.id);
@@ -37,10 +37,12 @@ function SimpleCard({ item }: BlockCardProps) {
         </div>
       </div>
       <div className={styles.card__priceBlock}>
-        <div className={styles.card__discount}>
-          €{getPriceWithoutDiscount(item.price, item.discountPercentage)}
+        <div>
+          <div className={styles.card__discount}>
+            €{getPriceWithoutDiscount(item.price, item.discountPercentage)}
+          </div>
+          <div className={styles.card__price}>€{item.price}</div>
         </div>
-        <div className={styles.card__price}>€{item.price}</div>
         <button
           className={`${isItemInCart ? styles.card__buyBtn_active : styles.card__buyBtn}`}
           type="button"
@@ -53,4 +55,4 @@ function SimpleCard({ item }: BlockCardProps) {
   );
 }
 
-export default SimpleCard;
+export default TileCard;

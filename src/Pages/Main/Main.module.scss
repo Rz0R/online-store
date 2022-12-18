@@ -1,5 +1,9 @@
+@import '../../scss/base/mixins.scss';
+
 .main {
   &__container {
     display: flex;
+    justify-content: space-between;
+    gap: rem(10);
   }
 }

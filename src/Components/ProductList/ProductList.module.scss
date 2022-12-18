@@ -1,0 +1,23 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.prodictList {
+  width: 100%;
+}
+
+.view {
+  width: 100%;
+
+  &Tile {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(rem(238), 1fr));
+
+    border-top: rem(1) solid $borderColor;
+    border-left: rem(1) solid $borderColor;
+
+    & > div {
+      border-bottom: rem(1) solid $borderColor;
+      border-right: rem(1) solid $borderColor;
+    }
+  }
+}
