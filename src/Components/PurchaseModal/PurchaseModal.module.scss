@@ -1,0 +1,80 @@
+@import '../../scss/colors.scss';
+
+.modal {
+  &__container {
+  }
+  &__form {
+  }
+  &__background {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: $bgColorModal;
+    width: 100vw;
+    height: 100vh;
+    z-index: 40;
+    cursor: default;
+  }
+}
+.form {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 41;
+  background: $bgColor;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  &__personalDetails {
+  }
+  &__cardDetails {
+  }
+  &__submit {
+    background: $secondColor;
+    padding: 10px;
+  }
+}
+.personalDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  &__title {
+  }
+  &__fullName,
+  &__phoneNumber,
+  &__address,
+  &__email {
+    padding: 5px 30px 5px 10px;
+  }
+  &__fullName {
+  }
+  &__phoneNumber {
+  }
+  &__address {
+  }
+  &__email {
+  }
+}
+.cardDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  &__title {
+  }
+  &__number,
+  &__name,
+  &__date,
+  &__cvv {
+    padding: 5px 30px 5px 10px;
+  }
+  &__number {
+  }
+  &__name {
+  }
+  &__date {
+  }
+  &__cvv {
+  }
+}
