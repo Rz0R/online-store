@@ -1,21 +1,14 @@
-import { useAppSelector, useAppDispatch } from '../../hooks/redux';
-import { addCartItem, dropCartItem } from '../../store/reducers/cartState';
 import { getPriceWithoutDiscount } from '../../utils/common';
 import { Item } from '../../types/data';
 import styles from './SimpleCard.module.scss';
 
-type BlockCardProps = {
+type SimpleCardProps = {
   item: Item;
+  isItemInCart: boolean;
+  onBuyButtonClick: () => void;
 };
 
-function SimpleCard({ item }: BlockCardProps) {
-  const dispatch = useAppDispatch();
-  const { cartItems } = useAppSelector((state) => state.CART);
-  const isItemInCart = cartItems.some((cartItem) => item.id === cartItem.id);
-
-  const onBuyButtonClick = () =>
-    isItemInCart ? dispatch(dropCartItem(item.id)) : dispatch(addCartItem(item));
-
+function SimpleCard({ item, isItemInCart, onBuyButtonClick }: SimpleCardProps) {
   return (
     <div className={styles.card}>
       <div className={styles.card__image}>

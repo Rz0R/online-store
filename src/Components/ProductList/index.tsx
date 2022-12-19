@@ -1,25 +1,23 @@
 import styles from './ProductList.module.scss';
-// import SimpleCard from './SimpleCard';
-import TileCard from './TileCard';
+import Card from './Card';
 import { Items } from '../../types/data';
+import { CardView } from '../../const/const';
 
 type ProductListProps = {
   items: Items;
 };
 
-enum View {
-  simple = 'SIMPLE',
-  tile = 'TILE',
-}
-
-const view: View = View.tile;
+const cardView: CardView = CardView.simple;
 
 function ProductList({ items }: ProductListProps) {
   return (
-    <div className={`${styles.prodictList} ${view === View.tile ? styles.viewTile : ''}`}>
+    <div
+      className={`${styles.prodictList} ${
+        cardView === CardView.tile ? styles.viewTile : styles.viewSimple
+      }`}
+    >
       {items.map((item) => (
-        // <SimpleCard key={item.id} item={item} />
-        <TileCard key={item.id} item={item} />
+        <Card cardView={cardView} item={item} />
       ))}
     </div>
   );

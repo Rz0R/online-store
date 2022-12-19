@@ -20,4 +20,8 @@
       border-right: rem(1) solid $borderColor;
     }
   }
+
+  &Simple {
+    display: grid;
+  }
 }

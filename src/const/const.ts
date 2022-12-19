@@ -10,6 +10,11 @@ export enum LoadingStatus {
   FAILED = 'failed',
 }
 
+export enum CardView {
+  simple = 'SIMPLE',
+  tile = 'TILE',
+}
+
 export const URL = 'https://dummyjson.com/products?limit=100';
 
 export const keyLocalStorage = 'online-store-metalknock-rz0r';
