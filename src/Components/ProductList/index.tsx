@@ -5,11 +5,10 @@ import { CardView } from '../../const/const';
 
 type ProductListProps = {
   items: Items;
+  cardView: CardView;
 };
 
-const cardView: CardView = CardView.simple;
-
-function ProductList({ items }: ProductListProps) {
+function ProductList({ items, cardView }: ProductListProps) {
   return (
     <div
       className={`${styles.prodictList} ${
@@ -17,7 +16,7 @@ function ProductList({ items }: ProductListProps) {
       }`}
     >
       {items.map((item) => (
-        <Card cardView={cardView} item={item} />
+        <Card key={item.id} cardView={cardView} item={item} />
       ))}
     </div>
   );

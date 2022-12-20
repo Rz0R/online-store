@@ -1,0 +1,9 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.topPanel {
+  padding: rem(16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
