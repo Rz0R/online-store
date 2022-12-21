@@ -1,16 +1,19 @@
 import ViewSwitch from './ViewSwitch';
-import { CardView } from '../../const/const';
+import SortOptions from './SortOptions';
+import { CardView, SortOptionValues } from '../../const/const';
 import styles from './TopPanel.module.scss';
 
 type TopPanelProps = {
   cardView: CardView;
   onViewSwitchChange: (viewMode: CardView) => void;
+  sortValue: SortOptionValues;
+  onSortValueChange: (value: SortOptionValues) => void;
 };
 
-function TopPanel({ cardView, onViewSwitchChange }: TopPanelProps) {
+function TopPanel({ cardView, onViewSwitchChange, sortValue, onSortValueChange }: TopPanelProps) {
   return (
     <div className={styles.topPanel}>
-      <div>Sort</div>
+      <SortOptions sortValue={sortValue} onSortValueChange={onSortValueChange} />
       <div>Search</div>
       <ViewSwitch cardView={cardView} onViewSwitchChange={onViewSwitchChange} />
     </div>
