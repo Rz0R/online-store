@@ -8,13 +8,15 @@ const useValidation = (value: string, validations: IValidations) => {
   const [deliveryAddressError, setDeliveryAddressError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [cardNumberError, setCardNumberError] = useState(false);
+  const [expiryDateError, setExpiryDateError] = useState(false);
+  const [cvvError, setCvvError] = useState(false);
   const [inputValid, setInputValid] = useState(false);
 
   useEffect(() => {
     Object.keys(validations).forEach((key) => {
       switch (key) {
         case ValidationKeys.fullNameError:
-          if (/\w{3,}\s+\w{3,}/gm.test(value)) {
+          if (/.{3,}\s+.{3,}/gm.test(value)) {
             setFullNameError(false);
           } else {
             setFullNameError(true);
@@ -28,7 +30,7 @@ const useValidation = (value: string, validations: IValidations) => {
           }
           break;
         case ValidationKeys.deliveryAddressError:
-          if (/\w{5,}\s+\w{5,}\s+\w{5,}/gm.test(value)) {
+          if (/.{5,}\s+.{5,}\s+.{5,}/gm.test(value)) {
             setDeliveryAddressError(false);
           } else {
             setDeliveryAddressError(true);
@@ -42,14 +44,27 @@ const useValidation = (value: string, validations: IValidations) => {
           }
           break;
         case ValidationKeys.cardNumberError:
-          if (/[0-9]{16}/gm.test(value)) {
+          if (/[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}/gm.test(value)) {
             setCardNumberError(false);
           } else {
             setCardNumberError(true);
           }
           break;
-        default:
+        case ValidationKeys.expiryDateError:
+          if (/[0-9]{2}\/[0-9]{2}/gm.test(value) && Number(value.slice(0, 2)) <= 12) {
+            setExpiryDateError(false);
+          } else {
+            setExpiryDateError(true);
+          }
           break;
+        case ValidationKeys.cvvError:
+          if (/[0-9]{3}/gm.test(value)) {
+            setCvvError(false);
+          } else {
+            setCvvError(true);
+          }
+          break;
+        default:
       }
     });
   }, [value]);
@@ -60,13 +75,23 @@ const useValidation = (value: string, validations: IValidations) => {
       numberPhoneError ||
       deliveryAddressError ||
       emailError ||
-      cardNumberError
+      cardNumberError ||
+      expiryDateError ||
+      cvvError
     ) {
       setInputValid(false);
     } else {
       setInputValid(true);
     }
-  }, [fullNameError, numberPhoneError, deliveryAddressError, emailError, cardNumberError]);
+  }, [
+    fullNameError,
+    numberPhoneError,
+    deliveryAddressError,
+    emailError,
+    cardNumberError,
+    expiryDateError,
+    cvvError,
+  ]);
 
   return {
     fullNameError,
@@ -74,6 +99,8 @@ const useValidation = (value: string, validations: IValidations) => {
     deliveryAddressError,
     emailError,
     cardNumberError,
+    expiryDateError,
+    cvvError,
     inputValid,
   };
 };

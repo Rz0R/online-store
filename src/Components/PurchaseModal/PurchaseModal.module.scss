@@ -16,6 +16,7 @@
     cursor: default;
   }
 }
+
 .form {
   position: fixed;
   left: 50%;
@@ -27,54 +28,104 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 25vw;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   &__personalDetails {
   }
   &__cardDetails {
   }
   &__submit {
+    font-weight: 500;
+    color: $whiteColor;
     background: $secondColor;
-    padding: 10px;
+    padding: 20px;
   }
 }
-.personalDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  &__title {
-  }
-  &__fullName,
-  &__phoneNumber,
-  &__address,
-  &__email {
-    padding: 5px 30px 5px 10px;
-  }
-  &__fullName {
-  }
-  &__phoneNumber {
-  }
-  &__address {
-  }
-  &__email {
-  }
-}
+
+.personalDetails,
 .cardDetails {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   &__title {
+    font-size: 18px;
+    font-weight: 500;
   }
-  &__number,
-  &__name,
-  &__date,
+}
+.cardDetails {
+  &__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    border: 1px solid $mainColor;
+    border-radius: 15px;
+    padding: 20px 10px;
+    background: $bgColorCard;
+  }
+  &__cardNumber {
+  }
+  &__expiryDate {
+    width: 70%;
+  }
   &__cvv {
-    padding: 5px 30px 5px 10px;
+    width: 50%;
+    margin-left: auto;
   }
-  &__number {
+}
+
+@media (max-width: 1250px) {
+  .form {
+    min-width: 31vw;
   }
-  &__name {
+}
+@media (max-width: 1015px) {
+  .form {
+    min-width: 40vw;
   }
-  &__date {
+}
+@media (max-width: 790px) {
+  .form {
+    min-width: 50vw;
   }
-  &__cvv {
+}
+@media (max-width: 640px) {
+  .form {
+    min-width: 80vw;
+  }
+  .cardDetails {
+    &__inner {
+      padding: 20px 5px;
+    }
+    &__expiryDate {
+      width: 100%;
+    }
+  }
+}
+.modalPlaced {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  background: $bgColor;
+
+  & ~ .personalDetails {
+    display: none;
+  }
+  & ~ .cardDetails {
+    display: none;
+  }
+  & ~ .form__submit {
+    display: none;
+  }
+  &__title {
+    font-size: 48px;
+    font-weight: 500;
+    text-align: center;
+  }
+  &__loader {
   }
 }

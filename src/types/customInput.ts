@@ -6,6 +6,8 @@ export interface IValidationErrors {
   deliveryAddressError: string;
   emailError: string;
   cardNumberError: string;
+  expiryDateError: string;
+  cvvError: string;
 }
 
 export interface IValidations {
@@ -14,6 +16,8 @@ export interface IValidations {
   deliveryAddressError?: boolean;
   emailError?: boolean;
   cardNumberError?: boolean;
+  expiryDateError?: boolean;
+  cvvError?: boolean;
 }
 
 export interface IInputData {
@@ -22,10 +26,13 @@ export interface IInputData {
   deliveryAddressError: boolean;
   emailError: boolean;
   cardNumberError: boolean;
+  cvvError: boolean;
   inputValid: boolean;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: () => void;
   isDirty: boolean;
+  paymentSystem: string;
+  inputRef: React.RefObject<HTMLInputElement>;
   validations: IValidations;
 }
