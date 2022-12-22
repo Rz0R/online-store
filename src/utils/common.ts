@@ -11,3 +11,15 @@ export const getSortedItems = {
   [SortOptionValues.raitingASC]: (items: Items) => items.sort((a, b) => a.rating - b.rating),
   [SortOptionValues.raitingDESC]: (items: Items) => items.sort((a, b) => b.rating - a.rating),
 };
+
+export const findItems = (items: Items, searchValue: string) =>
+  items.filter(
+    (item) =>
+      item.category.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.brand.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.price.toString() === searchValue ||
+      item.stock.toString() === searchValue ||
+      item.discountPercentage.toString() === searchValue,
+  );

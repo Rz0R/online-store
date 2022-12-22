@@ -1,0 +1,51 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.searchBar {
+  position: relative;
+
+  &__icon {
+    position: absolute;
+    left: rem(5);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__input {
+    padding: rem(4) rem(15) rem(4) rem(25);
+
+    border: rem(1) solid $borderColor;
+    font-family: 'Roboto', sans-serif;
+    font-size: rem(15);
+    line-height: 1.5;
+    transition: all 0.3s ease 0s;
+    border-radius: rem(3);
+
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    &:focus {
+      border: rem(1) solid $grayColor;
+    }
+  }
+
+  &__clearBtn {
+    position: absolute;
+    width: rem(14);
+    height: rem(14);
+    right: rem(7);
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a19d9d;
+    transition: all 0.3s ease 0s;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: $mainColor;
+      }
+    }
+  }
+}

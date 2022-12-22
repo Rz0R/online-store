@@ -6,7 +6,7 @@ import Filters from '../../Components/Filters';
 import ProductList from '../../Components/ProductList';
 import TopPanel from '../../Components/TopPanel';
 import { CardView, SortOptionValues } from '../../const/const';
-import { getSortedItems } from '../../utils/common';
+import { getSortedItems, findItems } from '../../utils/common';
 import styles from './Main.module.scss';
 
 function Main() {
@@ -15,6 +15,7 @@ function Main() {
 
   const [cardView, setCardView] = useState<CardView>(CardView.simple);
   const [sortValue, setSortValue] = useState<SortOptionValues>(SortOptionValues.sortTitle);
+  const [searchValue, setSearchValue] = useState<string>('');
 
   useEffect(() => {
     if (isLoading) dispatch(loadItemsAction());
@@ -22,8 +23,10 @@ function Main() {
 
   const onViewSwitchChange = (viewMode: CardView) => setCardView(viewMode);
   const onSortValueChange = (value: SortOptionValues) => setSortValue(value);
+  const onSearchValueChange = (value: string) => setSearchValue(value);
 
-  const sortedItems = getSortedItems[sortValue]([...items]);
+  const foundItems = findItems(items, searchValue);
+  const sortedItems = getSortedItems[sortValue]([...foundItems]);
 
   return (
     <main className="main">
@@ -36,6 +39,8 @@ function Main() {
               onViewSwitchChange={onViewSwitchChange}
               sortValue={sortValue}
               onSortValueChange={onSortValueChange}
+              searchValue={searchValue}
+              onSearchValueChange={onSearchValueChange}
             />
             <ProductList items={sortedItems} cardView={cardView} />
           </div>
