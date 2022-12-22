@@ -1,3 +1,4 @@
+import InputMask from 'react-input-mask';
 import { PaymentSystems, validationErrors } from '../../const/const';
 import { IValidationErrors, IInputData } from '../../types/customInput';
 import styles from './CustomInput.module.scss';
@@ -5,6 +6,7 @@ import { AmericanExpress, Default, MasterCard, Visa } from '../SVG/paymentSystem
 import Warning from '../SVG/warning';
 
 interface CustomInputProps {
+  mask: string;
   name: string;
   placeholder: string;
   inputData: IInputData;
@@ -26,12 +28,18 @@ const renderPaymentSystem = (paymentSystem: string) => {
   return '';
 };
 
-export default function CustomInput({ name, placeholder, inputData, className }: CustomInputProps) {
+export default function CustomInput({
+  mask,
+  name,
+  placeholder,
+  inputData,
+  className,
+}: CustomInputProps) {
   return (
     <>
       <div className={`${styles.customInput__wrapper} ${className}`}>
-        <input
-          ref={inputData.inputRef}
+        <InputMask
+          mask={mask}
           className={`${styles.customInput__input} `}
           type="text"
           name={name}

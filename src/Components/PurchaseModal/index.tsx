@@ -30,7 +30,18 @@ export default function PurchaseModal() {
     cvvError: false,
   });
 
-  const [validForm, setValidFrom] = useState(false);
+  const [formValid, setFromValid] = useState(false);
+
+  const handleClickSubmitButton = () => {
+    fullName.onBlur();
+    fullName.onBlur();
+    phoneNumber.onBlur();
+    address.onBlur();
+    email.onBlur();
+    cardNumber.onBlur();
+    expiryDate.onBlur();
+    cvv.onBlur();
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,31 +54,31 @@ export default function PurchaseModal() {
       expiryDate.inputValid &&
       cvv.inputValid
     ) {
-      setValidFrom(true);
+      setFromValid(true);
     }
   };
 
   useEffect(() => {
     setTimeout(() => {
-      if (validForm === true) {
+      if (formValid === true) {
         dispatch(closeModal());
         dispatch(clearCart());
         navigate('/');
       }
     }, 4000);
-  }, [validForm]);
+  }, [formValid]);
 
   return (
     <div className={styles.modal}>
       <button
         type="button"
         className={styles.modal__background}
-        onClick={() => !validForm && dispatch(closeModal())}
+        onClick={() => !formValid && dispatch(closeModal())}
       >
         {}
       </button>
       <form onSubmit={handleSubmit} className={`${styles.modal__form} ${styles.form}`}>
-        {validForm && (
+        {formValid && (
           <div className={styles.modalPlaced}>
             <h2 className={styles.modalPlaced__title}>Thanks so much for your order!</h2>
             <Loader className={styles.modalPlaced__loader} />
@@ -76,24 +87,28 @@ export default function PurchaseModal() {
         <div className={`${styles.form__personalDetails} ${styles.personalDetails}`}>
           <h2 className={styles.personalDetails__title}>Personal details</h2>
           <CustomInput
+            mask=""
             name="fullName"
             placeholder="Full Name"
             inputData={fullName}
             className={styles.personalDetails__fullName}
           />
           <CustomInput
+            mask=""
             name="phoneNumber"
             placeholder="Phone Number"
             inputData={phoneNumber}
             className={styles.personalDetails__phoneNumber}
           />
           <CustomInput
+            mask=""
             name="deliveryAddress"
             placeholder="Delivery Address"
             inputData={address}
             className={styles.personalDetails__address}
           />
           <CustomInput
+            mask=""
             name="email"
             placeholder="E-mail"
             inputData={email}
@@ -104,18 +119,21 @@ export default function PurchaseModal() {
           <h2 className={styles.cardDetails__title}>Credit card details</h2>
           <div className={styles.cardDetails__inner}>
             <CustomInput
+              mask="9999 9999 9999 9999"
               name="creditCardNumber"
               placeholder="Credit Card Number"
               inputData={cardNumber}
               className={styles.cardDetails__cardNumber}
             />
             <CustomInput
+              mask="99/99"
               name="expiryDate"
               placeholder="Expiry Date(MM/YY)"
               inputData={expiryDate}
               className={styles.cardDetails__expiryDate}
             />
             <CustomInput
+              mask="999"
               name="cvv"
               placeholder="CVV"
               inputData={cvv}
@@ -123,20 +141,7 @@ export default function PurchaseModal() {
             />
           </div>
         </div>
-        <button
-          className={styles.form__submit}
-          type="submit"
-          onClick={() => {
-            fullName.onBlur();
-            fullName.onBlur();
-            phoneNumber.onBlur();
-            address.onBlur();
-            email.onBlur();
-            cardNumber.onBlur();
-            expiryDate.onBlur();
-            cvv.onBlur();
-          }}
-        >
+        <button className={styles.form__submit} type="submit" onClick={handleClickSubmitButton}>
           Confirm the order
         </button>
       </form>

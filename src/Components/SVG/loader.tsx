@@ -4,6 +4,7 @@ import styles from './loader.module.scss';
 interface LoaderProps {
   className: string;
 }
+
 export default function Loader({ className }: LoaderProps) {
   return (
     <svg

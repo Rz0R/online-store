@@ -21,6 +21,12 @@ export interface IValidations {
 }
 
 export interface IInputData {
+  value: string;
+  isDirty: boolean;
+  paymentSystem: string;
+  validations: IValidations;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: () => void;
   fullNameError: boolean;
   numberPhoneError: boolean;
   deliveryAddressError: boolean;
@@ -28,11 +34,4 @@ export interface IInputData {
   cardNumberError: boolean;
   cvvError: boolean;
   inputValid: boolean;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: () => void;
-  isDirty: boolean;
-  paymentSystem: string;
-  inputRef: React.RefObject<HTMLInputElement>;
-  validations: IValidations;
 }
