@@ -41,6 +41,10 @@
     color: $whiteColor;
     background: $secondColor;
     padding: 20px;
+    transition: all 0.3s ease 0s;
+    &:hover {
+      background: $mainColor;
+    }
   }
 }
 
