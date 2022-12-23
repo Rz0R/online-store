@@ -2,12 +2,14 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { itemState } from './reducers/itemState';
 import { cartState } from './reducers/cartState';
+import { modalState } from './reducers/modalState';
 import { NameSpace } from '../const/const';
 import listenerMiddleware from './middleware';
 
 export const rootReducer = combineReducers({
   [NameSpace.items]: itemState,
   [NameSpace.cart]: cartState,
+  [NameSpace.modal]: modalState,
 });
 
 const setupStore = () =>

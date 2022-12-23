@@ -11,3 +11,7 @@ export type ItemState = {
   isLoading: boolean;
   error: string;
 };
+
+export type ModalState = {
+  isOpen: boolean;
+};
