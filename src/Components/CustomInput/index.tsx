@@ -2,8 +2,8 @@ import InputMask from 'react-input-mask';
 import { PaymentSystems, validationErrors } from '../../const/const';
 import { IValidationErrors, IInputData } from '../../types/customInput';
 import styles from './CustomInput.module.scss';
-import { AmericanExpress, Default, MasterCard, Visa } from '../SVG/paymentSystems';
-import Warning from '../SVG/warning';
+import { AmericanExpress, Default, MasterCard, Visa } from '../Loader/paymentSystems';
+import Warning from '../Loader/warning';
 
 interface CustomInputProps {
   mask: string;

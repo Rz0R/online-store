@@ -5,7 +5,7 @@ import styles from './PurchaseModal.module.scss';
 import { closeModal } from '../../store/reducers/modalState';
 import useInput from '../../hooks/input';
 import CustomInput from '../CustomInput';
-import Loader from '../SVG/loader';
+import Loader from '../Loader/loader';
 import { clearCart } from '../../store/reducers/cartState';
 
 export default function PurchaseModal() {
