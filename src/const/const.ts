@@ -13,6 +13,19 @@ export enum LoadingStatus {
   FAILED = 'failed',
 }
 
+export enum CardView {
+  simple = 'SIMPLE',
+  tile = 'TILE',
+}
+
+export enum SortOptionValues {
+  sortTitle = 'sort-title',
+  priceASC = 'price-asc',
+  priceDESC = 'price-desc',
+  raitingASC = 'raiting-asc',
+  raitingDESC = 'raiting-desc',
+}
+
 export enum ValidationKeys {
   fullNameError = 'fullNameError',
   numberPhoneError = 'numberPhoneError',
