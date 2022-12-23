@@ -5,8 +5,10 @@ import TotalAmount from '../../Components/TotalAmount';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { addCartItem } from '../../store/reducers/cartState';
 import loadItemsAction from '../../store/serviceActions';
+import PurchaseModal from '../../Components/PurchaseModal';
 
 function Cart() {
+  const { isOpen } = useAppSelector((state) => state.MODAL);
   const { cartItems } = useAppSelector((state) => state.CART);
   const dispatch = useAppDispatch();
 
@@ -25,6 +27,7 @@ function Cart() {
 
   return (
     <main className="cart">
+      {isOpen && <PurchaseModal />}
       <div className="cart__container">
         <h1 className={styles.cart__title}>Корзина</h1>
         <div className={styles.control}>

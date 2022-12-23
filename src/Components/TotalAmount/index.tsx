@@ -1,9 +1,10 @@
-import React from 'react';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { openModal } from '../../store/reducers/modalState';
 import styles from './TotalAmount.module.scss';
 
 export default function TotalAmount() {
   const { cartItemQuantity, totalPrice } = useAppSelector((state) => state.CART);
+  const dispatch = useAppDispatch();
 
   return (
     <div className={`${styles.totalAmount}`}>
@@ -28,7 +29,11 @@ export default function TotalAmount() {
             </button>
           </li>
         </ul>
-        <button className={styles.totalAmount__button} type="button">
+        <button
+          className={styles.totalAmount__button}
+          type="button"
+          onClick={() => dispatch(openModal())}
+        >
           Оформить заказ
         </button>
         <button className={styles.totalAmount__buttonQuick} type="button">
