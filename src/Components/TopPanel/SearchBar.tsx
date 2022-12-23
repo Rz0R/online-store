@@ -1,19 +1,31 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useCallback, useRef, useState } from 'react';
+
+import { debounce } from '../../utils/common';
 import styles from './SearchBar.module.scss';
 
+const DEBOUNCE_DELAY = 300;
+
 type SearchBarProps = {
-  searchValue: string;
   onSearchValueChange: (value: string) => void;
 };
 
-function SearchBar({ searchValue, onSearchValueChange }: SearchBarProps) {
+function SearchBar({ onSearchValueChange }: SearchBarProps) {
+  const [inputValue, setInputValue] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const onInputChange = (evt: ChangeEvent<HTMLInputElement>) =>
-    onSearchValueChange(evt.target.value);
+  const updateSearchValue = useCallback(
+    debounce((value: string) => onSearchValueChange(value), DEBOUNCE_DELAY),
+    [],
+  );
+
+  const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(evt.target.value);
+    updateSearchValue(evt.target.value);
+  };
 
   const onClearButtonClick = () => {
-    onSearchValueChange('');
+    setInputValue('');
+    updateSearchValue('');
     inputRef.current?.focus();
   };
 
@@ -38,13 +50,13 @@ function SearchBar({ searchValue, onSearchValueChange }: SearchBarProps) {
       </svg>
       <input
         className={styles.searchBar__input}
-        value={searchValue}
+        value={inputValue}
         onChange={onInputChange}
         ref={inputRef}
         type="search"
         placeholder="Search product"
       />
-      {searchValue && (
+      {inputValue && (
         <button className={styles.searchBar__clearBtn} onClick={onClearButtonClick} type="button">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path

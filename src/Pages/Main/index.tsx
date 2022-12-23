@@ -39,7 +39,6 @@ function Main() {
               onViewSwitchChange={onViewSwitchChange}
               sortValue={sortValue}
               onSortValueChange={onSortValueChange}
-              searchValue={searchValue}
               onSearchValueChange={onSearchValueChange}
             />
             <ProductList items={sortedItems} cardView={cardView} />

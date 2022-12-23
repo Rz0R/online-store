@@ -9,7 +9,7 @@ type TopPanelProps = {
   onViewSwitchChange: (viewMode: CardView) => void;
   sortValue: SortOptionValues;
   onSortValueChange: (value: SortOptionValues) => void;
-  searchValue: string;
+  // searchValue: string;
   onSearchValueChange: (value: string) => void;
 };
 
@@ -18,13 +18,12 @@ function TopPanel({
   onViewSwitchChange,
   sortValue,
   onSortValueChange,
-  searchValue,
   onSearchValueChange,
 }: TopPanelProps) {
   return (
     <div className={styles.topPanel}>
       <SortOptions sortValue={sortValue} onSortValueChange={onSortValueChange} />
-      <SearchBar searchValue={searchValue} onSearchValueChange={onSearchValueChange} />
+      <SearchBar onSearchValueChange={onSearchValueChange} />
       <ViewSwitch cardView={cardView} onViewSwitchChange={onViewSwitchChange} />
     </div>
   );

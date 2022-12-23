@@ -23,3 +23,12 @@ export const findItems = (items: Items, searchValue: string) =>
       item.stock.toString() === searchValue ||
       item.discountPercentage.toString() === searchValue,
   );
+
+export const debounce = (fn: (value: string) => void, delay: number) => {
+  let timer: ReturnType<typeof setTimeout>;
+
+  return (value: string) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(value), delay);
+  };
+};
