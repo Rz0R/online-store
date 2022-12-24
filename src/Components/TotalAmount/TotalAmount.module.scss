@@ -6,6 +6,7 @@
   border: 1px solid $bgColor;
   gap: 10px;
   height: 100%;
+
   &__inner {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -14,12 +15,34 @@
     background: $bgColor;
     padding: 15px 20px 10px;
   }
+
   &__title {
     font-size: 20px;
   }
+
+  &__priceContainer {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
   &__price {
     text-align: right;
+    font-size: 24px;
+    color: $secondColor;
   }
+
+  &__discountedPrice {
+    text-align: right;
+    font-size: 24px;
+    color: $secondColor;
+
+    & ~ .totalAmount__price {
+      font-size: 12px;
+      text-decoration: line-through;
+      color: $grayColor;
+    }
+  }
+
   &__amount {
   }
 
@@ -29,40 +52,61 @@
     padding: 15px 20px 10px;
     gap: 10px;
   }
-  &__button {
+
+  &__checkout {
     font-weight: 500;
     color: $whiteColor;
     background: $secondColor;
     padding: 20px;
-  }
-  &__buttonQuick {
-    margin: 0 auto;
-    border-bottom: 1px dotted $mainColor;
-    width: fit-content;
+    transition: all 0.3s ease 0s;
+    &:hover {
+      background: $mainColor;
+    }
   }
 }
+
 .promocode {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
   align-items: center;
+
   &__title {
   }
+
   &__input {
     grid-row: 2/2;
     border: 1px solid $grayColor;
   }
-  &__button {
+
+  &__apply {
     grid-row: 2/2;
+    border-bottom: 1px dotted $mainColor;
+    width: fit-content;
+    transition: all 0.3s ease 0s;
+    &:hover {
+      color: $redColor;
+      border-bottom: 1px dotted $redColor;
+    }
+    &Active {
+      &:hover {
+        color: $secondColor;
+        border-bottom: 1px dotted $secondColor;
+      }
+    }
   }
 }
+
 .promocodeList {
 }
+
 .promocodeItem {
   display: flex;
   justify-content: space-between;
+
   &_name {
   }
+
   &__close {
   }
 }

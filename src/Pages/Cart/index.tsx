@@ -1,35 +1,19 @@
-import { useEffect } from 'react';
 import styles from './Cart.module.scss';
 import CartItem from '../../Components/CartItem';
 import TotalAmount from '../../Components/TotalAmount';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { addCartItem } from '../../store/reducers/cartState';
-import loadItemsAction from '../../store/serviceActions';
+import { useAppSelector } from '../../hooks/redux';
+
 import PurchaseModal from '../../Components/PurchaseModal';
 
 function Cart() {
   const { isOpen } = useAppSelector((state) => state.MODAL);
   const { cartItems } = useAppSelector((state) => state.CART);
-  const dispatch = useAppDispatch();
-
-  // удалить после добавления функ-ла на main ////
-  const { items, isLoading } = useAppSelector((state) => state.ITEMS);
-
-  useEffect(() => {
-    if (isLoading) dispatch(loadItemsAction());
-  }, []);
-
-  const handleButton = () => {
-    const randomNum = Math.floor(Math.random() * 100);
-    dispatch(addCartItem(items[randomNum]));
-  };
-  // //////////////////////////////////////////////
 
   return (
     <main className="cart">
       {isOpen && <PurchaseModal />}
       <div className="cart__container">
-        <h1 className={styles.cart__title}>Корзина</h1>
+        <h1 className={styles.cart__title}>Cart</h1>
         <div className={styles.control}>
           <div className={styles.control__limit}>
             Items:
@@ -45,9 +29,6 @@ function Cart() {
             </button>
           </div>
         </div>
-        <button type="button" onClick={handleButton}>
-          Добавить случайный предмет в корзину
-        </button>
         <div className={styles.cart__wrapper}>
           <div className={styles.cart__list}>
             {cartItems.map((item) => (

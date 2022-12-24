@@ -26,3 +26,7 @@ export interface ResponseData {
   skip: number;
   total: number;
 }
+export interface Promocods {
+  name: string;
+  discount: number;
+}
