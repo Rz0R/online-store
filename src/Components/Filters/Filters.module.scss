@@ -1,6 +1,10 @@
 @import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
 
 .fiters {
-  width: rem(270);
-  flex: 0 0 rem(270);
+  width: rem(210);
+  flex: 0 0 rem(210);
+  border: rem(2) solid $borderColor;
+
+  padding: rem(20) rem(20) 0;
 }
