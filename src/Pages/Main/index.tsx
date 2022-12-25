@@ -6,7 +6,7 @@ import Filters from '../../Components/Filters';
 import ProductList from '../../Components/ProductList';
 import TopPanel from '../../Components/TopPanel';
 import { CardView, SortOptionValues } from '../../const/const';
-import { getSortedItems, findItems } from '../../utils/common';
+import { getSortedItems, findItems } from '../../utils/data';
 import styles from './Main.module.scss';
 
 function Main() {

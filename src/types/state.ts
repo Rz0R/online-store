@@ -8,6 +8,8 @@ export type CartState = {
 
 export type ItemState = {
   items: Items;
+  categories: string[];
+  brands: string[];
   isLoading: boolean;
   error: string;
 };

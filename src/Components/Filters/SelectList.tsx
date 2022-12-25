@@ -29,7 +29,7 @@ function SelectList() {
         {categories.map((category) => (
           <Checkbox
             key={category.id}
-            id={category.name}
+            id={category.id.toString()}
             isChecked={category.isActive}
             name={category.name}
             onChange={onChange}
