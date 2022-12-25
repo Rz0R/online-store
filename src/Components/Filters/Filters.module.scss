@@ -2,9 +2,11 @@
 @import '../../scss/colors.scss';
 
 .fiters {
-  width: rem(210);
-  flex: 0 0 rem(210);
+  width: rem(300);
+  flex: 0 0 rem(300);
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
   border: rem(2) solid $borderColor;
-
   padding: rem(20) rem(20) 0;
 }

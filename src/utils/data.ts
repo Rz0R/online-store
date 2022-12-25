@@ -1,5 +1,6 @@
 import { SortOptionValues } from '../const/const';
-import { Items } from '../types/data';
+import { FilterData, Items } from '../types/data';
+import { FilterState } from '../types/state';
 
 export const getSortedItems = {
   [SortOptionValues.sortTitle]: (items: Items) => items,
@@ -24,5 +25,38 @@ export const findItems = (items: Items, searchValue: string) => {
   );
 };
 
-export const getCategories = (items: Items) => [...new Set(items.map((item) => item.category))];
-export const getBrands = (items: Items) => [...new Set(items.map((item) => item.brand))];
+export const getCategories = (items: Items) => [
+  ...new Set(items.map((item) => item.category.toLowerCase())),
+];
+export const getBrands = (items: Items) => [
+  ...new Set(items.map((item) => item.brand.toLowerCase())),
+];
+
+export const getFilterState = (names: string[]) =>
+  names.map((name, idx) => ({
+    id: `${name}_${idx}`,
+    name,
+    isActive: false,
+  }));
+
+export const filterItems = (
+  items: Items,
+  filterState: FilterState,
+  filterType: 'category' | 'brand',
+) => {
+  const filterValues = filterState.filter((it) => it.isActive).map((it) => it.name);
+  if (filterValues.length === 0) return items;
+  return items.filter((item) => filterValues.some((it) => it === item[filterType].toLowerCase()));
+};
+
+export const getFilterData = (
+  items: Items,
+  filteredItems: Items,
+  filterState: FilterState,
+  filterType: 'category' | 'brand',
+): FilterData =>
+  filterState.map((item) => ({
+    ...item,
+    allItems: items.filter((it) => item.name === it[filterType].toLowerCase()).length,
+    availableItems: filteredItems.filter((it) => item.name === it[filterType].toLowerCase()).length,
+  }));

@@ -17,3 +17,9 @@ export type ItemState = {
 export type ModalState = {
   isOpen: boolean;
 };
+
+export type FilterState = {
+  id: string;
+  name: string;
+  isActive: boolean;
+}[];

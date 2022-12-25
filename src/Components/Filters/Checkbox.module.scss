@@ -34,6 +34,9 @@
     line-height: 1.5;
     color: $grayColor;
 
+    display: flex;
+    justify-content: space-between;
+
     @media (any-hover: hover) {
       &:hover {
         color: $secondColor;

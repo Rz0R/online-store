@@ -4,10 +4,12 @@ type CheckBoxProps = {
   id: string;
   isChecked: boolean;
   name: string;
-  onChange: (id: number, isChecked: boolean) => void;
+  allItems: number;
+  availableItems: number;
+  onChange: (id: string, isChecked: boolean) => void;
 };
 
-function CheckBox({ id, name, isChecked, onChange }: CheckBoxProps) {
+function CheckBox({ id, name, allItems, availableItems, isChecked, onChange }: CheckBoxProps) {
   return (
     <div className={styles.checkbox}>
       <input
@@ -15,10 +17,13 @@ function CheckBox({ id, name, isChecked, onChange }: CheckBoxProps) {
         type="checkbox"
         checked={isChecked}
         id={id}
-        onChange={() => onChange(+id, !isChecked)}
+        onChange={() => onChange(id, !isChecked)}
       />
       <label className={styles.checkbox__label} htmlFor={id}>
-        {name}
+        <span>{name}</span>
+        <span>
+          ({availableItems}/{allItems})
+        </span>
       </label>
     </div>
   );

@@ -1,37 +1,26 @@
-import { useState } from 'react';
 import Checkbox from './Checkbox';
-
+import { FilterData } from '../../types/data';
 import styles from './SelectList.module.scss';
 
-const initialCategories = [
-  {
-    id: 1,
-    name: 'smartphones',
-    isActive: false,
-  },
-  {
-    id: 2,
-    name: 'laptops',
-    isActive: false,
-  },
-];
+type SelectListProps = {
+  name: string;
+  filterState: FilterData;
+  onChange: (id: string, isActive: boolean) => void;
+};
 
-function SelectList() {
-  const [categories, setCategories] = useState(initialCategories);
-
-  const onChange = (id: number, isActive: boolean) =>
-    setCategories((prev) => prev.map((it) => (it.id === id ? { ...it, isActive } : it)));
-
+function SelectList({ name, filterState, onChange }: SelectListProps) {
   return (
     <div>
-      <h3 className={styles.selectList__name}>Category</h3>
+      <h3 className={styles.selectList__name}>{name}</h3>
       <div>
-        {categories.map((category) => (
+        {filterState.map(({ id, isActive, name: checboxName, allItems, availableItems }) => (
           <Checkbox
-            key={category.id}
-            id={category.id.toString()}
-            isChecked={category.isActive}
-            name={category.name}
+            key={id}
+            id={id}
+            isChecked={isActive}
+            name={checboxName}
+            allItems={allItems}
+            availableItems={availableItems}
             onChange={onChange}
           />
         ))}

@@ -26,3 +26,11 @@ export interface ResponseData {
   skip: number;
   total: number;
 }
+
+export type FilterData = {
+  allItems: number;
+  availableItems: number;
+  id: string;
+  name: string;
+  isActive: boolean;
+}[];
