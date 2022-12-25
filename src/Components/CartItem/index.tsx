@@ -6,9 +6,16 @@ import styles from './CartItem.module.scss';
 interface CartItemProps {
   className: string;
   item: CartItem;
+  indexOfFirstCartItem: number;
+  index: number;
 }
 
-export default function CartItemComp({ className, item }: CartItemProps) {
+export default function CartItemComp({
+  className,
+  item,
+  indexOfFirstCartItem,
+  index,
+}: CartItemProps) {
   const dispatch = useAppDispatch();
 
   const handleIncQuantity = () => {
@@ -23,6 +30,7 @@ export default function CartItemComp({ className, item }: CartItemProps) {
 
   return (
     <div className={`${styles.item} ${className}`}>
+      <div>{indexOfFirstCartItem + 1 + index}</div>
       <img className={styles.item__image} src={item.images[0]} alt={item.title} />
       <h3 className={styles.item__title}>{item.title}</h3>
       <div className={styles.price}>

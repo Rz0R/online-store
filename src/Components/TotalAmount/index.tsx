@@ -46,7 +46,10 @@ export default function TotalAmount() {
           <div className={styles.totalAmount__price}>€{totalPrice}</div>
         </div>
 
-        <div className={styles.totalAmount__amount}>Quantity: {cartItemQuantity}</div>
+        <div className={styles.totalAmount__amount}>
+          {' '}
+          {cartItemQuantity} {cartItemQuantity === 1 ? 'item' : 'items'}
+        </div>
       </div>
       <div className={styles.totalAmount__wrap}>
         <div className={styles.promocode}>

@@ -1,0 +1,27 @@
+@import '../../scss/colors.scss';
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  &__limit {
+  }
+  &__pageControl {
+    display: flex;
+    align-items: center;
+    background: $bgColor;
+  }
+
+  &__left {
+    padding: 10px;
+  }
+
+  &__number {
+    padding: 10px;
+  }
+
+  &__right {
+    padding: 10px;
+  }
+}
