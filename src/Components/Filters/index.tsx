@@ -4,9 +4,9 @@ import styles from './Filters.module.scss';
 
 type FilteProps = {
   categoryState: FilterData;
-  onCategoryFilterChange: (id: string, isActive: boolean) => void;
+  onCategoryFilterChange: (id: string) => void;
   brandState: FilterData;
-  onBrategoryFilterChange: (id: string, isActive: boolean) => void;
+  onBrategoryFilterChange: (id: string) => void;
 };
 
 function Filters({

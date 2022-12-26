@@ -36,12 +36,16 @@ function Main() {
     }
   }, [isLoading]);
 
-  const onCategoryFilterChange = (id: string, isActive: boolean) => {
-    setCategoryFilterState((prev) => prev.map((it) => (it.id === id ? { ...it, isActive } : it)));
+  const onCategoryFilterChange = (id: string) => {
+    setCategoryFilterState((prev) =>
+      prev.map((it) => (it.id === id ? { ...it, isActive: !it.isActive } : it)),
+    );
   };
 
-  const onBrandFilterChange = (id: string, isActive: boolean) => {
-    setBrandFilterState((prev) => prev.map((it) => (it.id === id ? { ...it, isActive } : it)));
+  const onBrandFilterChange = (id: string) => {
+    setBrandFilterState((prev) =>
+      prev.map((it) => (it.id === id ? { ...it, isActive: !it.isActive } : it)),
+    );
   };
 
   const onViewSwitchChange = (viewMode: CardView) => setCardView(viewMode);
