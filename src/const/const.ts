@@ -45,8 +45,8 @@ export enum PaymentSystems {
 }
 
 export const ListPromocods: Promocods[] = [
-  { name: 'RS', discount: 0.1 },
-  { name: 'EPM', discount: 0.15 },
+  { name: 'RS', discount: 0.1, fullName: 'Rolling Scopes School' },
+  { name: 'EPM', discount: 0.15, fullName: 'EPAM Systems' },
 ];
 
 export const validationErrors: IValidationErrors = {

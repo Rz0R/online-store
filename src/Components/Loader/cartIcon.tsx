@@ -1,8 +1,13 @@
 import React from 'react';
 
-export default function CartIcon() {
+interface CartIconProps {
+  className: string;
+}
+
+export default function CartIcon({ className }: CartIconProps) {
   return (
     <svg
+      className={className}
       aria-hidden="true"
       data-prefix="far"
       data-icon="shopping-cart"

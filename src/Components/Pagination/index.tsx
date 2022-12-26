@@ -4,9 +4,12 @@ import { useSearchParams } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 import { CartItem } from '../../types/data';
 import { getSearchParams } from '../../utils/common';
+import ArrowLeft from '../Loader/arrowLeft';
+import ArrowRight from '../Loader/arrowRight';
 import styles from './Pagination.module.scss';
 
 interface PaginationProps {
+  className: string;
   currentPage: number;
   cartItemsPerPage: string;
   memory: string;
@@ -18,6 +21,7 @@ interface PaginationProps {
 }
 
 export default function Pagination({
+  className,
   currentPage,
   cartItemsPerPage,
   memory,
@@ -47,12 +51,15 @@ export default function Pagination({
         break;
       case '0':
         setCartItemsPerPage('1');
+        setMemory('');
         break;
       case '00':
         setCartItemsPerPage('01');
+        setMemory('');
         break;
       default:
         setCartItemsPerPage(currentValue);
+        setMemory('');
     }
   };
 
@@ -93,7 +100,7 @@ export default function Pagination({
   const handleClickPrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
 
   return (
-    <div className={styles.control}>
+    <div className={`${styles.control} ${className}`}>
       <div className={styles.control__limit}>
         Items:
         <InputMask
@@ -102,15 +109,32 @@ export default function Pagination({
           type="text"
           value={cartItemsPerPage}
           onChange={handleChangeItemsPerPage}
+          className={styles.control__input}
         />
       </div>
       <div className={styles.control__pageControl}>
-        <button className={styles.control__left} type="button" onClick={handleClickPrevPage}>
-          {'<'}
+        <button
+          className={
+            currentPage !== 1
+              ? styles.control__left
+              : `${styles.control__left} ${styles.control__leftDisable}`
+          }
+          type="button"
+          onClick={handleClickPrevPage}
+        >
+          <ArrowLeft className={styles.control__leftIcon} />
         </button>
         <div className={styles.control__number}>{currentPage}</div>
-        <button className={styles.control__right} type="button" onClick={handleClickNextPage}>
-          {'>'}
+        <button
+          className={
+            currentPage !== numberOfPages
+              ? styles.control__right
+              : `${styles.control__right} ${styles.control__rightDisable}`
+          }
+          type="button"
+          onClick={handleClickNextPage}
+        >
+          <ArrowRight className={styles.control__rightIcon} />
         </button>
       </div>
     </div>

@@ -3,25 +3,71 @@
 .control {
   display: flex;
   align-items: center;
-  gap: 50px;
 
   &__limit {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-weight: 500;
   }
+
+  &__input {
+    border: 1px solid #eee;
+    padding: 5px 10px;
+    width: 2.5em;
+  }
+
   &__pageControl {
     display: flex;
     align-items: center;
     background: $bgColor;
-  }
-
-  &__left {
-    padding: 10px;
+    margin-left: 40px;
   }
 
   &__number {
-    padding: 10px;
+    min-width: 50px;
   }
 
+  &__left,
+  &__number,
   &__right {
-    padding: 10px;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__leftIcon,
+  &__rightIcon {
+    width: 16px;
+    height: 16px;
+    filter: invert(76%) sepia(0%) saturate(345%) hue-rotate(139deg) brightness(81%) contrast(87%);
+    font-size: 20px;
+    font-weight: 400;
+    transition: all 0.3s ease 0s;
+  }
+
+  &__leftDisable {
+    cursor: default;
+  }
+
+  &__rightDisable {
+    cursor: default;
+  }
+
+  &__left:not(.control__leftDisable) {
+    &:hover {
+      & .control__leftIcon {
+        filter: none;
+      }
+    }
+  }
+
+  &__right:not(.control__rightDisable) {
+    &:hover {
+      & .control__rightIcon {
+        filter: none;
+      }
+    }
   }
 }

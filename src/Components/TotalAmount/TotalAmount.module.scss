@@ -1,28 +1,41 @@
 @import '../../scss/colors.scss';
 
 .totalAmount {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid $bgColor;
-  gap: 10px;
-  height: 100%;
+  flex: 0 1 30%;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid $borderColor;
+    position: sticky;
+    top: 50px;
+  }
+
+  &__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: $bgColor;
+    padding: 0 20px 30px;
+  }
 
   &__inner {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    align-items: center;
-    background: $bgColor;
-    padding: 15px 20px 10px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 30px 0 0 0;
   }
 
   &__title {
-    font-size: 20px;
+    font-size: 21px;
+    font-weight: 500;
   }
 
   &__priceContainer {
     display: flex;
     flex-direction: column-reverse;
+    position: relative;
   }
 
   &__price {
@@ -31,16 +44,14 @@
     color: $secondColor;
   }
 
-  &__discountedPrice {
+  &__oldPrice {
     text-align: right;
-    font-size: 24px;
-    color: $secondColor;
-
-    & ~ .totalAmount__price {
-      font-size: 12px;
-      text-decoration: line-through;
-      color: $grayColor;
-    }
+    font-size: 12px;
+    text-decoration: line-through;
+    color: $grayColor;
+    position: absolute;
+    top: -15px;
+    right: 0;
   }
 
   &__amount {
@@ -49,8 +60,7 @@
   &__wrap {
     display: flex;
     flex-direction: column;
-    padding: 15px 20px 10px;
-    gap: 10px;
+    padding: 25px 20px 30px;
   }
 
   &__checkout {
@@ -62,51 +72,5 @@
     &:hover {
       background: $mainColor;
     }
-  }
-}
-
-.promocode {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  align-items: center;
-
-  &__title {
-  }
-
-  &__input {
-    grid-row: 2/2;
-    border: 1px solid $grayColor;
-  }
-
-  &__apply {
-    grid-row: 2/2;
-    border-bottom: 1px dotted $mainColor;
-    width: fit-content;
-    transition: all 0.3s ease 0s;
-    &:hover {
-      color: $redColor;
-      border-bottom: 1px dotted $redColor;
-    }
-    &Active {
-      &:hover {
-        color: $secondColor;
-        border-bottom: 1px dotted $secondColor;
-      }
-    }
-  }
-}
-
-.promocodeList {
-}
-
-.promocodeItem {
-  display: flex;
-  justify-content: space-between;
-
-  &_name {
-  }
-
-  &__close {
   }
 }

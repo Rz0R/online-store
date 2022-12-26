@@ -29,4 +29,5 @@ export interface ResponseData {
 export interface Promocods {
   name: string;
   discount: number;
+  fullName: string;
 }

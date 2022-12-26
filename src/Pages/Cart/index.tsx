@@ -11,10 +11,12 @@ import Pagination from '../../Components/Pagination';
 function Cart() {
   const { isOpen } = useAppSelector((state) => state.MODAL);
   const { cartItems } = useAppSelector((state) => state.CART);
+
   const [searchParams] = useSearchParams();
+
   const [currentPage, setCurrentPage] = useState(Math.ceil(Number(searchParams.get('page'))) || 1);
   const [cartItemsPerPage, setCartItemsPerPage] = useState(
-    (Number(searchParams.get('limit')) === 0 && '3') || searchParams.get('limit') || '3',
+    (Number(searchParams.get('limit')) === 0 && '10') || searchParams.get('limit') || '10',
   );
   const [memory, setMemory] = useState('');
 
@@ -25,10 +27,10 @@ function Cart() {
 
   if (cartItems.length === 0) {
     return (
-      <main className="cart">
-        <div className="cart__container">
-          <CartIcon />
-          <h3>Your cart is empty</h3>
+      <main className={`cartEmpty ${styles.cartEmpty}`}>
+        <div className={`cartEmpty__container ${styles.cartEmpty__container}`}>
+          <CartIcon className={styles.cartEmpty__icon} />
+          <h3 className={styles.cartEmpty__title}>Your cart is empty</h3>
         </div>
       </main>
     );
@@ -37,28 +39,33 @@ function Cart() {
     <main className="cart">
       {isOpen && <PurchaseModal />}
       <div className="cart__container">
-        <h1 className={styles.cart__title}>Cart</h1>
-        <Pagination
-          currentPage={currentPage}
-          cartItemsPerPage={cartItemsPerPage}
-          memory={memory}
-          limit={limit}
-          currentCartItems={currentCartItems}
-          setCurrentPage={setCurrentPage}
-          setCartItemsPerPage={setCartItemsPerPage}
-          setMemory={setMemory}
-        />
         <div className={styles.cart__wrapper}>
-          <div className={styles.cart__list}>
-            {currentCartItems.map((item, index) => (
-              <CartItem
-                className="styles.cart__list"
-                key={item.id}
-                item={item}
-                indexOfFirstCartItem={indexOfFirstCartItem}
-                index={index}
+          <div className={styles.cart__column}>
+            <div className={`${styles.cart__menu} ${styles.menu}`}>
+              <h1 className={styles.menu__title}>Cart</h1>
+              <Pagination
+                className={styles.menu__control}
+                currentPage={currentPage}
+                cartItemsPerPage={cartItemsPerPage}
+                memory={memory}
+                limit={limit}
+                currentCartItems={currentCartItems}
+                setCurrentPage={setCurrentPage}
+                setCartItemsPerPage={setCartItemsPerPage}
+                setMemory={setMemory}
               />
-            ))}
+            </div>
+            <div className={styles.cart__list}>
+              {currentCartItems.map((item, index) => (
+                <CartItem
+                  className="styles.cart__list"
+                  key={item.id}
+                  item={item}
+                  indexOfFirstCartItem={indexOfFirstCartItem}
+                  index={index}
+                />
+              ))}
+            </div>
           </div>
           <TotalAmount />
         </div>
