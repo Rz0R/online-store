@@ -8,6 +8,7 @@ const initialState: ItemState = {
   items: [],
   categories: [],
   brands: [],
+  prices: [],
   isLoading: true,
   error: '',
 };
@@ -35,6 +36,9 @@ export const itemStateSlice = createSlice({
     brandsLoadingSuccess(state, action: PayloadAction<string[]>) {
       state.brands = action.payload;
     },
+    pricesLoadingSucces(state, action: PayloadAction<number[]>) {
+      state.prices = action.payload;
+    },
   },
 });
 
@@ -44,5 +48,6 @@ export const {
   itemsLoadingError,
   categoriesLoadingSuccess,
   brandsLoadingSuccess,
+  pricesLoadingSucces,
 } = itemStateSlice.actions;
 export const itemState = itemStateSlice.reducer;

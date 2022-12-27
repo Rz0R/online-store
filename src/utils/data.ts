@@ -46,7 +46,10 @@ export const filterItems = (
 ) => {
   const filterValues = filterState.filter((it) => it.isActive).map((it) => it.name);
   if (filterValues.length === 0) return items;
-  return items.filter((item) => filterValues.some((it) => it === item[filterType].toLowerCase()));
+  const filteredItems = items.filter((item) =>
+    filterValues.some((it) => it === item[filterType].toLowerCase()),
+  );
+  return filteredItems;
 };
 
 export const getFilterData = (
@@ -60,3 +63,6 @@ export const getFilterData = (
     allItems: items.filter((it) => item.name === it[filterType].toLowerCase()).length,
     availableItems: filteredItems.filter((it) => item.name === it[filterType].toLowerCase()).length,
   }));
+
+export const getPrices = (items: Items) =>
+  [...new Set(items.map((it) => it.price))].sort((a, b) => a - b);

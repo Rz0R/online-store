@@ -19,13 +19,26 @@ import { Items } from '../../types/data';
 
 function Main() {
   const dispatch = useAppDispatch();
-  const { items, categories, brands, isLoading } = useAppSelector((state) => state.ITEMS);
+  const { items, categories, brands, prices, isLoading } = useAppSelector((state) => state.ITEMS);
 
   const [cardView, setCardView] = useState<CardView>(CardView.simple);
   const [sortValue, setSortValue] = useState<SortOptionValues>(SortOptionValues.sortTitle);
   const [searchValue, setSearchValue] = useState<string>('');
   const [categoryFilterState, setCategoryFilterState] = useState<FilterState>([]);
   const [bradnFilterState, setBrandFilterState] = useState<FilterState>([]);
+  const [priceFilterState, setPriceFilterState] = useState<{
+    minValue: number;
+    maxValue: number;
+    minDataValue: string;
+    maxDataValue: string;
+    max: number;
+  }>({
+    minValue: 0,
+    maxValue: 0,
+    minDataValue: '€0',
+    maxDataValue: '€0',
+    max: 0,
+  });
 
   useEffect(() => {
     if (isLoading) {
@@ -33,6 +46,13 @@ function Main() {
     } else {
       setCategoryFilterState(getFilterState(categories));
       setBrandFilterState(getFilterState(brands));
+      setPriceFilterState({
+        minValue: 0,
+        maxValue: prices.length - 1 || 0,
+        minDataValue: `€${prices[0]}`,
+        maxDataValue: `€${prices[prices.length - 1]}`,
+        max: prices.length > 0 ? prices.length - 1 : 0,
+      });
     }
   }, [isLoading]);
 
@@ -52,6 +72,16 @@ function Main() {
   const onSortValueChange = (value: SortOptionValues) => setSortValue(value);
   const onSearchValueChange = (value: string) => setSearchValue(value);
 
+  const onPriceFilterChange = (minValue: number, maxValue: number) => {
+    setPriceFilterState((prev) => ({
+      ...prev,
+      minValue,
+      maxValue,
+      minDataValue: `€${prices[minValue]}`,
+      maxDataValue: `€${prices[maxValue]}`,
+    }));
+  };
+
   const itemsFiteredByCategories: Items = filterItems(items, categoryFilterState, 'category');
 
   const itemsFilteredByBrands: Items = filterItems(
@@ -60,7 +90,13 @@ function Main() {
     'brand',
   );
 
-  const foundItems = findItems(itemsFilteredByBrands, searchValue);
+  const itemsFiteredByPrice = itemsFilteredByBrands.filter(
+    (it) =>
+      it.price >= prices[priceFilterState.minValue] &&
+      it.price <= prices[priceFilterState.maxValue],
+  );
+
+  const foundItems = findItems(itemsFiteredByPrice, searchValue);
   const sortedItems = getSortedItems[sortValue]([...foundItems]);
 
   const categoryFilterData = getFilterData(
@@ -78,6 +114,7 @@ function Main() {
         {!isLoading && (
           <>
             <Filters
+              priceState={{ ...priceFilterState, onInput: onPriceFilterChange }}
               categoryState={categoryFilterData}
               onCategoryFilterChange={onCategoryFilterChange}
               brandState={brandFilterData}

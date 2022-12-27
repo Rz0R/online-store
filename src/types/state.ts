@@ -10,6 +10,7 @@ export type ItemState = {
   items: Items;
   categories: string[];
   brands: string[];
+  prices: number[];
   isLoading: boolean;
   error: string;
 };
