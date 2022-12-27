@@ -59,7 +59,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 300px;
-    width: 15vw;
+    width: 14vw;
     display: block;
   }
 }
@@ -68,22 +68,25 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width: 100%;
+  width: 100px;
 
   &__inner {
     display: flex;
     gap: 5px;
     margin-left: auto;
     color: $grayColor;
+    flex-wrap: wrap;
   }
 
   &__quantity {
+    margin-left: auto;
   }
 
   &__multi {
   }
 
   &__price {
+    margin-left: auto;
   }
 
   &__totalPrice {
