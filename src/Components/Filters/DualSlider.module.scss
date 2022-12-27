@@ -1,0 +1,88 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+@mixin track {
+  height: rem(5);
+}
+
+@mixin thumb() {
+  margin-top: rem(-7);
+  width: rem(20);
+  height: rem(20);
+  background-color: $secondColor;
+  border: rem(5) solid $whiteColor;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.dualSlider {
+  padding-bottom: rem(10);
+
+  &__name {
+    color: $mainColor;
+    font-size: rem(16);
+    font-weight: 500;
+    margin-bottom: rem(10);
+  }
+
+  &__values {
+    margin-bottom: rem(15);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: $grayColor;
+    font-size: rem(16);
+    font-weight: 500;
+  }
+
+  &__trackWrapper {
+    position: relative;
+  }
+
+  &__input {
+    position: absolute;
+    margin: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    outline: none;
+    top: 0;
+    bottom: 0;
+    background-color: transparent;
+    pointer-events: none;
+
+    &::-webkit-slider-runnable-track {
+      -webkit-appearance: none;
+      @include track();
+    }
+
+    &::-moz-range-track {
+      -moz-appearance: none;
+      @include track();
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      @include thumb();
+    }
+
+    &::-moz-range-thumb {
+      -webkit-appearance: none;
+      @include thumb();
+    }
+  }
+
+  &__sliderTrack {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: rem(5);
+    border-radius: rem(5);
+    background-color: $borderColor;
+  }
+}
