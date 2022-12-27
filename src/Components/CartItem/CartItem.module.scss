@@ -150,6 +150,12 @@
   }
 }
 
+@media (max-width: 700px) {
+  .countButtons {
+    margin-left: 20px;
+  }
+}
+
 @media (max-width: 640px) {
   .item {
     flex-direction: column;
@@ -158,6 +164,9 @@
 
     &__data {
       width: 40vw;
+    }
+    .countButtons {
+      margin-left: 40px;
     }
   }
 }
