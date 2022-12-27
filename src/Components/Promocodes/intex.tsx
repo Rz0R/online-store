@@ -11,11 +11,11 @@ export default function Promocodes() {
   const [promo, setPromo] = useState('');
   const [isValidPromo, setIsValidPromo] = useState(false);
   const [indexCurrentPromocode, setIndexCurrentPromocode] = useState(-1);
-  const [isDirty, setIsDirty] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const handleChangePromo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPromo(e.target.value);
-    setIsDirty(false);
+    setShowError(false);
   };
 
   const handleClickApplyPromo = () => {
@@ -23,7 +23,7 @@ export default function Promocodes() {
       dispatch(addPromocode(ListPromocods[indexCurrentPromocode]));
       setPromo('');
     } else {
-      setIsDirty(true);
+      setShowError(true);
     }
   };
 
@@ -63,7 +63,7 @@ export default function Promocodes() {
           >
             <span className={styles.promocode__applyText}>Apply</span>
           </button>
-          {!isValidPromo && isDirty && (
+          {!isValidPromo && showError && (
             <div className={styles.promocode__error}>Invalid promo code</div>
           )}
         </div>

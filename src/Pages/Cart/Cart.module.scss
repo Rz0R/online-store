@@ -11,16 +11,13 @@
     flex: 0 1 70%;
   }
 
+  &__menu {
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid $borderColor;
-  }
-
-  &__item {
-  }
-
-  &__total {
   }
 }
 
@@ -43,6 +40,7 @@
 
 .cartEmpty {
   display: flex;
+
   &__container {
     display: flex;
     flex-direction: column;
@@ -50,11 +48,13 @@
     align-items: center;
     gap: 10px;
   }
+
   &__icon {
     width: 100px;
     height: 100px;
     color: $borderColor;
   }
+
   &__title {
     color: $borderColor;
     font-size: 18px;
@@ -62,7 +62,7 @@
   }
 }
 
-@media (max-width: 920px) {
+@media (max-width: 980px) {
   .cart {
     &__wrapper {
       flex-direction: column;

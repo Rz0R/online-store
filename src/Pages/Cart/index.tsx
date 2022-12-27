@@ -58,7 +58,6 @@ function Cart() {
             <div className={styles.cart__list}>
               {currentCartItems.map((item, index) => (
                 <CartItem
-                  className="styles.cart__list"
                   key={item.id}
                   item={item}
                   indexOfFirstCartItem={indexOfFirstCartItem}

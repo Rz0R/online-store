@@ -22,8 +22,8 @@
   }
 
   &__image {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     margin-right: 10px;
     border-radius: 10px;
     cursor: pointer;
@@ -31,7 +31,7 @@
     flex-shrink: 0;
   }
 
-  &__thumbnail {
+  &__descriptions {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -61,12 +61,6 @@
     max-width: 300px;
     width: 15vw;
     display: block;
-  }
-
-  &__quantity {
-  }
-
-  &__totalPrice {
   }
 }
 
@@ -158,29 +152,35 @@
     flex-direction: column;
     gap: 30px;
     align-items: normal;
+
     &__data {
       width: 40vw;
     }
   }
 }
-@media (max-width: 470px) {
+
+@media (max-width: 520px) {
   .item {
     &__wrapper:first-child {
       flex-direction: column;
       gap: 30px;
     }
+
     &__wrapper:last-child {
       justify-content: center;
     }
+
     &__index {
       margin-right: 0;
     }
+
     &__image {
-      width: 300px;
-      height: 300px;
+      width: 290px;
+      height: 290px;
       margin-right: 0;
     }
   }
+
   .price {
     width: auto;
   }

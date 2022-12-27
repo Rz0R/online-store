@@ -6,18 +6,12 @@ import Plus from '../Loader/plus';
 import styles from './CartItem.module.scss';
 
 interface CartItemProps {
-  className: string;
   item: CartItem;
   indexOfFirstCartItem: number;
   index: number;
 }
 
-export default function CartItemComp({
-  className,
-  item,
-  indexOfFirstCartItem,
-  index,
-}: CartItemProps) {
+export default function CartItemComp({ item, indexOfFirstCartItem, index }: CartItemProps) {
   const dispatch = useAppDispatch();
 
   const handleIncQuantity = () => {
@@ -31,11 +25,11 @@ export default function CartItemComp({
   };
 
   return (
-    <div className={`${styles.item} ${className}`}>
+    <div className={`${styles.item}`}>
       <div className={styles.item__wrapper}>
         <div className={styles.item__index}>{indexOfFirstCartItem + 1 + index}</div>
         <img className={styles.item__image} src={item.thumbnail} alt={item.title} />
-        <div className={styles.item__thumbnail}>
+        <div className={styles.item__descriptions}>
           <h3 className={styles.item__title}>{item.title}</h3>
           <div className={styles.item__dataWrapper}>
             Category:
