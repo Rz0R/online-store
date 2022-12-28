@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ListPromocods } from '../../const/const';
+import { ListPromocodes } from '../../const/const';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { addPromocode, removePromocode } from '../../store/reducers/cartState';
 import Close from '../Loader/close';
 import styles from './Promocodes.module.scss';
 
 export default function Promocodes() {
-  const { promocods } = useAppSelector((state) => state.CART);
+  const { promocodes } = useAppSelector((state) => state.CART);
   const dispatch = useAppDispatch();
   const [promo, setPromo] = useState('');
   const [isValidPromo, setIsValidPromo] = useState(false);
@@ -20,7 +20,7 @@ export default function Promocodes() {
 
   const handleClickApplyPromo = () => {
     if (isValidPromo) {
-      dispatch(addPromocode(ListPromocods[indexCurrentPromocode]));
+      dispatch(addPromocode(ListPromocodes[indexCurrentPromocode]));
       setPromo('');
     } else {
       setShowError(true);
@@ -28,7 +28,7 @@ export default function Promocodes() {
   };
 
   useEffect(() => {
-    setIndexCurrentPromocode(ListPromocods.findIndex((promocode) => promocode.name === promo));
+    setIndexCurrentPromocode(ListPromocodes.findIndex((promocode) => promocode.name === promo));
   }, [promo]);
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function Promocodes() {
         </div>
       </div>
       <ul className={styles.promocodeList}>
-        {promocods.map((promocod) => (
+        {promocodes.map((promocod) => (
           <li className={styles.promocodeItem} key={promocod.name}>
             <div className={styles.promocodeItem__name}>{promocod.fullName}</div>
             <div className={styles.promocodeItem__discount}>{promocod.discount * 100}%</div>

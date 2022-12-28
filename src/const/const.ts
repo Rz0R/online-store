@@ -1,5 +1,5 @@
 import { IValidationErrors } from '../types/customInput';
-import { Promocods } from '../types/data';
+import { Promocodes } from '../types/data';
 
 export enum NameSpace {
   cart = 'CART',
@@ -44,7 +44,7 @@ export enum PaymentSystems {
   default = 'Default',
 }
 
-export const ListPromocods: Promocods[] = [
+export const ListPromocodes: Promocodes[] = [
   { name: 'RS', discount: 0.1, fullName: 'Rolling Scopes School' },
   { name: 'EPM', discount: 0.15, fullName: 'EPAM Systems' },
 ];

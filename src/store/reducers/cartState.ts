@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { NameSpace, keyLocalStorage } from '../../const/const';
-import { Item, Promocods } from '../../types/data';
+import { Item, Promocodes } from '../../types/data';
 import { CartState } from '../../types/state';
 
 const localCartState: CartState = JSON.parse(localStorage.getItem(keyLocalStorage) || 'null');
@@ -10,7 +10,7 @@ export const initialState: CartState = {
   cartItemQuantity: localCartState ? localCartState.cartItemQuantity : 0,
   totalPrice: localCartState ? localCartState.totalPrice : 0,
   cartItems: localCartState ? localCartState.cartItems : [],
-  promocods: localCartState ? localCartState.promocods : [],
+  promocodes: localCartState ? localCartState.promocodes : [],
   totalDiscount: localCartState ? localCartState.totalDiscount : 0,
   discountedTotalPrice: localCartState ? localCartState.discountedTotalPrice : 0,
 };
@@ -56,24 +56,24 @@ export const cartStateSlice = createSlice({
       state.cartItems = [];
       state.cartItemQuantity = 0;
       state.totalPrice = 0;
-      state.promocods = [];
+      state.promocodes = [];
       state.totalDiscount = 0;
       state.discountedTotalPrice = 0;
     },
-    addPromocode(state, action: PayloadAction<Promocods>) {
-      if (!state.promocods.find((promocode) => promocode.name === action.payload.name)) {
-        state.promocods = [...state.promocods, action.payload];
+    addPromocode(state, action: PayloadAction<Promocodes>) {
+      if (!state.promocodes.find((promocode) => promocode.name === action.payload.name)) {
+        state.promocodes = [...state.promocodes, action.payload];
         const sumDiscount = parseFloat(
-          state.promocods.reduce((sum, promocod) => sum + promocod.discount, 0).toFixed(2),
+          state.promocodes.reduce((sum, promocod) => sum + promocod.discount, 0).toFixed(2),
         );
         state.totalDiscount = sumDiscount > 1 ? 1 : sumDiscount;
         state.discountedTotalPrice = Math.floor(state.totalPrice * (1 - state.totalDiscount));
       }
     },
     removePromocode(state, action: PayloadAction<string>) {
-      state.promocods = state.promocods.filter((promocod) => promocod.name !== action.payload);
+      state.promocodes = state.promocodes.filter((promocod) => promocod.name !== action.payload);
       const sumDiscount = parseFloat(
-        state.promocods.reduce((sum, promocod) => sum + promocod.discount, 0).toFixed(2),
+        state.promocodes.reduce((sum, promocod) => sum + promocod.discount, 0).toFixed(2),
       );
       state.totalDiscount = sumDiscount > 1 ? 1 : sumDiscount;
       state.discountedTotalPrice = Math.floor(state.totalPrice * (1 - state.totalDiscount));

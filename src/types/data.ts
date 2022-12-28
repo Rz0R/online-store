@@ -26,7 +26,7 @@ export interface ResponseData {
   skip: number;
   total: number;
 }
-export interface Promocods {
+export interface Promocodes {
   name: string;
   discount: number;
   fullName: string;

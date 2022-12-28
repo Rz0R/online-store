@@ -1,10 +1,10 @@
-import { Items, CartItems, Promocods } from './data';
+import { Items, CartItems, Promocodes } from './data';
 
 export type CartState = {
   cartItemQuantity: number;
   totalPrice: number;
   cartItems: CartItems;
-  promocods: Array<Promocods>;
+  promocodes: Array<Promocodes>;
   totalDiscount: number;
   discountedTotalPrice: number;
 };
