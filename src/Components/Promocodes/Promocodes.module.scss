@@ -1,0 +1,110 @@
+@import '../../scss/colors.scss';
+
+.promocode {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  &__title {
+    display: flex;
+    font-weight: 500;
+  }
+
+  &__test {
+    margin-left: auto;
+    color: $borderColor;
+  }
+
+  &__inner {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 25px;
+  }
+
+  &__input {
+    flex-grow: 1;
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid $borderColor;
+  }
+
+  &__apply {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    transition: all 0.3s ease 0s;
+
+    &Text {
+      font-weight: 500;
+      border-bottom: 1px dotted $mainColor;
+    }
+
+    &:hover {
+      color: $redColor;
+
+      .promocode__applyText {
+        border-bottom: 1px dotted $redColor;
+      }
+    }
+
+    &Active {
+      &:hover {
+        color: $secondColor;
+
+        .promocode__applyText {
+          border-bottom: 1px dotted $secondColor;
+        }
+      }
+    }
+  }
+
+  &__error {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    color: $redColor;
+  }
+}
+
+.promocodeList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.promocodeItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  &:last-child {
+    margin-bottom: 20px;
+  }
+
+  &__name {
+    font-weight: 500;
+  }
+
+  &__discount {
+    margin-left: auto;
+    font-weight: 500;
+  }
+
+  &__close {
+    display: flex;
+    filter: invert(76%) sepia(0%) saturate(345%) hue-rotate(139deg) brightness(81%) contrast(87%);
+    transition: all 0.3s ease 0s;
+
+    &:hover {
+      filter: none;
+    }
+
+    &Icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

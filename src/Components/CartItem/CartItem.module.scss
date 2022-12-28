@@ -3,19 +3,64 @@
 .item {
   display: flex;
   align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid $borderColor;
+  min-height: 200px;
   justify-content: space-between;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    &:last-child {
+      justify-content: end;
+    }
+  }
+
+  &__index {
+    min-width: 20px;
+    margin-right: 10px;
+  }
+
   &__image {
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    object-fit: cover;
+    flex-shrink: 0;
   }
+
+  &__descriptions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
   &__title {
-    font-size: 14px;
     line-height: 20px;
+    font-size: 18px;
     font-weight: 600;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    &:hover {
+      color: $secondColor;
+    }
   }
-  &__quantity {
+
+  &__dataWrapper {
+    display: flex;
+    gap: 5px;
   }
-  &__totalPrice {
+
+  &__data {
+    color: $grayColor;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    width: 14vw;
+    display: block;
   }
 }
 
@@ -23,17 +68,27 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 100px;
+
   &__inner {
     display: flex;
     gap: 5px;
     margin-left: auto;
+    color: $grayColor;
+    flex-wrap: wrap;
   }
+
   &__quantity {
+    margin-left: auto;
   }
+
   &__multi {
   }
+
   &__price {
+    margin-left: auto;
   }
+
   &__totalPrice {
     font-weight: 500;
     margin-left: auto;
@@ -42,15 +97,103 @@
 
 .countButtons {
   display: flex;
-  gap: 5px;
-  background: $bgColor;
-  &__dec {
-    padding: 10px 10px;
+  justify-content: end;
+  margin-left: 40px;
+
+  &__wrapper {
+    display: flex;
+    background: $bgColor;
   }
+
   &__quantity {
-    padding: 10px 10px;
+    min-width: 50px;
   }
-  &__inc {
+
+  &__quantity,
+  &__inc,
+  &__dec,
+  &__incDisable {
     padding: 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__incDisable {
+    cursor: default;
+  }
+
+  &__inc {
+    &:hover {
+      & .countButtons__incIcon {
+        filter: none;
+      }
+    }
+  }
+
+  &__dec {
+    &:hover {
+      & .countButtons__decIcon {
+        filter: none;
+      }
+    }
+  }
+
+  &__incIcon,
+  &__decIcon {
+    width: 16px;
+    height: 16px;
+    filter: invert(76%) sepia(0%) saturate(345%) hue-rotate(139deg) brightness(81%) contrast(87%);
+    font-size: 20px;
+    font-weight: 400;
+    transition: all 0.3s ease 0s;
+  }
+}
+
+@media (max-width: 700px) {
+  .countButtons {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .item {
+    flex-direction: column;
+    gap: 30px;
+    align-items: normal;
+
+    &__data {
+      width: 40vw;
+    }
+    .countButtons {
+      margin-left: 40px;
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .item {
+    &__wrapper:first-child {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    &__wrapper:last-child {
+      justify-content: center;
+    }
+
+    &__index {
+      margin-right: 0;
+    }
+
+    &__image {
+      width: 290px;
+      height: 290px;
+      margin-right: 0;
+    }
+  }
+
+  .price {
+    width: auto;
   }
 }

@@ -1,4 +1,5 @@
 import { IValidationErrors } from '../types/customInput';
+import { Promocodes } from '../types/data';
 
 export enum NameSpace {
   cart = 'CART',
@@ -42,6 +43,11 @@ export enum PaymentSystems {
   mastercard = 'Mastercard',
   default = 'Default',
 }
+
+export const ListPromocodes: Promocodes[] = [
+  { name: 'RS', discount: 0.1, fullName: 'Rolling Scopes School' },
+  { name: 'EPM', discount: 0.15, fullName: 'EPAM Systems' },
+];
 
 export const validationErrors: IValidationErrors = {
   fullNameError: 'The field contains at least two words, each at least 3 characters long.',
