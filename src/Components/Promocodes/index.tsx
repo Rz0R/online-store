@@ -69,14 +69,14 @@ export default function Promocodes() {
         </div>
       </div>
       <ul className={styles.promocodeList}>
-        {promocodes.map((promocod) => (
-          <li className={styles.promocodeItem} key={promocod.name}>
-            <div className={styles.promocodeItem__name}>{promocod.fullName}</div>
-            <div className={styles.promocodeItem__discount}>{promocod.discount * 100}%</div>
+        {promocodes.map((promocode) => (
+          <li className={styles.promocodeItem} key={promocode.name}>
+            <div className={styles.promocodeItem__name}>{promocode.fullName}</div>
+            <div className={styles.promocodeItem__discount}>{promocode.discount * 100}%</div>
             <button
               type="button"
               className={styles.promocodeItem__close}
-              onClick={() => dispatch(removePromocode(promocod.name))}
+              onClick={() => dispatch(removePromocode(promocode.name))}
             >
               <Close className={styles.promocodeItem__closeIcon} />
             </button>

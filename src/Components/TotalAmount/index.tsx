@@ -1,11 +1,11 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { openModal } from '../../store/reducers/modalState';
-import Promocodes from '../Promocodes/intex';
+import Promocodes from '../Promocodes/index';
 import styles from './TotalAmount.module.scss';
 
 export default function TotalAmount() {
-  const { cartItemQuantity, totalPrice, promocods, discountedTotalPrice } = useAppSelector(
+  const { cartItemQuantity, totalPrice, promocodes, discountedTotalPrice } = useAppSelector(
     (state) => state.CART,
   );
   const dispatch = useAppDispatch();
@@ -17,11 +17,11 @@ export default function TotalAmount() {
           <div className={styles.totalAmount__inner}>
             <h4 className={styles.totalAmount__title}>TOTAL:</h4>
             <div className={styles.totalAmount__priceContainer}>
-              {promocods.length > 0 && (
+              {promocodes.length > 0 && (
                 <div className={styles.totalAmount__oldPrice}>€{totalPrice}</div>
               )}
               <div className={styles.totalAmount__price}>
-                €{promocods.length > 0 ? discountedTotalPrice : totalPrice}
+                €{promocodes.length > 0 ? discountedTotalPrice : totalPrice}
               </div>
             </div>
           </div>

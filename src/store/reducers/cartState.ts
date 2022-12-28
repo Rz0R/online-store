@@ -64,16 +64,16 @@ export const cartStateSlice = createSlice({
       if (!state.promocodes.find((promocode) => promocode.name === action.payload.name)) {
         state.promocodes = [...state.promocodes, action.payload];
         const sumDiscount = parseFloat(
-          state.promocodes.reduce((sum, promocod) => sum + promocod.discount, 0).toFixed(2),
+          state.promocodes.reduce((sum, promocode) => sum + promocode.discount, 0).toFixed(2),
         );
         state.totalDiscount = sumDiscount > 1 ? 1 : sumDiscount;
         state.discountedTotalPrice = Math.floor(state.totalPrice * (1 - state.totalDiscount));
       }
     },
     removePromocode(state, action: PayloadAction<string>) {
-      state.promocodes = state.promocodes.filter((promocod) => promocod.name !== action.payload);
+      state.promocodes = state.promocodes.filter((promocode) => promocode.name !== action.payload);
       const sumDiscount = parseFloat(
-        state.promocodes.reduce((sum, promocod) => sum + promocod.discount, 0).toFixed(2),
+        state.promocodes.reduce((sum, promocode) => sum + promocode.discount, 0).toFixed(2),
       );
       state.totalDiscount = sumDiscount > 1 ? 1 : sumDiscount;
       state.discountedTotalPrice = Math.floor(state.totalPrice * (1 - state.totalDiscount));
