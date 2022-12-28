@@ -66,3 +66,6 @@ export const getFilterData = (
 
 export const getPrices = (items: Items) =>
   [...new Set(items.map((it) => it.price))].sort((a, b) => a - b);
+
+export const getStocks = (items: Items) =>
+  [...new Set(items.map((it) => it.stock))].sort((a, b) => a - b);

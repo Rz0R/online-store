@@ -9,6 +9,7 @@ const initialState: ItemState = {
   categories: [],
   brands: [],
   prices: [],
+  stocks: [],
   isLoading: true,
   error: '',
 };
@@ -36,8 +37,11 @@ export const itemStateSlice = createSlice({
     brandsLoadingSuccess(state, action: PayloadAction<string[]>) {
       state.brands = action.payload;
     },
-    pricesLoadingSucces(state, action: PayloadAction<number[]>) {
+    pricesLoadingSuccess(state, action: PayloadAction<number[]>) {
       state.prices = action.payload;
+    },
+    stocksLoadingSuccess(state, action: PayloadAction<number[]>) {
+      state.stocks = action.payload;
     },
   },
 });
@@ -48,6 +52,7 @@ export const {
   itemsLoadingError,
   categoriesLoadingSuccess,
   brandsLoadingSuccess,
-  pricesLoadingSucces,
+  pricesLoadingSuccess,
+  stocksLoadingSuccess,
 } = itemStateSlice.actions;
 export const itemState = itemStateSlice.reducer;

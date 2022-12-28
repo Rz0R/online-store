@@ -5,10 +5,11 @@ import {
   itemsLoadingSuccess,
   categoriesLoadingSuccess,
   brandsLoadingSuccess,
-  pricesLoadingSucces,
+  pricesLoadingSuccess,
+  stocksLoadingSuccess,
 } from './reducers/itemState';
 import { AppDispatch } from './rootReducer';
-import { getCategories, getBrands, getPrices } from '../utils/data';
+import { getCategories, getBrands, getPrices, getStocks } from '../utils/data';
 import { URL } from '../const/const';
 
 const loadItemsAction = () => async (dispatch: AppDispatch) => {
@@ -20,9 +21,11 @@ const loadItemsAction = () => async (dispatch: AppDispatch) => {
     const categories = getCategories(items);
     const brands = getBrands(items);
     const prices = getPrices(items);
+    const stocks = getStocks(items);
     dispatch(itemsLoadingSuccess(items));
     dispatch(brandsLoadingSuccess(brands));
-    dispatch(pricesLoadingSucces(prices));
+    dispatch(pricesLoadingSuccess(prices));
+    dispatch(stocksLoadingSuccess(stocks));
     dispatch(categoriesLoadingSuccess(categories));
   } catch (err) {
     dispatch(itemsLoadingError(`Error: ${err}`));
