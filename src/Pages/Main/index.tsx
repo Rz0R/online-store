@@ -23,6 +23,8 @@ function Main() {
     (state) => state.ITEMS,
   );
 
+  const [filteredItems, setFilteredItems] = useState<Items>([]);
+
   const [cardView, setCardView] = useState<CardView>(CardView.simple);
   const [sortValue, setSortValue] = useState<SortOptionValues>(SortOptionValues.sortTitle);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -79,6 +81,38 @@ function Main() {
     }
   }, [isLoading]);
 
+  useEffect(() => {
+    const itemsFiteredByCategories: Items = filterItems(items, categoryFilterState, 'category');
+
+    const itemsFilteredByBrands: Items = filterItems(
+      itemsFiteredByCategories,
+      bradnFilterState,
+      'brand',
+    );
+
+    const itemsFiteredByPrice = itemsFilteredByBrands.filter(
+      (it) =>
+        it.price >= prices[priceFilterState.minValue] &&
+        it.price <= prices[priceFilterState.maxValue],
+    );
+
+    const itemsFiteredByStock = itemsFiteredByPrice.filter(
+      (it) =>
+        it.stock >= stocks[stockFilterState.minValue] &&
+        it.stock <= stocks[stockFilterState.maxValue],
+    );
+
+    const foundItems = findItems(itemsFiteredByStock, searchValue);
+
+    setFilteredItems(foundItems);
+  }, [
+    searchValue,
+    JSON.stringify(categoryFilterState),
+    JSON.stringify(bradnFilterState),
+    JSON.stringify(priceFilterState),
+    JSON.stringify(stockFilterState),
+  ]);
+
   const onCategoryFilterChange = (id: string) => {
     setCategoryFilterState((prev) =>
       prev.map((it) => (it.id === id ? { ...it, isActive: !it.isActive } : it)),
@@ -115,37 +149,11 @@ function Main() {
     }));
   };
 
-  const itemsFiteredByCategories: Items = filterItems(items, categoryFilterState, 'category');
+  const categoryFilterData = getFilterData(items, filteredItems, categoryFilterState, 'category');
 
-  const itemsFilteredByBrands: Items = filterItems(
-    itemsFiteredByCategories,
-    bradnFilterState,
-    'brand',
-  );
+  const brandFilterData = getFilterData(items, filteredItems, bradnFilterState, 'brand');
 
-  const itemsFiteredByPrice = itemsFilteredByBrands.filter(
-    (it) =>
-      it.price >= prices[priceFilterState.minValue] &&
-      it.price <= prices[priceFilterState.maxValue],
-  );
-
-  const itemsFiteredByStock = itemsFiteredByPrice.filter(
-    (it) =>
-      it.stock >= stocks[stockFilterState.minValue] &&
-      it.stock <= stocks[stockFilterState.maxValue],
-  );
-
-  const foundItems = findItems(itemsFiteredByStock, searchValue);
-  const sortedItems = getSortedItems[sortValue]([...foundItems]);
-
-  const categoryFilterData = getFilterData(
-    items,
-    itemsFilteredByBrands,
-    categoryFilterState,
-    'category',
-  );
-
-  const brandFilterData = getFilterData(items, itemsFilteredByBrands, bradnFilterState, 'brand');
+  const sortedItems = getSortedItems[sortValue]([...filteredItems]);
 
   return (
     <main className="main">
