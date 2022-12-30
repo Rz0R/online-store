@@ -39,7 +39,7 @@ function ViewSwitch({ cardView, onViewSwitchChange }: ViewSwitchProps) {
           name="view-mode"
           value={CardView.simple}
           id="mode-simple"
-          checked={CardView.simple === cardView}
+          checked={!(CardView.tile === cardView)}
           onChange={onChange}
         />
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">

@@ -2,12 +2,19 @@ import { SortOptionValues } from '../const/const';
 import { FilterData, Items } from '../types/data';
 import { FilterState } from '../types/state';
 
-export const getSortedItems = {
-  [SortOptionValues.sortTitle]: (items: Items) => items,
-  [SortOptionValues.priceASC]: (items: Items) => items.sort((a, b) => a.price - b.price),
-  [SortOptionValues.priceDESC]: (items: Items) => items.sort((a, b) => b.price - a.price),
-  [SortOptionValues.raitingASC]: (items: Items) => items.sort((a, b) => a.rating - b.rating),
-  [SortOptionValues.raitingDESC]: (items: Items) => items.sort((a, b) => b.rating - a.rating),
+export const getSortedItems = (sortValue: SortOptionValues, items: Items) => {
+  switch (sortValue) {
+    case SortOptionValues.priceASC:
+      return items.sort((a, b) => a.price - b.price);
+    case SortOptionValues.priceDESC:
+      return items.sort((a, b) => b.price - a.price);
+    case SortOptionValues.raitingASC:
+      return items.sort((a, b) => a.rating - b.rating);
+    case SortOptionValues.raitingDESC:
+      return items.sort((a, b) => b.rating - a.rating);
+    default:
+      return items;
+  }
 };
 
 export const findItems = (items: Items, searchValue: string) => {

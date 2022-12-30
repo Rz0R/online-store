@@ -6,11 +6,12 @@ import styles from './SearchBar.module.scss';
 const DEBOUNCE_DELAY = 300;
 
 type SearchBarProps = {
+  defaultValue: string;
   onSearchValueChange: (value: string) => void;
 };
 
-function SearchBar({ onSearchValueChange }: SearchBarProps) {
-  const [inputValue, setInputValue] = useState<string>('');
+function SearchBar({ defaultValue, onSearchValueChange }: SearchBarProps) {
+  const [inputValue, setInputValue] = useState<string>(defaultValue);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const updateSearchValue = useCallback(
