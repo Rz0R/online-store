@@ -51,7 +51,7 @@ export default function CustomInput({
         />
         <label className={`${styles.customInput__label} ${styles.label}`} htmlFor={name}>
           {inputData.isDirty && !inputData.inputValid && (
-            <Warning className={styles.label__warning} />
+            <Warning className={styles.label__warning} bgColor={styles.bgColorWarning} />
           )}
           <ul className={styles.label__errorList}>
             {Object.keys(inputData.validations).map(
