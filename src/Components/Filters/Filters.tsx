@@ -5,9 +5,9 @@ import styles from './Filters.module.scss';
 
 type FilteProps = {
   categoryState: FilterData;
-  onCategoryFilterChange: (id: string) => void;
+  onCategoryFilterChange: (filterName: string, isActive: boolean) => void;
   brandState: FilterData;
-  onBrategoryFilterChange: (id: string) => void;
+  onBrategoryFilterChange: (filterName: string, isActive: boolean) => void;
   priceState: {
     minValue: number;
     maxValue: number;

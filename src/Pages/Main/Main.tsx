@@ -6,15 +6,8 @@ import loadItemsAction from '../../store/serviceActions';
 import Filters from '../../Components/Filters';
 import ProductList from '../../Components/ProductList';
 import TopPanel from '../../Components/TopPanel';
-import { CardView, SortOptionValues } from '../../const/const';
-import {
-  getSortedItems,
-  findItems,
-  filterItems,
-  getFilterState,
-  getFilterData,
-} from '../../utils/data';
-import { FilterState } from '../../types/state';
+import { CardView, QUERY_PARAM_DELIMITER, SortOptionValues } from '../../const/const';
+import { getSortedItems, findItems, filterItems, getFilterData } from '../../utils/data';
 import styles from './Main.module.scss';
 import { Items } from '../../types/data';
 
@@ -22,6 +15,8 @@ enum QueryParams {
   view = 'view',
   sort = 'sort',
   search = 'search',
+  category = 'category',
+  brand = 'brand',
 }
 
 function Main() {
@@ -36,9 +31,9 @@ function Main() {
   const sortValue =
     (searchParams.get(QueryParams.sort) as SortOptionValues) || SortOptionValues.sortTitle;
   const searchValue = searchParams.get(QueryParams.search) || '';
+  const categoryValues = searchParams.get(QueryParams.category) || '';
+  const brandValues = searchParams.get(QueryParams.brand) || '';
 
-  const [categoryFilterState, setCategoryFilterState] = useState<FilterState>([]);
-  const [bradnFilterState, setBrandFilterState] = useState<FilterState>([]);
   const [priceFilterState, setPriceFilterState] = useState<{
     minValue: number;
     maxValue: number;
@@ -73,8 +68,6 @@ function Main() {
     if (isLoading) {
       dispatch(loadItemsAction());
     } else {
-      setCategoryFilterState(getFilterState(categories));
-      setBrandFilterState(getFilterState(brands));
       setPriceFilterState({
         minValue: 0,
         maxValue: prices.length - 1 || 0,
@@ -93,14 +86,13 @@ function Main() {
   }, [isLoading]);
 
   useEffect(() => {
-    const itemsFiteredByCategories: Items = filterItems(items, categoryFilterState, 'category');
+    const itemsFiteredByCategories: Items = filterItems(items, categoryValues, 'category');
 
     const itemsFilteredByBrands: Items = filterItems(
       itemsFiteredByCategories,
-      bradnFilterState,
+      brandValues,
       'brand',
     );
-
     const itemsFiteredByPrice = itemsFilteredByBrands.filter(
       (it) =>
         it.price >= prices[priceFilterState.minValue] &&
@@ -118,22 +110,44 @@ function Main() {
     setFilteredItems(foundItems);
   }, [
     searchValue,
-    JSON.stringify(categoryFilterState),
-    JSON.stringify(bradnFilterState),
+    categoryValues,
+    brandValues,
     JSON.stringify(priceFilterState),
     JSON.stringify(stockFilterState),
   ]);
 
-  const onCategoryFilterChange = (id: string) => {
-    setCategoryFilterState((prev) =>
-      prev.map((it) => (it.id === id ? { ...it, isActive: !it.isActive } : it)),
-    );
+  const onSelectFilterChange = (
+    filter: string,
+    isActive: boolean,
+    filterType: 'category' | 'brand',
+  ) => {
+    setSearchParams((urlParams) => {
+      const prev = Object.fromEntries(urlParams.entries());
+      const prevQueryValue =
+        urlParams.get(QueryParams[filterType])?.split(QUERY_PARAM_DELIMITER) || [];
+
+      const currentQueryValue = isActive
+        ? [...new Set([...prevQueryValue, filter])]
+        : prevQueryValue.filter((it) => it !== filter);
+
+      if (currentQueryValue.length > 0) {
+        return {
+          ...prev,
+          [QueryParams[filterType]]: currentQueryValue.join(QUERY_PARAM_DELIMITER),
+        };
+      }
+
+      delete prev[QueryParams[filterType]];
+      return prev;
+    });
   };
 
-  const onBrandFilterChange = (id: string) => {
-    setBrandFilterState((prev) =>
-      prev.map((it) => (it.id === id ? { ...it, isActive: !it.isActive } : it)),
-    );
+  const onCategoryFilterChange = (category: string, isActive: boolean) => {
+    onSelectFilterChange(category, isActive, 'category');
+  };
+
+  const onBrandFilterChange = (brand: string, isActive: boolean) => {
+    onSelectFilterChange(brand, isActive, 'brand');
   };
 
   const onViewSwitchChange = (viewMode: CardView) =>
@@ -159,9 +173,7 @@ function Main() {
       const prev = Object.fromEntries(urlParams.entries());
       if (value === '') {
         delete prev[QueryParams.search];
-        return {
-          ...prev,
-        };
+        return prev;
       }
       return {
         ...prev,
@@ -189,9 +201,15 @@ function Main() {
     }));
   };
 
-  const categoryFilterData = getFilterData(items, filteredItems, categoryFilterState, 'category');
+  const categoryFilterData = getFilterData(
+    items,
+    filteredItems,
+    categories,
+    categoryValues,
+    'category',
+  );
 
-  const brandFilterData = getFilterData(items, filteredItems, bradnFilterState, 'brand');
+  const brandFilterData = getFilterData(items, filteredItems, brands, brandValues, 'brand');
 
   const sortedItems = getSortedItems(sortValue, [...filteredItems]);
 

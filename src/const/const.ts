@@ -57,3 +57,5 @@ export const validationErrors: IValidationErrors = {
 export const URL = 'https://dummyjson.com/products?limit=100';
 
 export const keyLocalStorage = 'online-store-metalknock-rz0r';
+
+export const QUERY_PARAM_DELIMITER = '↕';

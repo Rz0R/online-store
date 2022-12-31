@@ -6,7 +6,7 @@ type CheckBoxProps = {
   name: string;
   allItems: number;
   availableItems: number;
-  onChange: (id: string) => void;
+  onChange: (filterName: string, isActive: boolean) => void;
 };
 
 function CheckBox({ id, name, allItems, availableItems, isChecked, onChange }: CheckBoxProps) {
@@ -17,7 +17,7 @@ function CheckBox({ id, name, allItems, availableItems, isChecked, onChange }: C
         type="checkbox"
         checked={isChecked}
         id={id}
-        onChange={() => onChange(id)}
+        onChange={() => onChange(name, !isChecked)}
       />
       <label className={styles.checkbox__label} htmlFor={id}>
         <span>{name}</span>

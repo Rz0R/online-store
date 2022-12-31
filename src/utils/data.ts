@@ -1,6 +1,5 @@
-import { SortOptionValues } from '../const/const';
+import { SortOptionValues, QUERY_PARAM_DELIMITER } from '../const/const';
 import { FilterData, Items } from '../types/data';
-import { FilterState } from '../types/state';
 
 export const getSortedItems = (sortValue: SortOptionValues, items: Items) => {
   switch (sortValue) {
@@ -39,37 +38,33 @@ export const getBrands = (items: Items) => [
   ...new Set(items.map((item) => item.brand.toLowerCase())),
 ];
 
-export const getFilterState = (names: string[]) =>
-  names.map((name, idx) => ({
-    id: `${name}_${idx}`,
-    name,
-    isActive: false,
-  }));
-
 export const filterItems = (
   items: Items,
-  filterState: FilterState,
+  filterString: string,
   filterType: 'category' | 'brand',
-) => {
-  const filterValues = filterState.filter((it) => it.isActive).map((it) => it.name);
-  if (filterValues.length === 0) return items;
-  const filteredItems = items.filter((item) =>
-    filterValues.some((it) => it === item[filterType].toLowerCase()),
-  );
-  return filteredItems;
+): Items => {
+  if (filterString === '') return items;
+  const activeNames = filterString.split(QUERY_PARAM_DELIMITER);
+  return items.filter((item) => activeNames.some((it) => it === item[filterType].toLowerCase()));
 };
 
 export const getFilterData = (
   items: Items,
   filteredItems: Items,
-  filterState: FilterState,
+  allCategories: string[],
+  filterString: string,
   filterType: 'category' | 'brand',
-): FilterData =>
-  filterState.map((item) => ({
-    ...item,
-    allItems: items.filter((it) => item.name === it[filterType].toLowerCase()).length,
-    availableItems: filteredItems.filter((it) => item.name === it[filterType].toLowerCase()).length,
+): FilterData => {
+  const activeFilters = filterString.split(QUERY_PARAM_DELIMITER);
+
+  return allCategories.map((name, idx) => ({
+    id: `${name}_${idx}`,
+    name,
+    isActive: activeFilters.some((it) => it === name),
+    allItems: items.filter((it) => name === it[filterType].toLowerCase()).length,
+    availableItems: filteredItems.filter((it) => name === it[filterType].toLowerCase()).length,
   }));
+};
 
 export const getPrices = (items: Items) =>
   [...new Set(items.map((it) => it.price))].sort((a, b) => a - b);

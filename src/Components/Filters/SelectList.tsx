@@ -5,7 +5,7 @@ import styles from './SelectList.module.scss';
 type SelectListProps = {
   name: string;
   filterState: FilterData;
-  onChange: (id: string) => void;
+  onChange: (filterName: string, isActive: boolean) => void;
 };
 
 function SelectList({ name, filterState, onChange }: SelectListProps) {
