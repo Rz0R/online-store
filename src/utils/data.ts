@@ -38,7 +38,7 @@ export const getBrands = (items: Items) => [
   ...new Set(items.map((item) => item.brand.toLowerCase())),
 ];
 
-export const filterItems = (
+export const filterItemsBySelectList = (
   items: Items,
   filterString: string,
   filterType: 'category' | 'brand',
@@ -48,22 +48,61 @@ export const filterItems = (
   return items.filter((item) => activeNames.some((it) => it === item[filterType].toLowerCase()));
 };
 
-export const getFilterData = (
+export const getSelectListData = (
   items: Items,
   filteredItems: Items,
-  allCategories: string[],
+  allSelectListData: string[],
   filterString: string,
   filterType: 'category' | 'brand',
 ): FilterData => {
   const activeFilters = filterString.split(QUERY_PARAM_DELIMITER);
 
-  return allCategories.map((name, idx) => ({
+  return allSelectListData.map((name, idx) => ({
     id: `${name}_${idx}`,
     name,
     isActive: activeFilters.some((it) => it === name),
     allItems: items.filter((it) => name === it[filterType].toLowerCase()).length,
     availableItems: filteredItems.filter((it) => name === it[filterType].toLowerCase()).length,
   }));
+};
+
+export const getDualSliderMinIndex = (allSliderData: number[], queryString: string) => {
+  const value = queryString.split(QUERY_PARAM_DELIMITER)[0];
+  if (Number.isNaN(value)) return 0;
+  return allSliderData.findIndex((it) => it >= +value);
+};
+
+export const getDualSliderMaxIndex = (allSliderData: number[], queryString: string) => {
+  const value = +queryString.split(QUERY_PARAM_DELIMITER)[1];
+  if (Number.isNaN(value)) return allSliderData.length > 0 ? allSliderData.length - 1 : 0;
+  const dataValue = [...allSliderData].reverse().find((it) => it <= value);
+  if (dataValue === undefined) return -1;
+  return allSliderData.findIndex((it) => it === dataValue);
+};
+
+export const getDualSliderData = (allSliderData: number[], queryString: string, prefix = '') => {
+  const minValue = getDualSliderMinIndex(allSliderData, queryString);
+  const maxValue = getDualSliderMaxIndex(allSliderData, queryString);
+
+  const minDataValue = allSliderData[minValue];
+  const maxDataValue = allSliderData[maxValue];
+
+  return {
+    minValue,
+    maxValue,
+    minDataValue: `${prefix}${minDataValue}`,
+    maxDataValue: `${prefix}${maxDataValue}`,
+    max: allSliderData.length > 0 ? allSliderData.length - 1 : 0,
+  };
+};
+
+export const filterItemsByPrice = (items: Items, allSliderData: number[], queryString: string) => {
+  const minValue = getDualSliderMinIndex(allSliderData, queryString);
+  const maxValue = getDualSliderMaxIndex(allSliderData, queryString);
+
+  return items.filter(
+    (it) => it.price >= allSliderData[minValue] && it.price <= allSliderData[maxValue],
+  );
 };
 
 export const getPrices = (items: Items) =>
