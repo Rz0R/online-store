@@ -8,6 +8,7 @@ const loadItemsAction = () => async (dispatch: AppDispatch) => {
     dispatch(itemsLoading());
     const response = await fetch(URL);
     const data: ResponseData = await response.json();
+    data.products = data.products.filter((product) => product.images.length >= 2);
     dispatch(itemsLoadingSuccess(data.products));
   } catch (err) {
     dispatch(itemsLoadingError(`Error: ${err}`));
