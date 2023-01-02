@@ -90,7 +90,11 @@ export default function Pagination({
   }, [currentPage]);
 
   useEffect(() => {
-    if (currentCartItems.length === 0 && cartItems.length !== 0) {
+    if (
+      currentCartItems.length === 0 &&
+      cartItems.length !== 0 &&
+      currentPage < numberOfPages + 2
+    ) {
       setCurrentPage(currentPage - 1);
     }
   }, [currentCartItems]);
