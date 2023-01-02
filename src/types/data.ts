@@ -34,3 +34,12 @@ export type FilterData = {
   name: string;
   isActive: boolean;
 }[];
+
+export type DualSliderData = {
+  minValue: number;
+  maxValue: number;
+  minDataValue: number;
+  maxDataValue: number;
+  max: number;
+  onInput: (minValue: number, maxValue: number) => void;
+};

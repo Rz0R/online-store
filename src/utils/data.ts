@@ -80,7 +80,7 @@ export const getDualSliderMaxIndex = (allSliderData: number[], queryString: stri
   return allSliderData.findIndex((it) => it === dataValue);
 };
 
-export const getDualSliderData = (allSliderData: number[], queryString: string, prefix = '') => {
+export const getDualSliderData = (allSliderData: number[], queryString: string) => {
   const minValue = getDualSliderMinIndex(allSliderData, queryString);
   const maxValue = getDualSliderMaxIndex(allSliderData, queryString);
 
@@ -90,18 +90,23 @@ export const getDualSliderData = (allSliderData: number[], queryString: string, 
   return {
     minValue,
     maxValue,
-    minDataValue: `${prefix}${minDataValue}`,
-    maxDataValue: `${prefix}${maxDataValue}`,
+    minDataValue,
+    maxDataValue,
     max: allSliderData.length > 0 ? allSliderData.length - 1 : 0,
   };
 };
 
-export const filterItemsByPrice = (items: Items, allSliderData: number[], queryString: string) => {
+export const filterItemsByDualSlider = (
+  items: Items,
+  allSliderData: number[],
+  queryString: string,
+  sliderType: 'price' | 'stock',
+) => {
   const minValue = getDualSliderMinIndex(allSliderData, queryString);
   const maxValue = getDualSliderMaxIndex(allSliderData, queryString);
 
   return items.filter(
-    (it) => it.price >= allSliderData[minValue] && it.price <= allSliderData[maxValue],
+    (it) => it[sliderType] >= allSliderData[minValue] && it[sliderType] <= allSliderData[maxValue],
   );
 };
 

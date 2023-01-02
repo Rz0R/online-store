@@ -13,10 +13,10 @@ import {
   filterItemsBySelectList,
   getSelectListData,
   getDualSliderData,
-  filterItemsByPrice,
+  filterItemsByDualSlider,
 } from '../../utils/data';
-import styles from './Main.module.scss';
 import { Items } from '../../types/data';
+import styles from './Main.module.scss';
 
 enum QueryParams {
   view = 'view',
@@ -25,6 +25,7 @@ enum QueryParams {
   category = 'category',
   brand = 'brand',
   price = 'price',
+  stock = 'stock',
 }
 
 function Main() {
@@ -42,59 +43,17 @@ function Main() {
   const categoryValues = searchParams.get(QueryParams.category) || '';
   const brandValues = searchParams.get(QueryParams.brand) || '';
   const priceValues = searchParams.get(QueryParams.price) || '';
-
-  // const [priceFilterState, setPriceFilterState] = useState<{
-  //   minValue: number;
-  //   maxValue: number;
-  //   minDataValue: string;
-  //   maxDataValue: string;
-  //   max: number;
-  // }>({
-  //   minValue: 0,
-  //   maxValue: 0,
-  //   minDataValue: '€0',
-  //   maxDataValue: '€0',
-  //   max: 0,
-  // });
-
-  // const [stockFilterState, setStockFilterState] = useState<{
-  //   minValue: number;
-  //   maxValue: number;
-  //   minDataValue: string;
-  //   maxDataValue: string;
-  //   max: number;
-  // }>({
-  //   minValue: 0,
-  //   maxValue: 0,
-  //   minDataValue: '0',
-  //   maxDataValue: '0',
-  //   max: 0,
-  // });
+  const stockValues = searchParams.get(QueryParams.stock) || '';
 
   const [filteredItems, setFilteredItems] = useState<Items>([]);
 
   useEffect(() => {
-    if (isLoading) {
-      dispatch(loadItemsAction());
-    } else {
-      // setPriceFilterState({
-      //   minValue: 0,
-      //   maxValue: prices.length - 1 || 0,
-      //   minDataValue: `€${prices[0]}`,
-      //   maxDataValue: `€${prices[prices.length - 1]}`,
-      //   max: prices.length > 0 ? prices.length - 1 : 0,
-      // });
-      // setStockFilterState({
-      //   minValue: 0,
-      //   maxValue: stocks.length - 1 || 0,
-      //   minDataValue: `${stocks[0]}`,
-      //   maxDataValue: `${stocks[stocks.length - 1]}`,
-      //   max: stocks.length > 0 ? stocks.length - 1 : 0,
-      // });
-    }
+    if (isLoading) dispatch(loadItemsAction());
   }, [isLoading]);
 
   useEffect(() => {
+    if (isLoading) return;
+
     const itemsFiteredByCategories: Items = filterItemsBySelectList(
       items,
       categoryValues,
@@ -107,26 +66,24 @@ function Main() {
       'brand',
     );
 
-    const itemsFiteredByPrice = filterItemsByPrice(itemsFilteredByBrands, prices, priceValues);
+    const itemsFiteredByPrice = filterItemsByDualSlider(
+      itemsFilteredByBrands,
+      prices,
+      priceValues,
+      'price',
+    );
 
-    const itemsFiteredByStock = itemsFiteredByPrice;
-
-    // const itemsFiteredByStock = itemsFiteredByPrice.filter(
-    //   (it) =>
-    //     it.stock >= stocks[stockFilterState.minValue] &&
-    //     it.stock <= stocks[stockFilterState.maxValue],
-    // );
+    const itemsFiteredByStock = filterItemsByDualSlider(
+      itemsFiteredByPrice,
+      stocks,
+      stockValues,
+      'stock',
+    );
 
     const foundItems = findItems(itemsFiteredByStock, searchValue);
 
     setFilteredItems(foundItems);
-  }, [
-    searchValue,
-    categoryValues,
-    brandValues,
-    priceValues,
-    // JSON.stringify(stockFilterState),
-  ]);
+  }, [isLoading, searchValue, categoryValues, brandValues, priceValues, stockValues]);
 
   const onSelectFilterChange = (
     filter: string,
@@ -193,28 +150,29 @@ function Main() {
       };
     });
 
-  const onPriceFilterChange = (minValue: number, maxValue: number) => {
-    const minDataValue = prices[minValue];
-    const maxDataValue = prices[maxValue];
+  const onDualSliderChange = (
+    minValue: number,
+    maxValue: number,
+    sliderType: 'price' | 'stock',
+  ) => {
+    const dataVaues = sliderType === 'price' ? prices : stocks;
+    const minDataValue = dataVaues[minValue];
+    const maxDataValue = dataVaues[maxValue];
     setSearchParams((urlParams) => {
       const prev = Object.fromEntries(urlParams.entries());
 
       return {
         ...prev,
-        [QueryParams.price]: `${minDataValue}${QUERY_PARAM_DELIMITER}${maxDataValue}`,
+        [QueryParams[sliderType]]: `${minDataValue}${QUERY_PARAM_DELIMITER}${maxDataValue}`,
       };
     });
   };
 
-  // const onStockFilterChange = (minValue: number, maxValue: number) => {
-  //   setStockFilterState((prev) => ({
-  //     ...prev,
-  //     minValue,
-  //     maxValue,
-  //     minDataValue: `${stocks[minValue]}`,
-  //     maxDataValue: `${stocks[maxValue]}`,
-  //   }));
-  // };
+  const onPriceDualSliderChange = (minValue: number, maxValue: number) =>
+    onDualSliderChange(minValue, maxValue, 'price');
+
+  const onStockDualSliderChange = (minValue: number, maxValue: number) =>
+    onDualSliderChange(minValue, maxValue, 'stock');
 
   const categoryFilterData = getSelectListData(
     items,
@@ -226,7 +184,9 @@ function Main() {
 
   const brandFilterData = getSelectListData(items, filteredItems, brands, brandValues, 'brand');
 
-  const priceFitlterData = getDualSliderData(prices, priceValues, '€');
+  const priceDualSliderData = getDualSliderData(prices, priceValues);
+
+  const stockDualSliderData = getDualSliderData(stocks, stockValues);
 
   const sortedItems = getSortedItems(sortValue, [...filteredItems]);
 
@@ -236,8 +196,8 @@ function Main() {
         {!isLoading && (
           <>
             <Filters
-              priceState={{ ...priceFitlterData, onInput: onPriceFilterChange }}
-              // stockState={{ ...stockFilterState, onInput: onStockFilterChange }}
+              priceState={{ ...priceDualSliderData, onInput: onPriceDualSliderChange }}
+              stockState={{ ...stockDualSliderData, onInput: onStockDualSliderChange }}
               categoryState={categoryFilterData}
               onCategoryFilterChange={onCategoryFilterChange}
               brandState={brandFilterData}

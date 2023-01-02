@@ -1,6 +1,6 @@
 import SelectList from './SelectList';
 import DualSlider from './DualSlider';
-import { FilterData } from '../../types/data';
+import { FilterData, DualSliderData } from '../../types/data';
 import styles from './Filters.module.scss';
 
 type FilteProps = {
@@ -8,22 +8,8 @@ type FilteProps = {
   onCategoryFilterChange: (filterName: string, isActive: boolean) => void;
   brandState: FilterData;
   onBrategoryFilterChange: (filterName: string, isActive: boolean) => void;
-  priceState: {
-    minValue: number;
-    maxValue: number;
-    minDataValue: string;
-    maxDataValue: string;
-    max: number;
-    onInput: (minValue: number, maxValue: number) => void;
-  };
-  // stockState: {
-  //   minValue: number;
-  //   maxValue: number;
-  //   minDataValue: string;
-  //   maxDataValue: string;
-  //   max: number;
-  //   onInput: (minValue: number, maxValue: number) => void;
-  // };
+  priceState: DualSliderData;
+  stockState: DualSliderData;
 };
 
 function Filters({
@@ -32,20 +18,21 @@ function Filters({
   brandState,
   onBrategoryFilterChange,
   priceState,
-}: // stockState,
-FilteProps) {
+  stockState,
+}: FilteProps) {
   return (
     <div className={styles.fiters}>
       <DualSlider
         name="Prices"
         minValue={priceState.minValue}
         maxValue={priceState.maxValue}
+        dataPrefix="€"
         minDataValue={priceState.minDataValue}
         maxDataValue={priceState.maxDataValue}
         max={priceState.max}
         onInput={priceState.onInput}
       />
-      {/* <DualSlider
+      <DualSlider
         name="Stocks"
         minValue={stockState.minValue}
         maxValue={stockState.maxValue}
@@ -53,7 +40,7 @@ FilteProps) {
         maxDataValue={stockState.maxDataValue}
         max={stockState.max}
         onInput={stockState.onInput}
-      /> */}
+      />
       <SelectList name="Categories" filterState={categoryState} onChange={onCategoryFilterChange} />
       <SelectList name="Brands" filterState={brandState} onChange={onBrategoryFilterChange} />
     </div>

@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+
+import { DualSliderData } from '../../types/data';
 import styles from './DualSlider.module.scss';
 
 const fillColor = (curValue1: number, curValue2: number, maxValue: number) => {
@@ -12,16 +14,12 @@ const MIN = 0;
 
 type DualSliderProps = {
   name: string;
-  minValue: number;
-  maxValue: number;
-  minDataValue: string;
-  maxDataValue: string;
-  max: number;
-  onInput: (minValue: number, maxValue: number) => void;
-};
+  dataPrefix?: string;
+} & DualSliderData;
 
 function DualSlider({
   name,
+  dataPrefix,
   minValue,
   maxValue,
   minDataValue,
@@ -41,7 +39,7 @@ function DualSlider({
     <div className={styles.dualSlider}>
       <h3 className={styles.dualSlider__name}>{name}</h3>
       <div className={styles.dualSlider__values}>
-        <div>{minDataValue}</div>⟷<div>{maxDataValue}</div>
+        <div>{`${dataPrefix}${minDataValue}`}</div>⟷<div>{`${dataPrefix}${maxDataValue}`}</div>
       </div>
 
       <div className={styles.dualSlider__trackWrapper}>
@@ -72,5 +70,9 @@ function DualSlider({
     </div>
   );
 }
+
+DualSlider.defaultProps = {
+  dataPrefix: '',
+};
 
 export default DualSlider;
