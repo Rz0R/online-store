@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { DualSliderData } from '../../types/data';
 import styles from './DualSlider.module.scss';
@@ -28,6 +28,7 @@ function DualSlider({
   onInput,
 }: DualSliderProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [activeInput, setActiveInput] = useState<boolean>(false);
 
   useEffect(() => {
     if (trackRef.current) {
@@ -49,7 +50,10 @@ function DualSlider({
           min={MIN}
           max={max}
           value={minValue}
-          className={styles.dualSlider__input}
+          className={`${styles.dualSlider__input} ${
+            activeInput ? styles.dualSlider__activeInput : ''
+          }`}
+          onMouseDown={() => setActiveInput(true)}
           onInput={(evt) => {
             const value = Math.min(+evt.currentTarget.value, maxValue);
             onInput(value, maxValue);
@@ -60,7 +64,10 @@ function DualSlider({
           min={MIN}
           max={max}
           value={maxValue}
-          className={styles.dualSlider__input}
+          className={`${styles.dualSlider__input} ${
+            !activeInput ? styles.dualSlider__activeInput : ''
+          }`}
+          onMouseDown={() => setActiveInput(false)}
           onInput={(evt) => {
             const value = Math.max(+evt.currentTarget.value, minValue);
             onInput(minValue, value);

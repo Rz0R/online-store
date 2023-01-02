@@ -75,6 +75,10 @@
     }
   }
 
+  &__activeInput {
+    z-index: 1;
+  }
+
   &__sliderTrack {
     position: absolute;
     top: 0;
