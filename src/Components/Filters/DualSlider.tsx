@@ -12,6 +12,8 @@ const fillColor = (curValue1: number, curValue2: number, maxValue: number) => {
 
 const MIN = 0;
 
+const NOT_FOUND = 'NOT FOUND';
+
 type DualSliderProps = {
   name: string;
   dataPrefix?: string;
@@ -36,11 +38,20 @@ function DualSlider({
     }
   }, [minValue, maxValue]);
 
+  const strMinDataValue = Number.isNaN(minDataValue) ? NOT_FOUND : `${dataPrefix}${minDataValue}`;
+  const strMaxDataValue = Number.isNaN(maxDataValue) ? NOT_FOUND : `${dataPrefix}${maxDataValue}`;
+
   return (
     <div className={styles.dualSlider}>
       <h3 className={styles.dualSlider__name}>{name}</h3>
       <div className={styles.dualSlider__values}>
-        <div>{`${dataPrefix}${minDataValue}`}</div>⟷<div>{`${dataPrefix}${maxDataValue}`}</div>
+        {strMinDataValue === strMaxDataValue ? (
+          <div>{strMinDataValue}</div>
+        ) : (
+          <>
+            <div>{strMinDataValue}</div>⟷<div>{strMaxDataValue}</div>
+          </>
+        )}
       </div>
 
       <div className={styles.dualSlider__trackWrapper}>
