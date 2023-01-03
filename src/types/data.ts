@@ -35,11 +35,14 @@ export type FilterData = {
   isActive: boolean;
 }[];
 
-export type DualSliderData = {
+export type StateDualSliderData = {
   minValue: number;
   maxValue: number;
   minDataValue: number;
   maxDataValue: number;
   max: number;
+};
+
+export type DualSliderData = StateDualSliderData & {
   onInput: (minValue: number, maxValue: number) => void;
 };

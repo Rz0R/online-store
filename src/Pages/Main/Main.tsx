@@ -6,27 +6,16 @@ import loadItemsAction from '../../store/serviceActions';
 import Filters from '../../Components/Filters';
 import ProductList from '../../Components/ProductList';
 import TopPanel from '../../Components/TopPanel';
-import { CardView, QUERY_PARAM_DELIMITER, SortOptionValues } from '../../const/const';
+import { CardView, QUERY_PARAM_DELIMITER, SortOptionValues, QueryParams } from '../../const/const';
 import {
   getSortedItems,
-  findItems,
-  filterItemsBySelectList,
+  filterItems,
   getSelectListData,
   getDualSliderData,
-  filterItemsByDualSlider,
-} from '../../utils/data';
-import { Items } from '../../types/data';
+  getDualSliderDataAterFiltering,
+} from '../../utils/filter';
+import { Items, StateDualSliderData } from '../../types/data';
 import styles from './Main.module.scss';
-
-enum QueryParams {
-  view = 'view',
-  sort = 'sort',
-  search = 'search',
-  category = 'category',
-  brand = 'brand',
-  price = 'price',
-  stock = 'stock',
-}
 
 function Main() {
   const dispatch = useAppDispatch();
@@ -46,6 +35,12 @@ function Main() {
   const stockValues = searchParams.get(QueryParams.stock) || '';
 
   const [filteredItems, setFilteredItems] = useState<Items>([]);
+  const [priceDualSliderData, setPriceDualSliderData] = useState<StateDualSliderData>(
+    getDualSliderData(prices, priceValues),
+  );
+  const [stockDualSliderData, setStockDualSliderData] = useState<StateDualSliderData>(
+    getDualSliderData(stocks, stockValues),
+  );
 
   useEffect(() => {
     if (isLoading) dispatch(loadItemsAction());
@@ -54,36 +49,23 @@ function Main() {
   useEffect(() => {
     if (isLoading) return;
 
-    const itemsFiteredByCategories: Items = filterItemsBySelectList(
+    const foundItems = filterItems({
       items,
       categoryValues,
-      'category',
-    );
-
-    const itemsFilteredByBrands: Items = filterItemsBySelectList(
-      itemsFiteredByCategories,
       brandValues,
-      'brand',
-    );
-
-    const itemsFiteredByPrice = filterItemsByDualSlider(
-      itemsFilteredByBrands,
       prices,
       priceValues,
-      'price',
-    );
-
-    const itemsFiteredByStock = filterItemsByDualSlider(
-      itemsFiteredByPrice,
       stocks,
       stockValues,
-      'stock',
-    );
+      searchValue,
+    });
 
-    const foundItems = findItems(itemsFiteredByStock, searchValue);
+    setPriceDualSliderData(getDualSliderDataAterFiltering(prices, foundItems, 'price'));
+
+    setStockDualSliderData(getDualSliderDataAterFiltering(stocks, foundItems, 'stock'));
 
     setFilteredItems(foundItems);
-  }, [isLoading, searchValue, categoryValues, brandValues, priceValues, stockValues]);
+  }, [isLoading, searchValue, categoryValues, brandValues]);
 
   const onSelectFilterChange = (
     filter: string,
@@ -168,11 +150,59 @@ function Main() {
     });
   };
 
-  const onPriceDualSliderChange = (minValue: number, maxValue: number) =>
+  const onPriceDualSliderChange = (minValue: number, maxValue: number) => {
     onDualSliderChange(minValue, maxValue, 'price');
 
-  const onStockDualSliderChange = (minValue: number, maxValue: number) =>
+    const currentPriceValues = `${prices[minValue]}${QUERY_PARAM_DELIMITER}${prices[maxValue]}`;
+
+    const foundItems = filterItems({
+      items,
+      categoryValues,
+      brandValues,
+      prices,
+      priceValues: currentPriceValues,
+      stocks,
+      stockValues,
+      searchValue,
+    });
+
+    setStockDualSliderData(getDualSliderDataAterFiltering(stocks, foundItems, 'stock'));
+    setFilteredItems(foundItems);
+    setPriceDualSliderData((prev) => ({
+      ...prev,
+      minValue,
+      maxValue,
+      minDataValue: prices[minValue],
+      maxDataValue: prices[maxValue],
+    }));
+  };
+
+  const onStockDualSliderChange = (minValue: number, maxValue: number) => {
     onDualSliderChange(minValue, maxValue, 'stock');
+
+    const currentStockValues = `${stocks[minValue]}${QUERY_PARAM_DELIMITER}${stocks[maxValue]}`;
+
+    const foundItems = filterItems({
+      items,
+      categoryValues,
+      brandValues,
+      prices,
+      priceValues,
+      stocks,
+      stockValues: currentStockValues,
+      searchValue,
+    });
+
+    setPriceDualSliderData(getDualSliderDataAterFiltering(prices, foundItems, 'price'));
+    setFilteredItems(foundItems);
+    setStockDualSliderData((prev) => ({
+      ...prev,
+      minValue,
+      maxValue,
+      minDataValue: stocks[minValue],
+      maxDataValue: stocks[maxValue],
+    }));
+  };
 
   const categoryFilterData = getSelectListData(
     items,
@@ -183,10 +213,6 @@ function Main() {
   );
 
   const brandFilterData = getSelectListData(items, filteredItems, brands, brandValues, 'brand');
-
-  const priceDualSliderData = getDualSliderData(prices, priceValues);
-
-  const stockDualSliderData = getDualSliderData(stocks, stockValues);
 
   const sortedItems = getSortedItems(sortValue, [...filteredItems]);
 
