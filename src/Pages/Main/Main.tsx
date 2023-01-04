@@ -73,6 +73,7 @@ function Main() {
     if (location.search === '') {
       setPriceDualSliderData(getDualSliderData(prices, priceValues));
       setStockDualSliderData(getDualSliderData(stocks, stockValues));
+      setFilteredItems(items);
     }
   }, [location.search]);
 
