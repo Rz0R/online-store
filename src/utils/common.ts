@@ -9,3 +9,6 @@ export const debounce = (fn: (value: string) => void, delay: number) => {
     timer = setTimeout(() => fn(value), delay);
   };
 };
+
+export const getSearchParams = () =>
+  Object.fromEntries(new URLSearchParams(window.location.search));
