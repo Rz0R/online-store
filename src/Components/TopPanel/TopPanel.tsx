@@ -5,6 +5,7 @@ import { CardView, SortOptionValues } from '../../const/const';
 import styles from './TopPanel.module.scss';
 
 type TopPanelProps = {
+  itemQuantity: number;
   cardView: CardView;
   onViewSwitchChange: (viewMode: CardView) => void;
   sortValue: SortOptionValues;
@@ -14,6 +15,7 @@ type TopPanelProps = {
 };
 
 function TopPanel({
+  itemQuantity,
   cardView,
   onViewSwitchChange,
   sortValue,
@@ -24,6 +26,7 @@ function TopPanel({
   return (
     <div className={styles.topPanel}>
       <SortOptions sortValue={sortValue} onSortValueChange={onSortValueChange} />
+      <div>Found: {itemQuantity}</div>
       <SearchBar defaultValue={searchValue} onSearchValueChange={onSearchValueChange} />
       <ViewSwitch cardView={cardView} onViewSwitchChange={onViewSwitchChange} />
     </div>

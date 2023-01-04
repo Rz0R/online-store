@@ -243,6 +243,7 @@ function Main() {
             />
             <div className={styles.main__rightPanel}>
               <TopPanel
+                itemQuantity={filteredItems.length}
                 cardView={cardView}
                 onViewSwitchChange={onViewSwitchChange}
                 sortValue={sortValue}
