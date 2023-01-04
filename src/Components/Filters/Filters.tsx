@@ -1,5 +1,6 @@
 import SelectList from './SelectList';
 import DualSlider from './DualSlider';
+import CopyLinkButton from './CopyLinkButton';
 import { FilterData, DualSliderData } from '../../types/data';
 import styles from './Filters.module.scss';
 
@@ -29,9 +30,7 @@ function Filters({
           Reset Filters
         </button>
 
-        <button className={styles.fiters__btn} type="button">
-          Copy Link
-        </button>
+        <CopyLinkButton />
       </div>
       <div className={styles.fiters__content}>
         <DualSlider
