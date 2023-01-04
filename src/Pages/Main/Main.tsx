@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import loadItemsAction from '../../store/serviceActions';
@@ -24,6 +24,8 @@ function Main() {
   );
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const cardView = (searchParams.get(QueryParams.view) as CardView) || CardView.simple;
   const sortValue =
@@ -66,6 +68,13 @@ function Main() {
 
     setFilteredItems(foundItems);
   }, [isLoading, searchValue, categoryValues, brandValues]);
+
+  useEffect(() => {
+    if (location.search === '') {
+      setPriceDualSliderData(getDualSliderData(prices, priceValues));
+      setStockDualSliderData(getDualSliderData(stocks, stockValues));
+    }
+  }, [location.search]);
 
   const onSelectFilterChange = (
     filter: string,
@@ -204,6 +213,8 @@ function Main() {
     }));
   };
 
+  const onResetBtnClick = () => navigate('/');
+
   const categoryFilterData = getSelectListData(
     items,
     filteredItems,
@@ -228,6 +239,7 @@ function Main() {
               onCategoryFilterChange={onCategoryFilterChange}
               brandState={brandFilterData}
               onBrategoryFilterChange={onBrandFilterChange}
+              onResetBtnClick={onResetBtnClick}
             />
             <div className={styles.main__rightPanel}>
               <TopPanel
