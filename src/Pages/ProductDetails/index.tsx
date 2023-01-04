@@ -31,14 +31,16 @@ export default function ProductDetails() {
   return (
     <main className="productDetails">
       <div className="productDetails__container">
-        {currentItem && (
-          <BreadcrumbList
-            category={currentItem.category}
-            brand={currentItem.brand}
-            title={currentItem.title}
-          />
-        )}
-        {currentItem && <ProductCard currentItem={currentItem} />}
+        <div className={styles.productDetails__wrapper}>
+          {currentItem && (
+            <BreadcrumbList
+              category={currentItem.category}
+              brand={currentItem.brand}
+              title={currentItem.title}
+            />
+          )}
+          {currentItem && <ProductCard currentItem={currentItem} />}
+        </div>
       </div>
     </main>
   );

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
 import { addCartItem, removeCartItem } from '../../store/reducers/cartState';
 import { CartItem } from '../../types/data';
@@ -12,6 +13,7 @@ interface CartItemProps {
 }
 
 export default function CartItemComp({ item, indexOfFirstCartItem, index }: CartItemProps) {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleIncQuantity = () => {
@@ -24,13 +26,31 @@ export default function CartItemComp({ item, indexOfFirstCartItem, index }: Cart
     dispatch(removeCartItem(item.id));
   };
 
+  const handleClickItem = (id: number) => {
+    navigate(`/product-details/${id}`);
+  };
+
   return (
     <div className={`${styles.item}`}>
       <div className={styles.item__wrapper}>
         <div className={styles.item__index}>{indexOfFirstCartItem + 1 + index}</div>
-        <img className={styles.item__image} src={item.thumbnail} alt={item.title} />
+        <button
+          className={styles.item__title}
+          type="button"
+          onClick={() => handleClickItem(item.id)}
+        >
+          <img className={styles.item__image} src={item.thumbnail} alt={item.title} />
+        </button>
         <div className={styles.item__descriptions}>
-          <h3 className={styles.item__title}>{item.title}</h3>
+          <h3 className={styles.item__title}>
+            <button
+              className={styles.item__title}
+              type="button"
+              onClick={() => handleClickItem(item.id)}
+            >
+              {item.title}
+            </button>
+          </h3>
           <div className={styles.item__dataWrapper}>
             Category:
             <span className={styles.item__data}>{item.category}</span>

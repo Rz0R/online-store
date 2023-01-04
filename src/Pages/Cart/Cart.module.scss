@@ -3,12 +3,13 @@
 .cart {
   &__wrapper {
     display: flex;
-    gap: 30px;
     margin-top: 40px;
   }
 
   &__column {
-    flex: 0 1 70%;
+    flex: 0 0 66%;
+    width: 100%;
+    margin-right: 4%;
   }
 
   &__menu {

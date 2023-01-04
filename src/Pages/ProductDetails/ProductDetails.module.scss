@@ -1,7 +1,16 @@
 @import '../../scss/colors';
 
+.productDetails {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
 .productDetailsEmpty {
   display: flex;
+
   &__container {
     display: flex;
     flex-direction: column;

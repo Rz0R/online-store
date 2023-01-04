@@ -2,43 +2,23 @@
 
 .productCard {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  &__buy {
-    font-weight: 500;
-    color: $whiteColor;
-    background: $secondColor;
-    padding: 20px;
-    transition: all 0.3s ease 0s;
+  gap: 50px;
 
-    &Active {
-      background: $redColor;
-    }
-
-    &:hover {
-      background: $mainColor;
-    }
-  }
-
-  &__fastBuy {
+  &__column {
     display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 50px;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 900px) {
+  .productCard {
+    flex-direction: column;
     align-items: center;
-    width: fit-content;
-    transition: all 0.3s ease 0s;
-    gap: 5px;
-
-    &Icon {
-      width: 19px;
-      height: 19px;
-    }
-
-    &Text {
-      font-weight: 500;
-      border-bottom: 1px dotted $mainColor;
-    }
-
-    &:hover {
-      color: $secondColor;
+    &__column {
+      width: 100%;
     }
   }
 }

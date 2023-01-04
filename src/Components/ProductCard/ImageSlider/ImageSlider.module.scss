@@ -1,23 +1,148 @@
+@import '../../../scss/colors.scss';
+
 .imageSlider {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 0 0 500px;
+
+  &__discount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    background: $redColor;
+    color: $whiteColor;
+    aspect-ratio: 1/1;
+    border-radius: 50px 0px 50px 50px;
+  }
+
   &__main {
-    width: 300px;
     height: 300px;
+    max-width: 100%;
+    transition: all 0.3s ease 0s;
+  }
+
+  &__wrapper {
+    position: relative;
+    width: fit-content;
+
+    &Main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 100%;
+      overflow: hidden;
+      // transition: all 0.3s ease 0s;
+    }
+
+    &Slider {
+      overflow: hidden;
+      &Margin {
+        margin: 0 20px;
+      }
+    }
   }
 
   &__slider {
     display: flex;
+    max-width: 100%;
+    position: relative;
+    z-index: 5;
+    gap: 4%;
+    transition: all 0.3s ease 0s;
+    width: 500px;
   }
 
   &__item {
+    flex: 0 0 22%;
+
     &Active {
       opacity: 0.5;
     }
     &Button {
+      width: 100%;
     }
 
     &Image {
-      width: 75px;
-      height: 75px;
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+    }
+  }
+}
+
+.slideLeft {
+  -webkit-animation: slide-left 0.5s ease-in;
+  animation: slide-left 0.5s ease-in;
+}
+
+@keyframes slide-left {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .imageSlider {
+    width: 540px;
+    flex: 0 0 100%;
+
+    &__slider {
+      width: 540px;
+    }
+
+    &__wrapperSliderMargin {
+      width: 500px;
+    }
+  }
+}
+
+@media (max-width: 570px) {
+  .imageSlider {
+    width: 340px;
+
+    &__main {
+      height: 200px;
+    }
+
+    &__slider {
+      width: 340px;
+    }
+    &__wrapperSliderMargin {
+      width: 300px;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .imageSlider {
+    width: 240px;
+
+    &__main {
+      height: 150px;
+    }
+
+    &__slider {
+      width: 240px;
+    }
+
+    &__wrapperSliderMargin {
+      width: 200px;
     }
   }
 }
