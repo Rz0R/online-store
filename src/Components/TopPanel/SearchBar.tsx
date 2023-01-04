@@ -1,4 +1,5 @@
 import { ChangeEvent, useCallback, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { debounce } from '../../utils/common';
 import styles from './SearchBar.module.scss';
@@ -14,9 +15,11 @@ function SearchBar({ defaultValue, onSearchValueChange }: SearchBarProps) {
   const [inputValue, setInputValue] = useState<string>(defaultValue);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const location = useLocation();
+
   const updateSearchValue = useCallback(
     debounce((value: string) => onSearchValueChange(value), DEBOUNCE_DELAY),
-    [],
+    [location.search],
   );
 
   const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
