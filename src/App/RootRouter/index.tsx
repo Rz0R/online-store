@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from '../../Components/header';
 import Main from '../../Pages/Main';
-import Footer from '../../Components/footer';
+
+import Footer from '../../Components/Footer';
 
 export default function RootRouter() {
   return (
