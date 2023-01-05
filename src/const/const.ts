@@ -22,8 +22,8 @@ export enum SortOptionValues {
   sortTitle = 'sort-title',
   priceASC = 'price-asc',
   priceDESC = 'price-desc',
-  raitingASC = 'raiting-asc',
-  raitingDESC = 'raiting-desc',
+  ratingASC = 'rating-asc',
+  ratingDESC = 'rating-desc',
 }
 
 export enum ValidationKeys {

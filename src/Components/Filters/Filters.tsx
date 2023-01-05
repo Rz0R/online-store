@@ -4,11 +4,11 @@ import CopyLinkButton from './CopyLinkButton';
 import { FilterData, DualSliderData } from '../../types/data';
 import styles from './Filters.module.scss';
 
-type FilteProps = {
+type FilterProps = {
   categoryState: FilterData;
   onCategoryFilterChange: (filterName: string, isActive: boolean) => void;
   brandState: FilterData;
-  onBrategoryFilterChange: (filterName: string, isActive: boolean) => void;
+  onBrandFilterChange: (filterName: string, isActive: boolean) => void;
   priceState: DualSliderData;
   stockState: DualSliderData;
   onResetBtnClick: () => void;
@@ -18,21 +18,21 @@ function Filters({
   categoryState,
   onCategoryFilterChange,
   brandState,
-  onBrategoryFilterChange,
+  onBrandFilterChange,
   priceState,
   stockState,
   onResetBtnClick,
-}: FilteProps) {
+}: FilterProps) {
   return (
-    <div className={styles.fiters}>
-      <div className={styles.fiters__top}>
-        <button className={styles.fiters__btn} type="button" onClick={onResetBtnClick}>
+    <div className={styles.filters}>
+      <div className={styles.filters__top}>
+        <button className={styles.filters__btn} type="button" onClick={onResetBtnClick}>
           Reset Filters
         </button>
 
         <CopyLinkButton />
       </div>
-      <div className={styles.fiters__content}>
+      <div className={styles.filters__content}>
         <DualSlider
           name="Prices"
           minValue={priceState.minValue}
@@ -57,7 +57,7 @@ function Filters({
           filterState={categoryState}
           onChange={onCategoryFilterChange}
         />
-        <SelectList name="Brands" filterState={brandState} onChange={onBrategoryFilterChange} />
+        <SelectList name="Brands" filterState={brandState} onChange={onBrandFilterChange} />
       </div>
     </div>
   );

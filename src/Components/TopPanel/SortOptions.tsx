@@ -23,8 +23,8 @@ function SortOptions({ sortValue, onSortValueChange }: SortOptionsProps) {
       </option>
       <option value={SortOptionValues.priceASC}>Sort by price ASC</option>
       <option value={SortOptionValues.priceDESC}>Sort by price DESC</option>
-      <option value={SortOptionValues.raitingASC}>Sort by raiting ASC</option>
-      <option value={SortOptionValues.raitingDESC}>Sort by raiting DESC</option>
+      <option value={SortOptionValues.ratingASC}>Sort by rating ASC</option>
+      <option value={SortOptionValues.ratingDESC}>Sort by rating DESC</option>
     </select>
   );
 }

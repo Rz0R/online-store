@@ -12,7 +12,7 @@ import {
   filterItems,
   getSelectListData,
   getDualSliderData,
-  getDualSliderDataAterFiltering,
+  getDualSliderDataAfterFiltering,
 } from '../../utils/filter';
 import { Items, StateDualSliderData } from '../../types/data';
 import styles from './Main.module.scss';
@@ -62,9 +62,9 @@ function Main() {
       searchValue,
     });
 
-    setPriceDualSliderData(getDualSliderDataAterFiltering(prices, foundItems, 'price'));
+    setPriceDualSliderData(getDualSliderDataAfterFiltering(prices, foundItems, 'price'));
 
-    setStockDualSliderData(getDualSliderDataAterFiltering(stocks, foundItems, 'stock'));
+    setStockDualSliderData(getDualSliderDataAfterFiltering(stocks, foundItems, 'stock'));
 
     setFilteredItems(foundItems);
   }, [isLoading, searchValue, categoryValues, brandValues]);
@@ -176,7 +176,7 @@ function Main() {
       searchValue,
     });
 
-    setStockDualSliderData(getDualSliderDataAterFiltering(stocks, foundItems, 'stock'));
+    setStockDualSliderData(getDualSliderDataAfterFiltering(stocks, foundItems, 'stock'));
     setFilteredItems(foundItems);
     setPriceDualSliderData((prev) => ({
       ...prev,
@@ -203,7 +203,7 @@ function Main() {
       searchValue,
     });
 
-    setPriceDualSliderData(getDualSliderDataAterFiltering(prices, foundItems, 'price'));
+    setPriceDualSliderData(getDualSliderDataAfterFiltering(prices, foundItems, 'price'));
     setFilteredItems(foundItems);
     setStockDualSliderData((prev) => ({
       ...prev,
@@ -239,7 +239,7 @@ function Main() {
               categoryState={categoryFilterData}
               onCategoryFilterChange={onCategoryFilterChange}
               brandState={brandFilterData}
-              onBrategoryFilterChange={onBrandFilterChange}
+              onBrandFilterChange={onBrandFilterChange}
               onResetBtnClick={onResetBtnClick}
             />
             <div className={styles.main__rightPanel}>

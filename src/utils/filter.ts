@@ -7,9 +7,9 @@ export const getSortedItems = (sortValue: SortOptionValues, items: Items) => {
       return items.sort((a, b) => a.price - b.price);
     case SortOptionValues.priceDESC:
       return items.sort((a, b) => b.price - a.price);
-    case SortOptionValues.raitingASC:
+    case SortOptionValues.ratingASC:
       return items.sort((a, b) => a.rating - b.rating);
-    case SortOptionValues.raitingDESC:
+    case SortOptionValues.ratingDESC:
       return items.sort((a, b) => b.rating - a.rating);
     default:
       return items;
@@ -89,12 +89,12 @@ export const getDualSliderData = (allSliderData: number[], queryString: string) 
   };
 };
 
-export const getDualSliderDataAterFiltering = (
+export const getDualSliderDataAfterFiltering = (
   allSliderData: number[],
-  fiteredItems: Items,
+  filteredItems: Items,
   filterType: 'price' | 'stock',
 ) => {
-  if (fiteredItems.length === 0) {
+  if (filteredItems.length === 0) {
     return {
       minValue: 0,
       maxValue: allSliderData.length - 1,
@@ -104,7 +104,7 @@ export const getDualSliderDataAterFiltering = (
     };
   }
 
-  const sortedItems = [...fiteredItems].sort(
+  const sortedItems = [...filteredItems].sort(
     (a: Item, b: Item) => (a[filterType] as number) - (b[filterType] as number),
   );
 
@@ -158,31 +158,31 @@ export const filterItems = ({
   stockValues: string;
   searchValue: string;
 }) => {
-  const itemsFiteredByCategories: Items = filterItemsBySelectList(
+  const itemsFilteredByCategories: Items = filterItemsBySelectList(
     items,
     categoryValues,
     'category',
   );
 
   const itemsFilteredByBrands: Items = filterItemsBySelectList(
-    itemsFiteredByCategories,
+    itemsFilteredByCategories,
     brandValues,
     'brand',
   );
 
-  const itemsFiteredByPrice = filterItemsByDualSlider(
+  const itemsFilteredByPrice = filterItemsByDualSlider(
     itemsFilteredByBrands,
     prices,
     priceValues,
     'price',
   );
 
-  const itemsFiteredByStock = filterItemsByDualSlider(
-    itemsFiteredByPrice,
+  const itemsFilteredByStock = filterItemsByDualSlider(
+    itemsFilteredByPrice,
     stocks,
     stockValues,
     'stock',
   );
 
-  return findItems(itemsFiteredByStock, searchValue);
+  return findItems(itemsFilteredByStock, searchValue);
 };

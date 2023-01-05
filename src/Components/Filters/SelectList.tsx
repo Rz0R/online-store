@@ -13,12 +13,12 @@ function SelectList({ name, filterState, onChange }: SelectListProps) {
     <div>
       <h3 className={styles.selectList__name}>{name}</h3>
       <div>
-        {filterState.map(({ id, isActive, name: checboxName, allItems, availableItems }) => (
+        {filterState.map(({ id, isActive, name: checkboxName, allItems, availableItems }) => (
           <Checkbox
             key={id}
             id={id}
             isChecked={isActive}
-            name={checboxName}
+            name={checkboxName}
             allItems={allItems}
             availableItems={availableItems}
             onChange={onChange}
