@@ -46,3 +46,9 @@ export type StateDualSliderData = {
 export type DualSliderData = StateDualSliderData & {
   onInput: (minValue: number, maxValue: number) => void;
 };
+
+export interface Promocodes {
+  name: string;
+  discount: number;
+  fullName: string;
+}

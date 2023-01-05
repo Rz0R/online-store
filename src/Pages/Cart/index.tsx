@@ -1,58 +1,70 @@
-import { useEffect } from 'react';
+import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styles from './Cart.module.scss';
 import CartItem from '../../Components/CartItem';
 import TotalAmount from '../../Components/TotalAmount';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { addCartItem } from '../../store/reducers/cartState';
-import loadItemsAction from '../../store/serviceActions';
+import { useAppSelector } from '../../hooks/redux';
 import PurchaseModal from '../../Components/PurchaseModal';
+import CartIcon from '../../Components/Loader/cartIcon';
+import Pagination from '../../Components/Pagination';
 
 function Cart() {
   const { isOpen } = useAppSelector((state) => state.MODAL);
   const { cartItems } = useAppSelector((state) => state.CART);
-  const dispatch = useAppDispatch();
 
-  // удалить после добавления функ-ла на main ////
-  const { items, isLoading } = useAppSelector((state) => state.ITEMS);
+  const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    if (isLoading) dispatch(loadItemsAction());
-  }, []);
+  const [currentPage, setCurrentPage] = useState(Math.ceil(Number(searchParams.get('page'))) || 1);
+  const [cartItemsPerPage, setCartItemsPerPage] = useState(
+    (Number(searchParams.get('limit')) === 0 && '10') || searchParams.get('limit') || '10',
+  );
+  const [memory, setMemory] = useState('');
 
-  const handleButton = () => {
-    const randomNum = Math.floor(Math.random() * 100);
-    dispatch(addCartItem(items[randomNum]));
-  };
-  // //////////////////////////////////////////////
+  const limit = Number(cartItemsPerPage !== '' ? cartItemsPerPage : memory);
+  const indexOfLastCartItem = currentPage * limit;
+  const indexOfFirstCartItem = indexOfLastCartItem - limit;
+  const currentCartItems = cartItems.slice(indexOfFirstCartItem, indexOfLastCartItem);
 
+  if (cartItems.length === 0) {
+    return (
+      <main className={`cartEmpty ${styles.cartEmpty}`}>
+        <div className={`cartEmpty__container ${styles.cartEmpty__container}`}>
+          <CartIcon className={styles.cartEmpty__icon} />
+          <h3 className={styles.cartEmpty__title}>Your cart is empty</h3>
+        </div>
+      </main>
+    );
+  }
   return (
     <main className="cart">
       {isOpen && <PurchaseModal />}
       <div className="cart__container">
-        <h1 className={styles.cart__title}>Корзина</h1>
-        <div className={styles.control}>
-          <div className={styles.control__limit}>
-            Items:
-            <input type="text" placeholder="4" />
-          </div>
-          <div className={styles.control__pageControl}>
-            <button className={styles.control__left} type="button">
-              {'<'}
-            </button>
-            <div className={styles.control__number}>1</div>
-            <button className={styles.control__right} type="button">
-              {'>'}
-            </button>
-          </div>
-        </div>
-        <button type="button" onClick={handleButton}>
-          Добавить случайный предмет в корзину
-        </button>
         <div className={styles.cart__wrapper}>
-          <div className={styles.cart__list}>
-            {cartItems.map((item) => (
-              <CartItem className="styles.cart__list" key={item.id} item={item} />
-            ))}
+          <div className={styles.cart__column}>
+            <div className={`${styles.cart__menu} ${styles.menu}`}>
+              <h1 className={styles.menu__title}>Cart</h1>
+              <Pagination
+                className={styles.menu__control}
+                currentPage={currentPage}
+                cartItemsPerPage={cartItemsPerPage}
+                memory={memory}
+                limit={limit}
+                currentCartItems={currentCartItems}
+                setCurrentPage={setCurrentPage}
+                setCartItemsPerPage={setCartItemsPerPage}
+                setMemory={setMemory}
+              />
+            </div>
+            <div className={styles.cart__list}>
+              {currentCartItems.map((item, index) => (
+                <CartItem
+                  key={item.id}
+                  item={item}
+                  indexOfFirstCartItem={indexOfFirstCartItem}
+                  index={index}
+                />
+              ))}
+            </div>
           </div>
           <TotalAmount />
         </div>
