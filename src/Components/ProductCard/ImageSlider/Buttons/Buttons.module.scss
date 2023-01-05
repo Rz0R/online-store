@@ -15,16 +15,18 @@
     cursor: default;
     height: fit-content;
     transform: translateY(-50%);
+
     &Left {
       position: relative;
-      // left: -20px;
       left: 0;
+
       &Active {
         & > .buttons__buttonLeftIcon {
           filter: none;
           cursor: pointer;
         }
       }
+
       &Icon {
         width: 20px;
         height: 20px;
@@ -35,8 +37,8 @@
 
     &Right {
       position: relative;
-      // right: -20px;
       right: 0;
+
       &Active {
         & > .buttons__buttonRightIcon {
           filter: none;

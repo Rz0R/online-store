@@ -40,7 +40,6 @@
       align-items: center;
       max-width: 100%;
       overflow: hidden;
-      // transition: all 0.3s ease 0s;
     }
 
     &Slider {
@@ -79,24 +78,6 @@
   }
 }
 
-.slideLeft {
-  -webkit-animation: slide-left 0.5s ease-in;
-  animation: slide-left 0.5s ease-in;
-}
-
-@keyframes slide-left {
-  0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateX(-100px);
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-}
-
 @media (max-width: 900px) {
   .imageSlider {
     width: 540px;
@@ -123,6 +104,7 @@
     &__slider {
       width: 340px;
     }
+
     &__wrapperSliderMargin {
       width: 300px;
     }
