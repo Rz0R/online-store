@@ -1,0 +1,11 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.selectList {
+  &__name {
+    color: $mainColor;
+    font-size: rem(16);
+    font-weight: 500;
+    margin-bottom: rem(5);
+  }
+}

@@ -6,6 +6,10 @@ import { ItemState } from '../../types/state';
 
 const initialState: ItemState = {
   items: [],
+  categories: [],
+  brands: [],
+  prices: [],
+  stocks: [],
   isLoading: true,
   error: '',
 };
@@ -27,8 +31,28 @@ export const itemStateSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    categoriesLoadingSuccess(state, action: PayloadAction<string[]>) {
+      state.categories = action.payload;
+    },
+    brandsLoadingSuccess(state, action: PayloadAction<string[]>) {
+      state.brands = action.payload;
+    },
+    pricesLoadingSuccess(state, action: PayloadAction<number[]>) {
+      state.prices = action.payload;
+    },
+    stocksLoadingSuccess(state, action: PayloadAction<number[]>) {
+      state.stocks = action.payload;
+    },
   },
 });
 
-export const { itemsLoading, itemsLoadingSuccess, itemsLoadingError } = itemStateSlice.actions;
+export const {
+  itemsLoading,
+  itemsLoadingSuccess,
+  itemsLoadingError,
+  categoriesLoadingSuccess,
+  brandsLoadingSuccess,
+  pricesLoadingSuccess,
+  stocksLoadingSuccess,
+} = itemStateSlice.actions;
 export const itemState = itemStateSlice.reducer;

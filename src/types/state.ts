@@ -11,6 +11,10 @@ export type CartState = {
 
 export type ItemState = {
   items: Items;
+  categories: string[];
+  brands: string[];
+  prices: number[];
+  stocks: number[];
   isLoading: boolean;
   error: string;
 };
@@ -18,3 +22,9 @@ export type ItemState = {
 export type ModalState = {
   isOpen: boolean;
 };
+
+export type FilterState = {
+  id: string;
+  name: string;
+  isActive: boolean;
+}[];

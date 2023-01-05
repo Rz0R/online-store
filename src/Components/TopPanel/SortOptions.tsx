@@ -12,15 +12,19 @@ function SortOptions({ sortValue, onSortValueChange }: SortOptionsProps) {
   const onChange = (evt: ChangeEvent<HTMLSelectElement>) =>
     onSortValueChange(evt.target.value as SortOptionValues);
 
+  const selectValue = Object.values(SortOptionValues).includes(sortValue as SortOptionValues)
+    ? sortValue
+    : SortOptionValues.sortTitle;
+
   return (
-    <select value={sortValue} onChange={onChange} className={styles.sortOptions}>
+    <select value={selectValue} onChange={onChange} className={styles.sortOptions}>
       <option disabled value={SortOptionValues.sortTitle}>
         Sort options:
       </option>
       <option value={SortOptionValues.priceASC}>Sort by price ASC</option>
       <option value={SortOptionValues.priceDESC}>Sort by price DESC</option>
-      <option value={SortOptionValues.raitingASC}>Sort by raiting ASC</option>
-      <option value={SortOptionValues.raitingDESC}>Sort by raiting DESC</option>
+      <option value={SortOptionValues.ratingASC}>Sort by rating ASC</option>
+      <option value={SortOptionValues.ratingDESC}>Sort by rating DESC</option>
     </select>
   );
 }
