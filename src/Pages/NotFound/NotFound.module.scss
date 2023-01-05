@@ -1,0 +1,19 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.notFound {
+  display: flex;
+  &__container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__error {
+    font-size: rem(50);
+    color: $grayColor;
+    font-weight: 700;
+    text-align: center;
+  }
+}
