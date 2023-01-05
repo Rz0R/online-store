@@ -14,6 +14,9 @@ const useValidation = (value: string, validations: IValidations) => {
 
   useEffect(() => {
     Object.keys(validations).forEach((key) => {
+      const thisDate = new Date();
+      const thisMonth = thisDate.getMonth() + 1;
+      const thisYear = Number(String(thisDate.getFullYear()).slice(-2));
       switch (key) {
         case ValidationKeys.fullNameError:
           if (/.{3,}\s+.{3,}/gm.test(value)) {
@@ -51,7 +54,12 @@ const useValidation = (value: string, validations: IValidations) => {
           }
           break;
         case ValidationKeys.expiryDateError:
-          if (/[0-9]{2}\/[0-9]{2}/gm.test(value) && Number(value.slice(0, 2)) <= 12) {
+          if (
+            /[0-9]{2}\/[0-9]{2}/gm.test(value) &&
+            Number(value.slice(0, 2)) <= 12 &&
+            Number(value.slice(0, 2)) >= thisMonth &&
+            Number(value.slice(-2)) >= thisYear
+          ) {
             setExpiryDateError(false);
           } else {
             setExpiryDateError(true);

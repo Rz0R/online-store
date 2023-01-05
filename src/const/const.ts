@@ -56,7 +56,8 @@ export const validationErrors: IValidationErrors = {
   deliveryAddressError: 'The field contains at least three words, each at least 5 characters long.',
   emailError: 'The text entered is not an email.',
   cardNumberError: 'The number of digits entered must be exactly 16.',
-  expiryDateError: 'The field length must be 4. Month 0-12.',
+  expiryDateError:
+    'The field length must be 4. Maximum month 12. Date cannot be less than current date.',
   cvvError: 'The field length must be 3.',
 };
 
