@@ -2,29 +2,6 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Что использовал
-
-CRA + typescript + react-router-dom + sass
-
-Если захотите сами поднять реакт приложение+ts+react-router-dom+sass и потренироваться используйте: 
-1) npx create-react-app my-app --template typescript
-2) npm i react-router-dom
-3) npm install sass
-4) установить и настроить линтер\претир как вам нужно
-
-Там будет много лишнего, что вместе с create-react-app прилетит, лишнее можно удалить, либо оставить.
-
-## На что обратить внимание
-
-1) в src/index.tsx входна точка приложения
-2) в src/App/RootRouter настройки для роутинга по SPA
-3) в src/Pages/Main можете глянуть пример рендера однотипных компонентов с использованием массива
-4) в src/Pages/Other зарендерин компонент использующий хуки 
-5) в src/Components/TestComponentsWithHooks можете глянуть базовое применение хуков useState, useEffect
-6) стили навешиваем используя импорт scss файлов прямо в компоненты, если инетесно написал ещё работу со стилями через модули в src/Components/header
-7) в src/Components/TestForMain можно глянуть пример типизации и деструктуризации пропсов
-8) структура проекта примерная, можете переделать как хотите
-
 ## Available Scripts
 
 In the project directory, you can run:

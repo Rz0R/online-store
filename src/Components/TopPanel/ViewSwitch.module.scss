@@ -1,0 +1,26 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.viewSwitch {
+  display: flex;
+  gap: rem(2);
+
+  color: #a19d9d;
+
+  &__radioBtn {
+    width: rem(16);
+    height: rem(16);
+    cursor: pointer;
+
+    & input {
+      display: none;
+      &:checked + svg {
+        color: $mainColor;
+      }
+    }
+
+    svg {
+      transition: all 0.3s ease 0s;
+    }
+  }
+}

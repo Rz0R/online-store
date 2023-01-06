@@ -1,9 +1,3 @@
-function Main() {
-  return (
-    <main className="main">
-      <div className="main__container"> Main page</div>
-    </main>
-  );
-}
+import Main from './Main';
 
 export default Main;
