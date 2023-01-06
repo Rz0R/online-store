@@ -72,7 +72,7 @@ export default function CartItemComp({ item, indexOfFirstCartItem, index }: Cart
             <span className={styles.item__data}>{item.discountPercentage}%</span>
           </div>
           <div className={styles.item__dataWrapper}>
-            Desctiption:
+            Description:
             <span className={styles.item__data}>{item.description}</span>
           </div>
         </div>
