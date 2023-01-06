@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { debounce } from '../../utils/common';
@@ -16,6 +16,12 @@ function SearchBar({ defaultValue, onSearchValueChange }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const location = useLocation();
+
+  useEffect(() => {
+    if (defaultValue === '') {
+      setInputValue(defaultValue);
+    }
+  }, [defaultValue]);
 
   const updateSearchValue = useCallback(
     debounce((value: string) => onSearchValueChange(value), DEBOUNCE_DELAY),
