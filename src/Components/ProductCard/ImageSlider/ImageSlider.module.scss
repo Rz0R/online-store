@@ -58,6 +58,7 @@
     gap: 4%;
     transition: all 0.3s ease 0s;
     width: 500px;
+    min-height: 110px;
   }
 
   &__item {
@@ -85,6 +86,7 @@
 
     &__slider {
       width: 540px;
+      min-height: 0;
     }
 
     &__wrapperSliderMargin {
