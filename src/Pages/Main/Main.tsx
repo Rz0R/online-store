@@ -147,9 +147,9 @@ function Main() {
     maxValue: number,
     sliderType: 'price' | 'stock',
   ) => {
-    const dataVaues = sliderType === 'price' ? prices : stocks;
-    const minDataValue = dataVaues[minValue];
-    const maxDataValue = dataVaues[maxValue];
+    const dataValues = sliderType === 'price' ? prices : stocks;
+    const minDataValue = dataValues[minValue];
+    const maxDataValue = dataValues[maxValue];
     setSearchParams((urlParams) => {
       const prev = Object.fromEntries(urlParams.entries());
 
