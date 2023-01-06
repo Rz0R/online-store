@@ -6,19 +6,19 @@ import styles from './Buttons.module.scss';
 
 interface ButtonsProps {
   slideNumber: number;
-  imagesWithoutDubplicate: IImagesWithSize[];
+  imagesWithoutDuplicate: IImagesWithSize[];
   quantityVisibleSlides: number;
   setSlideNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function Buttons({
   slideNumber,
-  imagesWithoutDubplicate,
+  imagesWithoutDuplicate,
   quantityVisibleSlides,
   setSlideNumber,
 }: ButtonsProps) {
   const handleClickRightArrow = () => {
-    if (slideNumber < imagesWithoutDubplicate.length - quantityVisibleSlides) {
+    if (slideNumber < imagesWithoutDuplicate.length - quantityVisibleSlides) {
       setSlideNumber(slideNumber + 1);
     }
   };
@@ -42,7 +42,7 @@ export default function Buttons({
       </button>
       <button
         className={`${styles.buttons__button} ${styles.buttons__buttonRight} ${
-          slideNumber < imagesWithoutDubplicate.length - quantityVisibleSlides
+          slideNumber < imagesWithoutDuplicate.length - quantityVisibleSlides
             ? styles.buttons__buttonRightActive
             : ''
         }`}

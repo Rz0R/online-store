@@ -11,7 +11,7 @@ interface ImageSliderProps {
 
 export default function ImageSlider({ currentItem }: ImageSliderProps) {
   const [mainImage, setMainImage] = useState(currentItem.images[0]);
-  const [imagesWithoutDubplicate, setImagesWithoutDubplicate] = useState<IImagesWithSize[]>([]);
+  const [imagesWithoutDuplicate, setImagesWithoutDuplicate] = useState<IImagesWithSize[]>([]);
   const [isVisibleButtons, setIsVisibleButtons] = useState(false);
   const [widthSlide, setWidthSlide] = useState(0);
   const [gap, setGap] = useState(0);
@@ -38,7 +38,7 @@ export default function ImageSlider({ currentItem }: ImageSliderProps) {
         return acc;
       }, []);
 
-      setImagesWithoutDubplicate(
+      setImagesWithoutDuplicate(
         imagesWithSize.filter(
           (imageWithSize, i) =>
             i === imagesWithSize.findIndex((val) => val.size === imageWithSize.size),
@@ -48,10 +48,10 @@ export default function ImageSlider({ currentItem }: ImageSliderProps) {
   }, []);
 
   useEffect(() => {
-    if (imagesWithoutDubplicate.length > quantityVisibleSlides) {
+    if (imagesWithoutDuplicate.length > quantityVisibleSlides) {
       setIsVisibleButtons(true);
     }
-  }, [imagesWithoutDubplicate]);
+  }, [imagesWithoutDuplicate]);
 
   useEffect(() => {
     if (ref.current) {
@@ -102,7 +102,7 @@ export default function ImageSlider({ currentItem }: ImageSliderProps) {
             style={{ left: `${slideNumber * -(widthSlide + gap)}px` }}
             ref={refList}
           >
-            {imagesWithoutDubplicate.map((image, i) => (
+            {imagesWithoutDuplicate.map((image, i) => (
               <li
                 className={
                   mainImage !== image.url
@@ -130,7 +130,7 @@ export default function ImageSlider({ currentItem }: ImageSliderProps) {
         {isVisibleButtons && (
           <Buttons
             slideNumber={slideNumber}
-            imagesWithoutDubplicate={imagesWithoutDubplicate}
+            imagesWithoutDuplicate={imagesWithoutDuplicate}
             quantityVisibleSlides={quantityVisibleSlides}
             setSlideNumber={setSlideNumber}
           />
