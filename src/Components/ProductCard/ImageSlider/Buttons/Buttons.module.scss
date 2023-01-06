@@ -1,0 +1,56 @@
+.buttons {
+  &__buttons {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 0;
+    justify-content: space-between;
+    z-index: 20;
+  }
+
+  &__button {
+    display: flex;
+    cursor: default;
+    height: fit-content;
+    transform: translateY(-50%);
+
+    &Left {
+      position: relative;
+      left: 0;
+
+      &Active {
+        & > .buttons__buttonLeftIcon {
+          filter: none;
+          cursor: pointer;
+        }
+      }
+
+      &Icon {
+        width: 20px;
+        height: 20px;
+        filter: invert(76%) sepia(0%) saturate(345%) hue-rotate(139deg) brightness(81%)
+          contrast(87%);
+      }
+    }
+
+    &Right {
+      position: relative;
+      right: 0;
+
+      &Active {
+        & > .buttons__buttonRightIcon {
+          filter: none;
+          cursor: pointer;
+        }
+      }
+      &Icon {
+        width: 20px;
+        height: 20px;
+        filter: invert(76%) sepia(0%) saturate(345%) hue-rotate(139deg) brightness(81%)
+          contrast(87%);
+      }
+    }
+  }
+}

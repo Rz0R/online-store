@@ -8,3 +8,9 @@ $whiteColor: #fff;
 $borderColor: #eee;
 $bgColorModal: rgba(0, 0, 0, 0.4);
 $bgColorCard: #dde0e6;
+$bgColorWarning: #ff877f;
+
+:export {
+  bgColorWarning: $bgColorWarning;
+  whiteColor: $whiteColor;
+}

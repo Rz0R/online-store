@@ -1,0 +1,57 @@
+@import '../../../scss/colors.scss';
+
+.productButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+
+  &__buy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    font-weight: 500;
+    color: $whiteColor;
+    background: $secondColor;
+    padding: 12px;
+    transition: all 0.3s ease 0s;
+
+    &Icon {
+      width: 23px;
+    }
+
+    &Active {
+      background: $redColor;
+    }
+
+    &:hover {
+      background: $mainColor;
+    }
+  }
+
+  &__fastBuy {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    transition: all 0.3s ease 0s;
+    gap: 5px;
+
+    &Icon {
+      width: 19px;
+      height: 19px;
+    }
+
+    &Text {
+      font-weight: 500;
+      border-bottom: 1px dotted $mainColor;
+    }
+
+    &:hover {
+      color: $secondColor;
+    }
+  }
+}

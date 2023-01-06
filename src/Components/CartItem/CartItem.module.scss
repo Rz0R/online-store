@@ -43,6 +43,7 @@
     font-weight: 600;
     transition: all 0.3s ease 0s;
     cursor: pointer;
+    text-transform: capitalize;
     &:hover {
       color: $secondColor;
     }
@@ -61,6 +62,7 @@
     max-width: 300px;
     width: 14vw;
     display: block;
+    text-transform: capitalize;
   }
 }
 

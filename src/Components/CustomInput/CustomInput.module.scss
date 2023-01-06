@@ -38,6 +38,7 @@
   &__warning {
     width: 15px;
     margin-right: 5px;
+    color: $mainColor;
 
     &:hover {
       & + .label__errorList {
@@ -63,7 +64,7 @@
   }
 
   &__error {
-    color: red;
+    color: $redColor;
   }
 }
 

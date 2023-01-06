@@ -17,7 +17,7 @@ const loadItemsAction = () => async (dispatch: AppDispatch) => {
     dispatch(itemsLoading());
     const response = await fetch(URL);
     const data: ResponseData = await response.json();
-    const items = data.products;
+    const items = data.products.filter((product) => product.images.length >= 2);
     const categories = getCategories(items);
     const brands = getBrands(items);
     const prices = getPrices(items);
