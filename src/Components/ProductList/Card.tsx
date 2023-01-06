@@ -1,3 +1,6 @@
+import { MouseEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { addCartItem, dropCartItem } from '../../store/reducers/cartState';
 import SimpleCard from './SimpleCard';
@@ -15,17 +18,32 @@ function Card({ item, cardView }: CardProps) {
   const { cartItems } = useAppSelector((state) => state.CART);
   const isItemInCart = cartItems.some((cartItem) => item.id === cartItem.id);
 
-  const onBuyButtonClick = () =>
-    isItemInCart ? dispatch(dropCartItem(item.id)) : dispatch(addCartItem(item));
+  const navigate = useNavigate();
+  const onCardClick = () => navigate(`/product-details/${item.id}`);
+
+  const onBuyButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    evt.stopPropagation();
+    return isItemInCart ? dispatch(dropCartItem(item.id)) : dispatch(addCartItem(item));
+  };
 
   switch (String(cardView)) {
     case CardView.tile:
       return (
-        <TileCard item={item} isItemInCart={isItemInCart} onBuyButtonClick={onBuyButtonClick} />
+        <TileCard
+          item={item}
+          isItemInCart={isItemInCart}
+          onCardClick={onCardClick}
+          onBuyButtonClick={onBuyButtonClick}
+        />
       );
     default:
       return (
-        <SimpleCard item={item} isItemInCart={isItemInCart} onBuyButtonClick={onBuyButtonClick} />
+        <SimpleCard
+          item={item}
+          isItemInCart={isItemInCart}
+          onCardClick={onCardClick}
+          onBuyButtonClick={onBuyButtonClick}
+        />
       );
   }
 }
