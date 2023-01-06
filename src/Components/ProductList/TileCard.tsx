@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react';
+
 import { getPriceWithoutDiscount } from '../../utils/common';
 import { Item } from '../../types/data';
 import styles from './TileCard.module.scss';
@@ -5,12 +7,13 @@ import styles from './TileCard.module.scss';
 type TileCardProps = {
   item: Item;
   isItemInCart: boolean;
-  onBuyButtonClick: () => void;
+  onCardClick: () => void;
+  onBuyButtonClick: (evt: MouseEvent<HTMLButtonElement>) => void;
 };
 
-function TileCard({ item, isItemInCart, onBuyButtonClick }: TileCardProps) {
+function TileCard({ item, isItemInCart, onCardClick, onBuyButtonClick }: TileCardProps) {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onCardClick} aria-hidden>
       <div className={styles.card__image}>
         <img src={item.thumbnail} alt={item.title} />
       </div>
@@ -26,7 +29,7 @@ function TileCard({ item, isItemInCart, onBuyButtonClick }: TileCardProps) {
           <span className={styles.card__subtitle}>Stock:</span> {item.stock}
         </p>
         <div className={styles.card__stock}>
-          <span className={styles.card__subtitle}>Raiting:</span> {item.rating}
+          <span className={styles.card__subtitle}>Rating:</span> {item.rating}
         </div>
       </div>
       <div className={styles.card__priceBlock}>
