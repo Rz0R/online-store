@@ -9,6 +9,14 @@ type ProductListProps = {
 };
 
 function ProductList({ items, cardView }: ProductListProps) {
+  if (items.length === 0) {
+    return (
+      <div className={styles.productList}>
+        <div className={styles.productList__notFound}>No products found 😏</div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`${styles.productList} ${
