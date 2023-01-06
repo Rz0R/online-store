@@ -1,0 +1,47 @@
+@import '../../scss/colors.scss';
+
+.footer {
+  background: $bgColor;
+  margin-top: 40px;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  &__link {
+    display: flex;
+  }
+
+  &__githubIcon {
+    width: 30px;
+    height: 30px;
+
+    & path {
+      transition: all 0.3s ease 0s;
+    }
+
+    &:hover path {
+      fill: $secondColor;
+    }
+  }
+
+  &__rsschoolIcon {
+    width: 100%;
+    height: 30px;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+  }
+
+  &__year {
+    font-size: 19px;
+    font-weight: 1000;
+    line-height: 0.7;
+  }
+}
