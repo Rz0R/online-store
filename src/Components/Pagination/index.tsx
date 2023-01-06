@@ -31,77 +31,65 @@ export default function Pagination({
   setCartItemsPerPage,
   setMemory,
 }: PaginationProps) {
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { cartItems } = useAppSelector((state) => state.CART);
   const numberOfPages = Math.ceil(cartItems.length / limit);
 
   const handleChangeItemsPerPage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentValue = e.target.value;
 
-    if (Number.isNaN(Number(currentValue))) {
-      setCartItemsPerPage('1');
-    }
-
     switch (currentValue) {
       case '':
+      case '0':
+      case '00':
         if (!memory) {
           setMemory(cartItemsPerPage);
         }
-        setCartItemsPerPage(currentValue);
-        break;
-      case '0':
-        setCartItemsPerPage('1');
-        setMemory('');
-        break;
-      case '00':
-        setCartItemsPerPage('01');
-        setMemory('');
+        setCartItemsPerPage('');
+        searchParams.delete('limit');
+        setSearchParams(searchParams);
         break;
       default:
         setCartItemsPerPage(currentValue);
         setMemory('');
+        setSearchParams({
+          ...getSearchParams(),
+          limit: currentValue,
+        });
     }
   };
 
   useEffect(() => {
     if (currentPage > numberOfPages) {
       setCurrentPage(numberOfPages);
+
+      setSearchParams({
+        ...getSearchParams(),
+        page: numberOfPages.toString(),
+      });
     }
+  }, [currentPage, currentCartItems]);
 
-    if (Number(cartItemsPerPage) < 0 || Number.isNaN(Number(cartItemsPerPage))) {
-      setCartItemsPerPage('1');
+  const handleClickNextPage = () => {
+    if (currentPage < numberOfPages) {
+      setCurrentPage(currentPage + 1);
+
+      setSearchParams({
+        ...getSearchParams(),
+        page: (currentPage + 1).toString(),
+      });
     }
+  };
 
-    setSearchParams({
-      ...getSearchParams(),
-      limit: cartItemsPerPage,
-    });
-  }, [cartItemsPerPage]);
-
-  useEffect(() => {
-    if (currentPage <= 0) {
-      setCurrentPage(1);
-    }
-
-    setSearchParams({
-      ...getSearchParams(),
-      page: currentPage.toString(),
-    });
-  }, [currentPage]);
-
-  useEffect(() => {
-    if (
-      currentCartItems.length === 0 &&
-      cartItems.length !== 0 &&
-      currentPage < numberOfPages + 2
-    ) {
+  const handleClickPrevPage = () => {
+    if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+      setSearchParams({
+        ...getSearchParams(),
+        page: (currentPage - 1).toString(),
+      });
     }
-  }, [currentCartItems]);
-
-  const handleClickNextPage = () => currentPage < numberOfPages && setCurrentPage(currentPage + 1);
-
-  const handleClickPrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+  };
 
   return (
     <div className={`${styles.control} ${className}`}>
