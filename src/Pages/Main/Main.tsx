@@ -23,6 +23,8 @@ function Main() {
     (state) => state.ITEMS,
   );
 
+  const [areFiltersInit, setAreFiltersInit] = useState(false);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,6 +69,8 @@ function Main() {
     setStockDualSliderData(getDualSliderDataAfterFiltering(stocks, foundItems, 'stock'));
 
     setFilteredItems(foundItems);
+
+    setAreFiltersInit(true);
   }, [isLoading, searchValue, categoryValues, brandValues]);
 
   useEffect(() => {
@@ -231,8 +235,8 @@ function Main() {
   return (
     <main className="main">
       <div className={`${styles.main__container} main__container`}>
-        {!isLoading && (
-          <>
+        <div className={styles.main__leftPanel}>
+          {!isLoading && (
             <Filters
               priceState={{ ...priceDualSliderData, onInput: onPriceDualSliderChange }}
               stockState={{ ...stockDualSliderData, onInput: onStockDualSliderChange }}
@@ -242,20 +246,26 @@ function Main() {
               onBrandFilterChange={onBrandFilterChange}
               onResetBtnClick={onResetBtnClick}
             />
-            <div className={styles.main__rightPanel}>
-              <TopPanel
-                itemQuantity={filteredItems.length}
-                cardView={cardView}
-                onViewSwitchChange={onViewSwitchChange}
-                sortValue={sortValue}
-                onSortValueChange={onSortValueChange}
-                searchValue={searchValue}
-                onSearchValueChange={onSearchValueChange}
-              />
-              <ProductList items={sortedItems} cardView={cardView} />
-            </div>
-          </>
-        )}
+          )}
+        </div>
+
+        <div className={styles.main__rightPanel}>
+          <TopPanel
+            itemQuantity={filteredItems.length}
+            cardView={cardView}
+            onViewSwitchChange={onViewSwitchChange}
+            sortValue={sortValue}
+            onSortValueChange={onSortValueChange}
+            searchValue={searchValue}
+            onSearchValueChange={onSearchValueChange}
+          />
+          <ProductList
+            items={sortedItems}
+            cardView={cardView}
+            isLoading={isLoading}
+            areFiltersInit={areFiltersInit}
+          />
+        </div>
       </div>
     </main>
   );

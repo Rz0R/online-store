@@ -38,8 +38,14 @@ function DualSlider({
     }
   }, [minValue, maxValue]);
 
-  const strMinDataValue = Number.isNaN(minDataValue) ? NOT_FOUND : `${dataPrefix}${minDataValue}`;
-  const strMaxDataValue = Number.isNaN(maxDataValue) ? NOT_FOUND : `${dataPrefix}${maxDataValue}`;
+  const strMinDataValue =
+    Number.isNaN(minDataValue) || minDataValue === undefined
+      ? NOT_FOUND
+      : `${dataPrefix}${minDataValue}`;
+  const strMaxDataValue =
+    Number.isNaN(maxDataValue) || maxDataValue === undefined
+      ? NOT_FOUND
+      : `${dataPrefix}${maxDataValue}`;
 
   return (
     <div className={styles.dualSlider}>
