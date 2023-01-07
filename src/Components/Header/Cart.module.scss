@@ -3,7 +3,7 @@
 
 .cart {
   background-color: $bgColor;
-  padding: rem(8) rem(30);
+  padding: rem(10) rem(25);
   border-radius: rem(20);
   cursor: pointer;
 
@@ -11,6 +11,8 @@
   gap: rem(10);
 
   font-size: rem(14);
+
+  font-weight: 500;
 
   &__icon {
     position: relative;
@@ -30,22 +32,22 @@
 
   &__count {
     position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(50%, -30%);
-    border-radius: 50%;
-    color: #fff;
-    font-size: rem(11);
-    font-weight: 700;
-    background-color: $secondColor;
-    width: rem(16);
-    height: rem(16);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: rem(-7);
+    right: rem(-7);
+    display: block;
+    font-size: rem(10);
+    line-height: rem(16);
+    padding: 0 rem(5);
+    min-width: rem(16);
+    text-align: center;
+    border-radius: rem(20);
+    font-weight: 500;
+    background: $secondColor;
+    color: $whiteColor;
+    box-shadow: 0px 0px 0px 2px $whiteColor;
   }
 
-  &__desription {
+  &__description {
     font-size: rem(14);
   }
 

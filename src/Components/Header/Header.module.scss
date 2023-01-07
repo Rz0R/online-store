@@ -2,12 +2,13 @@
 @import '../../scss/colors.scss';
 
 .header {
+  box-shadow: 0px 3px 5px -3px rgb(0 0 0 / 30%);
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: rem(20);
-    padding-bottom: rem(20);
+    padding-top: rem(20) !important;
+    padding-bottom: rem(10) !important;
   }
 
   &__logo img {
