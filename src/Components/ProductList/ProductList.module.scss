@@ -11,6 +11,44 @@
     font-weight: 500;
     color: $grayColor;
   }
+
+  &__loaderMessage {
+    padding-top: 15%;
+    text-align: center;
+  }
+
+  &__loader {
+    font-size: 48px;
+    display: inline-block;
+    font-weight: 500;
+    color: $bgColor;
+    box-sizing: border-box;
+    text-shadow: 0 0 2px $secondColor, 0 0 1px $secondColor, 0 0 1px $secondColor;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  &__loader::after {
+    content: 'Loading...';
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 1;
+    color: $secondColor;
+    width: 100%;
+    height: 108%;
+    overflow: hidden;
+    box-sizing: border-box;
+    animation: loaderAnimation 1s linear infinite;
+  }
+
+  @keyframes loaderAnimation {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
 }
 
 .view {

@@ -231,8 +231,8 @@ function Main() {
   return (
     <main className="main">
       <div className={`${styles.main__container} main__container`}>
-        {!isLoading && (
-          <>
+        <div className={styles.main__leftPanel}>
+          {!isLoading && (
             <Filters
               priceState={{ ...priceDualSliderData, onInput: onPriceDualSliderChange }}
               stockState={{ ...stockDualSliderData, onInput: onStockDualSliderChange }}
@@ -242,20 +242,25 @@ function Main() {
               onBrandFilterChange={onBrandFilterChange}
               onResetBtnClick={onResetBtnClick}
             />
-            <div className={styles.main__rightPanel}>
-              <TopPanel
-                itemQuantity={filteredItems.length}
-                cardView={cardView}
-                onViewSwitchChange={onViewSwitchChange}
-                sortValue={sortValue}
-                onSortValueChange={onSortValueChange}
-                searchValue={searchValue}
-                onSearchValueChange={onSearchValueChange}
-              />
-              <ProductList items={sortedItems} cardView={cardView} />
-            </div>
-          </>
-        )}
+          )}
+        </div>
+
+        <div className={styles.main__rightPanel}>
+          <TopPanel
+            itemQuantity={filteredItems.length}
+            cardView={cardView}
+            onViewSwitchChange={onViewSwitchChange}
+            sortValue={sortValue}
+            onSortValueChange={onSortValueChange}
+            searchValue={searchValue}
+            onSearchValueChange={onSearchValueChange}
+          />
+          <ProductList
+            items={sortedItems}
+            cardView={cardView}
+            isLoading={isLoading || priceDualSliderData.max === 0}
+          />
+        </div>
       </div>
     </main>
   );

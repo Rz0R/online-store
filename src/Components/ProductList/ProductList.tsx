@@ -6,9 +6,20 @@ import { CardView } from '../../const/const';
 type ProductListProps = {
   items: Items;
   cardView: CardView;
+  isLoading: boolean;
 };
 
-function ProductList({ items, cardView }: ProductListProps) {
+function ProductList({ items, cardView, isLoading }: ProductListProps) {
+  if (isLoading) {
+    return (
+      <div className={styles.productList}>
+        <div className={styles.productList__loaderMessage}>
+          <span className={styles.productList__loader}>Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   if (items.length === 0) {
     return (
       <div className={styles.productList}>
