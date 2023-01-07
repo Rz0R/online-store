@@ -46,17 +46,16 @@ export default function Pagination({
           setMemory(cartItemsPerPage);
         }
         setCartItemsPerPage('');
-        searchParams.delete('limit');
-        setSearchParams(searchParams);
         break;
       default:
         setCartItemsPerPage(currentValue);
         setMemory('');
-        setSearchParams({
-          ...getSearchParams(),
-          limit: currentValue,
-        });
     }
+
+    setSearchParams({
+      ...getSearchParams(),
+      limit: currentValue,
+    });
   };
 
   useEffect(() => {
@@ -69,6 +68,13 @@ export default function Pagination({
       });
     }
   }, [currentPage, currentCartItems]);
+
+  useEffect(() => {
+    if (Array.from(searchParams).length === 0) {
+      setCurrentPage(1);
+      setCartItemsPerPage('10');
+    }
+  }, [searchParams]);
 
   const handleClickNextPage = () => {
     if (currentPage < numberOfPages) {
@@ -94,7 +100,7 @@ export default function Pagination({
   return (
     <div className={`${styles.control} ${className}`}>
       <div className={styles.control__limit}>
-        Items:
+        Limit:
         <InputMask
           mask="99"
           maskChar=""
