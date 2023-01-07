@@ -23,6 +23,8 @@ function Main() {
     (state) => state.ITEMS,
   );
 
+  const [areFiltersInit, setAreFiltersInit] = useState(false);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,6 +69,8 @@ function Main() {
     setStockDualSliderData(getDualSliderDataAfterFiltering(stocks, foundItems, 'stock'));
 
     setFilteredItems(foundItems);
+
+    setAreFiltersInit(true);
   }, [isLoading, searchValue, categoryValues, brandValues]);
 
   useEffect(() => {
@@ -258,7 +262,8 @@ function Main() {
           <ProductList
             items={sortedItems}
             cardView={cardView}
-            isLoading={isLoading || priceDualSliderData.max === 0}
+            isLoading={isLoading}
+            areFiltersInit={areFiltersInit}
           />
         </div>
       </div>

@@ -7,9 +7,10 @@ type ProductListProps = {
   items: Items;
   cardView: CardView;
   isLoading: boolean;
+  areFiltersInit: boolean;
 };
 
-function ProductList({ items, cardView, isLoading }: ProductListProps) {
+function ProductList({ items, cardView, isLoading, areFiltersInit }: ProductListProps) {
   if (isLoading) {
     return (
       <div className={styles.productList}>
@@ -20,7 +21,7 @@ function ProductList({ items, cardView, isLoading }: ProductListProps) {
     );
   }
 
-  if (items.length === 0) {
+  if (areFiltersInit && items.length === 0) {
     return (
       <div className={styles.productList}>
         <div className={styles.productList__notFound}>No products found 😏</div>
