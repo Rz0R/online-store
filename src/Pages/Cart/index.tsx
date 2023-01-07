@@ -13,10 +13,14 @@ function Cart() {
   const { cartItems } = useAppSelector((state) => state.CART);
 
   const [searchParams] = useSearchParams();
+  const pageParam = Math.ceil(Number(searchParams.get('page')));
+  const limitParam = Math.ceil(Number(searchParams.get('limit')));
 
-  const [currentPage, setCurrentPage] = useState(Math.ceil(Number(searchParams.get('page'))) || 1);
+  const [currentPage, setCurrentPage] = useState(
+    ((pageParam < 1 || Number.isNaN(pageParam)) && 1) || pageParam,
+  );
   const [cartItemsPerPage, setCartItemsPerPage] = useState(
-    (Number(searchParams.get('limit')) === 0 && '10') || searchParams.get('limit') || '10',
+    ((limitParam < 1 || Number.isNaN(limitParam)) && '10') || limitParam.toString(),
   );
   const [memory, setMemory] = useState('');
 

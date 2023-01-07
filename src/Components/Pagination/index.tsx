@@ -31,82 +31,76 @@ export default function Pagination({
   setCartItemsPerPage,
   setMemory,
 }: PaginationProps) {
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { cartItems } = useAppSelector((state) => state.CART);
   const numberOfPages = Math.ceil(cartItems.length / limit);
 
   const handleChangeItemsPerPage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentValue = e.target.value;
 
-    if (Number.isNaN(Number(currentValue))) {
-      setCartItemsPerPage('1');
-    }
-
     switch (currentValue) {
       case '':
+      case '0':
+      case '00':
         if (!memory) {
           setMemory(cartItemsPerPage);
         }
-        setCartItemsPerPage(currentValue);
-        break;
-      case '0':
-        setCartItemsPerPage('1');
-        setMemory('');
-        break;
-      case '00':
-        setCartItemsPerPage('01');
-        setMemory('');
+        setCartItemsPerPage('');
         break;
       default:
         setCartItemsPerPage(currentValue);
         setMemory('');
     }
+
+    setSearchParams({
+      ...getSearchParams(),
+      limit: currentValue,
+    });
   };
 
   useEffect(() => {
     if (currentPage > numberOfPages) {
       setCurrentPage(numberOfPages);
-    }
 
-    if (Number(cartItemsPerPage) < 0 || Number.isNaN(Number(cartItemsPerPage))) {
-      setCartItemsPerPage('1');
+      setSearchParams({
+        ...getSearchParams(),
+        page: numberOfPages.toString(),
+      });
     }
-
-    setSearchParams({
-      ...getSearchParams(),
-      limit: cartItemsPerPage,
-    });
-  }, [cartItemsPerPage]);
+  }, [currentPage, currentCartItems]);
 
   useEffect(() => {
-    if (currentPage <= 0) {
+    if (Array.from(searchParams).length === 0) {
       setCurrentPage(1);
+      setCartItemsPerPage('10');
     }
+  }, [searchParams]);
 
-    setSearchParams({
-      ...getSearchParams(),
-      page: currentPage.toString(),
-    });
-  }, [currentPage]);
+  const handleClickNextPage = () => {
+    if (currentPage < numberOfPages) {
+      setCurrentPage(currentPage + 1);
 
-  useEffect(() => {
-    if (
-      currentCartItems.length === 0 &&
-      cartItems.length !== 0 &&
-      currentPage < numberOfPages + 2
-    ) {
+      setSearchParams({
+        ...getSearchParams(),
+        page: (currentPage + 1).toString(),
+      });
+    }
+  };
+
+  const handleClickPrevPage = () => {
+    if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+      setSearchParams({
+        ...getSearchParams(),
+        page: (currentPage - 1).toString(),
+      });
     }
-  }, [currentCartItems]);
-
-  const handleClickNextPage = () => currentPage < numberOfPages && setCurrentPage(currentPage + 1);
-
-  const handleClickPrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+  };
 
   return (
     <div className={`${styles.control} ${className}`}>
       <div className={styles.control__limit}>
-        Items:
+        Limit:
         <InputMask
           mask="99"
           maskChar=""
