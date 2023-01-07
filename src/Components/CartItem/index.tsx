@@ -35,7 +35,7 @@ export default function CartItemComp({ item, indexOfFirstCartItem, index }: Cart
       <div className={styles.item__wrapper}>
         <div className={styles.item__index}>{indexOfFirstCartItem + 1 + index}</div>
         <button
-          className={styles.item__title}
+          className={styles.item__image}
           type="button"
           onClick={() => handleClickItem(item.id)}
         >
@@ -72,7 +72,7 @@ export default function CartItemComp({ item, indexOfFirstCartItem, index }: Cart
             <span className={styles.item__data}>{item.discountPercentage}%</span>
           </div>
           <div className={styles.item__dataWrapper}>
-            Desctiption:
+            Description:
             <span className={styles.item__data}>{item.description}</span>
           </div>
         </div>

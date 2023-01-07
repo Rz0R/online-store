@@ -3,15 +3,16 @@
 .cart {
   &__wrapper {
     display: flex;
-    margin-top: 40px;
-    justify-content: space-between;
+    padding: 25px 0 40px 0;
+    gap: 3%;
   }
 
   &__column {
-    flex: 0 0 70%;
+    flex: 1 1 auto;
   }
 
   &__menu {
+    margin: 0 0 25px 0;
   }
 
   &__list {
@@ -24,8 +25,7 @@
 .menu {
   display: flex;
   align-items: center;
-  justify-content: end;
-  margin: 0 0 40px 0;
+  justify-content: flex-end;
 
   &__title {
     margin-right: auto;
