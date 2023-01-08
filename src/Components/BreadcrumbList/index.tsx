@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './BreadcrumbList.module.scss';
 
@@ -12,9 +13,9 @@ export default function BreadcrumbList({ category, brand, title }: BreadcrumbPro
   return (
     <ul className={styles.breadcrumb__list}>
       <li className={styles.breadcrumb__item}>
-        <a className={styles.breadcrumb__link} href="/">
+        <Link className={styles.breadcrumb__link} to="/">
           Store
-        </a>
+        </Link>
       </li>
       <li className={styles.breadcrumb__item}>{category}</li>
       <li className={styles.breadcrumb__item}>{brand}</li>
