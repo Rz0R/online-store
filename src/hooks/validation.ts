@@ -26,7 +26,7 @@ const useValidation = (value: string, validations: IValidations) => {
           }
           break;
         case ValidationKeys.numberPhoneError:
-          if (/^[+]\d{8,}/gm.test(value)) {
+          if (/^[+]\d{9,}$/gm.test(value)) {
             setNumberPhoneError(false);
           } else {
             setNumberPhoneError(true);
