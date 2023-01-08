@@ -27,10 +27,17 @@ const useInput = (InitialValue: string, validations: IValidations) => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     Object.keys(validations).forEach((key) => {
-      if (key === ValidationKeys.cardNumberError) {
-        definitionPaymentSystem(e.target.value);
+      switch (key) {
+        case ValidationKeys.cardNumberError:
+          definitionPaymentSystem(e.target.value);
+          setValue(e.target.value);
+          break;
+        case ValidationKeys.numberPhoneError:
+          setValue(e.target.value.slice(0, 16));
+          break;
+        default:
+          setValue(e.target.value);
       }
-      setValue(e.target.value);
     });
   };
 
