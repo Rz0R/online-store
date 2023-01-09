@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './BreadcrumbList.module.scss';
 
-interface BreadcrumbProps {
+export interface BreadcrumbProps {
   category: string;
   brand: string;
   title: string;
