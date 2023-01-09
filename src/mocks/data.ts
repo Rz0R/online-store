@@ -1,3 +1,5 @@
+import { IImagesWithSize } from '../types/imageSlider';
+import { BreadcrumbProps } from '../Components/BreadcrumbList';
 import { Items } from '../types/data';
 
 export const ITEMS: Items = [
@@ -2016,4 +2018,24 @@ export const STOCKS: number[] = [
   50, 51, 52, 54, 55, 61, 63, 64, 65, 68, 72, 77, 78, 79, 83, 84, 88, 89, 91, 92, 94, 95, 96, 101,
   105, 106, 107, 109, 110, 111, 113, 114, 115, 122, 123, 127, 128, 129, 131, 132, 133, 136, 137,
   138, 140, 142, 144, 146, 148, 149, 150,
+];
+
+export const BREADCRUMBS: BreadcrumbProps = {
+  category: 'Smartphones',
+  brand: 'Apple',
+  title: 'Samsung 9',
+};
+
+export const IMAGESWITHSIZE: IImagesWithSize[] = [
+  { url: 'https://i.dummyjson.com/data/products/1/1.jpg', size: '123' },
+  { url: 'https://i.dummyjson.com/data/products/1/2.jpg', size: '1234' },
+  { url: 'https://i.dummyjson.com/data/products/1/3.jpg', size: '123' },
+  { url: 'https://i.dummyjson.com/data/products/1/4.jpg', size: '123' },
+  { url: 'https://i.dummyjson.com/data/products/1/5.jpg', size: '12345' },
+];
+
+export const IMAGESWITHSIZEWITHOUTDUPLICATE: IImagesWithSize[] = [
+  { url: 'https://i.dummyjson.com/data/products/1/1.jpg', size: '123' },
+  { url: 'https://i.dummyjson.com/data/products/1/2.jpg', size: '1234' },
+  { url: 'https://i.dummyjson.com/data/products/1/5.jpg', size: '12345' },
 ];
