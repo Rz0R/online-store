@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { IValidations } from '../types/customInput';
 import { ValidationKeys } from '../const/const';
+import { getLastNDigits, getNumberFirstNChars } from '../utils/common';
 
 const useValidation = (value: string, validations: IValidations) => {
   const [fullNameError, setFullNameError] = useState(false);
@@ -16,7 +17,8 @@ const useValidation = (value: string, validations: IValidations) => {
     Object.keys(validations).forEach((key) => {
       const thisDate = new Date();
       const thisMonth = thisDate.getMonth() + 1;
-      const thisYear = Number(String(thisDate.getFullYear()).slice(-2));
+      const thisYear = getLastNDigits(thisDate.getFullYear(), 2);
+
       switch (key) {
         case ValidationKeys.fullNameError:
           if (/.{3,}\s+.{3,}/gm.test(value)) {
@@ -56,8 +58,8 @@ const useValidation = (value: string, validations: IValidations) => {
         case ValidationKeys.expiryDateError:
           if (
             /[0-9]{2}\/[0-9]{2}/gm.test(value) &&
-            Number(value.slice(0, 2)) <= 12 &&
-            Number(value.slice(0, 2)) >= thisMonth &&
+            getNumberFirstNChars(value, 2) <= 12 &&
+            getNumberFirstNChars(value, 2) >= thisMonth &&
             Number(value.slice(-2)) >= thisYear
           ) {
             setExpiryDateError(false);

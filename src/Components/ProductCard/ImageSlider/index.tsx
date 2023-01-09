@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 
 import { Item } from '../../../types/data';
 import { IImagesWithSize } from '../../../types/imageSlider';
+import { getImagesWithoutDuplicate } from '../../../utils/common';
 import Buttons from './Buttons';
 import styles from './ImageSlider.module.scss';
 
@@ -38,12 +39,7 @@ export default function ImageSlider({ currentItem }: ImageSliderProps) {
         return acc;
       }, []);
 
-      setImagesWithoutDuplicate(
-        imagesWithSize.filter(
-          (imageWithSize, i) =>
-            i === imagesWithSize.findIndex((val) => val.size === imageWithSize.size),
-        ),
-      );
+      setImagesWithoutDuplicate(getImagesWithoutDuplicate(imagesWithSize));
     });
   }, []);
 
