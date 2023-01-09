@@ -15,7 +15,7 @@ function SimpleCard({ item, isItemInCart, onCardClick, onBuyButtonClick }: Simpl
   return (
     <div className={styles.card} onClick={onCardClick} aria-hidden="true">
       <div className={styles.card__image}>
-        <img src={item.thumbnail} alt={item.title} />
+        <img src={item.thumbnail} alt={item.title} loading="lazy" />
       </div>
       <div className={styles.card__descriptionBlock}>
         <h3 className={styles.card__title}>{item.title}</h3>
