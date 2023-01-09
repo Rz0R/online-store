@@ -2026,7 +2026,7 @@ export const BREADCRUMBS: BreadcrumbProps = {
   title: 'Samsung 9',
 };
 
-export const IMAGESWITHSIZE: IImagesWithSize[] = [
+export const IMAGES_WITH_SIZE: IImagesWithSize[] = [
   { url: 'https://i.dummyjson.com/data/products/1/1.jpg', size: '123' },
   { url: 'https://i.dummyjson.com/data/products/1/2.jpg', size: '1234' },
   { url: 'https://i.dummyjson.com/data/products/1/3.jpg', size: '123' },
@@ -2034,7 +2034,7 @@ export const IMAGESWITHSIZE: IImagesWithSize[] = [
   { url: 'https://i.dummyjson.com/data/products/1/5.jpg', size: '12345' },
 ];
 
-export const IMAGESWITHSIZEWITHOUTDUPLICATE: IImagesWithSize[] = [
+export const IMAGES_WITH_SIZE_WITHOUT_DUPLICATE: IImagesWithSize[] = [
   { url: 'https://i.dummyjson.com/data/products/1/1.jpg', size: '123' },
   { url: 'https://i.dummyjson.com/data/products/1/2.jpg', size: '1234' },
   { url: 'https://i.dummyjson.com/data/products/1/5.jpg', size: '12345' },

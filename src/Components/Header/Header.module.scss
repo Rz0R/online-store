@@ -11,12 +11,15 @@
     padding-bottom: rem(10) !important;
   }
 
-  &__logo img {
-    display: block;
-    max-width: rem(200);
-    max-height: rem(100);
-    width: auto;
-    height: auto;
+  &__logo {
+    min-height: rem(64);
+    img {
+      display: block;
+      max-width: rem(200);
+      max-height: rem(100);
+      width: auto;
+      height: auto;
+    }
   }
 
   &__cart {

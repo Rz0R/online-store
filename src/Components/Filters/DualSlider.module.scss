@@ -72,6 +72,8 @@
     &::-moz-range-thumb {
       -webkit-appearance: none;
       @include thumb();
+      width: rem(10);
+      height: rem(10);
     }
   }
 
