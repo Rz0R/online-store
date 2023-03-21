@@ -1,0 +1,155 @@
+@import '../../scss/colors.scss';
+
+.modal {
+  &__container {
+  }
+
+  &__form {
+  }
+
+  &__background {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: $bgColorModal;
+    width: 100vw;
+    height: 100vh;
+    z-index: 40;
+    cursor: default;
+  }
+}
+
+.form {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 41;
+  background: $bgColor;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 25vw;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+
+  &__personalDetails {
+  }
+
+  &__cardDetails {
+  }
+
+  &__submit {
+    font-weight: 500;
+    color: $whiteColor;
+    background: $secondColor;
+    padding: 20px;
+    transition: all 0.3s ease 0s;
+
+    &:hover {
+      background: $mainColor;
+    }
+  }
+}
+
+.personalDetails,
+.cardDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  &__title {
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.cardDetails {
+  &__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    border: 1px solid $mainColor;
+    border-radius: 15px;
+    padding: 20px 10px;
+    background: $bgColorCard;
+  }
+
+  &__cardNumber {
+  }
+
+  &__expiryDate {
+    width: 70%;
+  }
+
+  &__cvv {
+    width: 50%;
+    margin-left: auto;
+  }
+}
+
+.modalPlaced {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  background: $bgColor;
+
+  & ~ .personalDetails {
+    display: none;
+  }
+
+  & ~ .cardDetails {
+    display: none;
+  }
+
+  & ~ .form__submit {
+    display: none;
+  }
+
+  &__title {
+    font-size: 48px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  &__loader {
+  }
+}
+
+@media (max-width: 1250px) {
+  .form {
+    min-width: 31vw;
+  }
+}
+
+@media (max-width: 1015px) {
+  .form {
+    min-width: 40vw;
+  }
+}
+
+@media (max-width: 790px) {
+  .form {
+    min-width: 50vw;
+  }
+}
+@media (max-width: 640px) {
+  .form {
+    min-width: 80vw;
+  }
+
+  .cardDetails {
+    &__inner {
+      padding: 20px 5px;
+    }
+
+    &__expiryDate {
+      width: 100%;
+    }
+  }
+}

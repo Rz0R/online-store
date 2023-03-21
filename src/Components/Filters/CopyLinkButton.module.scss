@@ -1,0 +1,19 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.copyLinkBtn {
+  width: rem(110);
+  height: rem(40);
+  border-radius: rem(3);
+  background-color: $secondColor;
+  color: $whiteColor;
+  font-weight: 500;
+  transition: all 0.3s ease 0s;
+  margin-top: auto;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $mainColor;
+    }
+  }
+}

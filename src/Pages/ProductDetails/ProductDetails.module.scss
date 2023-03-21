@@ -1,0 +1,33 @@
+@import '../../scss/colors';
+
+.productDetails {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+}
+
+.productDetailsEmpty {
+  display: flex;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__icon {
+    width: 100px;
+    height: 100px;
+    color: $borderColor;
+  }
+
+  &__title {
+    color: $borderColor;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}

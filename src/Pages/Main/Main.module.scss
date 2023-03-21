@@ -1,0 +1,18 @@
+@import '../../scss/base/mixins.scss';
+
+.main {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    gap: rem(10);
+  }
+
+  &__leftPanel {
+    flex: 1 0 rem(300);
+    display: flex;
+  }
+
+  &__rightPanel {
+    width: 100%;
+  }
+}

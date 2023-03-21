@@ -1,0 +1,42 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.filters {
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    flex: 0 0 rem(64.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: rem(10) rem(20);
+  }
+
+  &__btn {
+    width: rem(110);
+    height: rem(40);
+    border-radius: rem(3);
+    background-color: $secondColor;
+    color: $whiteColor;
+    font-weight: 500;
+    transition: all 0.3s ease 0s;
+    margin-top: auto;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $mainColor;
+      }
+    }
+  }
+
+  &__content {
+    width: rem(300);
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+    border: rem(2) solid $borderColor;
+    padding: rem(20) rem(20);
+  }
+}

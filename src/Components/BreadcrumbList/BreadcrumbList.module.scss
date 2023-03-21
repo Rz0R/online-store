@@ -1,0 +1,28 @@
+@import '../../scss/colors.scss';
+
+.breadcrumb {
+  &__list {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    color: $grayColor;
+    text-transform: capitalize;
+
+    &:nth-child(n + 2)::before {
+      content: '-';
+      margin-right: 5px;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    transition: all 0.3s ease 0s;
+
+    &:hover {
+      color: $secondColor;
+    }
+  }
+}

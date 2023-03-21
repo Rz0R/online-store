@@ -1,0 +1,78 @@
+@import '../../scss/base/mixins.scss';
+@import '../../scss/colors.scss';
+
+.checkbox {
+  position: relative;
+
+  &__input {
+    position: absolute;
+    padding: 0;
+    z-index: -1;
+    opacity: 0;
+
+    &:checked + label {
+      color: $secondColor;
+
+      &::after {
+        opacity: 1;
+      }
+
+      &::before {
+        border-color: $secondColor;
+      }
+    }
+  }
+
+  &__label {
+    margin: 0px;
+    position: relative;
+    padding-left: rem(22);
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    text-transform: capitalize;
+    font-size: rem(14);
+    line-height: 1.5;
+    color: $grayColor;
+
+    display: flex;
+    justify-content: space-between;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: $secondColor;
+
+        &::after {
+          opacity: 0.5;
+        }
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      border: rem(1) solid $borderColor;
+      background-color: $bgColor;
+      width: rem(16);
+      height: rem(16);
+      left: 0;
+      top: rem(3);
+      transition: all 0.3s ease 0s;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: rem(16);
+      height: rem(16);
+      left: 0;
+      top: rem(3);
+      transition: opacity 0.3s linear;
+      width: rem(10);
+      height: rem(10);
+      background-color: $secondColor;
+      left: rem(3);
+      top: rem(6);
+      opacity: 0;
+    }
+  }
+}
